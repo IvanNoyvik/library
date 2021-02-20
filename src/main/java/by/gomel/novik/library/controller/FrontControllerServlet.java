@@ -1,15 +1,12 @@
 package by.gomel.novik.library.controller;
 
-import by.gomel.novik.library.controller.commands.FrontCommand;
 import by.gomel.novik.library.controller.commands.UnknownCommand;
 import by.gomel.novik.library.controller.constant.CommandConstant;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @WebServlet(name = "FrontControllerServlet", urlPatterns = {"/front", "/"})
 public class FrontControllerServlet extends HttpServlet {
@@ -29,10 +26,8 @@ public class FrontControllerServlet extends HttpServlet {
         command.init(getServletContext(), request, response);
         try {
             command.process();
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
     }
 

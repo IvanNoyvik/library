@@ -10,6 +10,7 @@ public interface CommandConstant {
     String COMMAND = "command";
     String FORWARD = "forward";
     String UNKNOWN = "unknown";
+    String ERROR_PAGE = "error";
 
 
     String LOGIN = "login";

@@ -1,4 +1,4 @@
-package by.gomel.novik.library.controller.commands;
+package by.gomel.novik.library.controller;
 
 import by.gomel.novik.library.controller.constant.CommandConstant;
 
@@ -26,9 +26,13 @@ public abstract class FrontCommand {
 
     public abstract void process() throws ServletException, IOException;
 
-    protected void forward(String target) throws ServletException, IOException {
+    protected void forward(String target) {
         target = String.format(CommandConstant.JSP_PATH, target);
         RequestDispatcher dispatcher = context.getRequestDispatcher(target);
-        dispatcher.forward(request, response);
+        try {
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            forward(CommandConstant.ERROR_PAGE); // problem
+        }
     }
 }

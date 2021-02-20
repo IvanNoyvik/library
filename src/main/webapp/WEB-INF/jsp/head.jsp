@@ -13,22 +13,24 @@
 </head>
 <body>
 
-<form action="<c:url value="/front" ><c:param name="command" value="Login"/></c:url>" method="post">
-    <input name="login" type="text" placeholder="Enter login.."/>
-    <input name="password" type="password" placeholder="Enter password.."/>
-    <input type="submit" value="Login.."/>
-</form>
+<c:url value="/front" scope="request" var="login">
+    <c:param name="command" value="Forward"/>
+    <c:param name="forward" value="login"/>
+</c:url>
+<a href="<c:out value="${login}"/>">Login</a>
 
-<c:url value="/front" scope="request" var="logup">
+<c:url value="/front" scope="request" var="registration">
     <c:param name="command" value="Forward"/>
     <c:param name="forward" value="registration"/>
 </c:url>
-<a href="<c:out value="${logup}"/>">Registration</a>
+<a href="<c:out value="${registration}"/>">Registration</a>
 
+<c:url value="/front" scope="request" var="logout">
+    <c:param name="command" value="Forward"/>
+    <c:param name="forward" value="logout"/>
+</c:url>
 
-
-
-
+<a href="<c:out value="${logout}"/>">Logout</a>
 
 
 </body>

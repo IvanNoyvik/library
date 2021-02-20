@@ -1,5 +1,6 @@
 package by.gomel.novik.library.controller.commands;
 
+import by.gomel.novik.library.controller.FrontCommand;
 import by.gomel.novik.library.controller.constant.CommandConstant;
 
 import javax.servlet.ServletException;
