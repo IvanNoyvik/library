@@ -14,6 +14,7 @@ public interface CommandConstant {
 
     String LOGIN = "login";
     String PASSWORD = "password";
+    String NAME = "name";
 
 
 

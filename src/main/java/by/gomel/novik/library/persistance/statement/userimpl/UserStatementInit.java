@@ -26,4 +26,11 @@ public class UserStatementInit extends EntityStatementInit<User> {
         ps.setLong(6, id);
 
     }
+
+    public void initStatement(PreparedStatement ps, String login, String password) throws SQLException {
+
+        ps.setString(1, login);
+        ps.setString(2, password);
+
+    }
 }
