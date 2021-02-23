@@ -33,4 +33,10 @@ public class UserStatementInit extends EntityStatementInit<User> {
         ps.setString(2, password);
 
     }
+
+    public void initStatement(PreparedStatement ps, String login) throws SQLException {
+
+        ps.setString(1, login);
+
+    }
 }

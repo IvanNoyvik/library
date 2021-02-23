@@ -7,5 +7,6 @@
 </head>
 <body>
 <c:import url="/WEB-INF/jsp/head.jsp" />
+MAIN
 </body>
 </html>

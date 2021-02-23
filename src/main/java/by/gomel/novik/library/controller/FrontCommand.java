@@ -32,7 +32,18 @@ public abstract class FrontCommand {
         try {
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            forward(CommandConstant.ERROR_PAGE); // problem
+            redirect(CommandConstant.ERROR_PAGE); // problem
         }
     }
+
+    protected void redirect(String target) {
+        target = String.format(CommandConstant.JSP_PATH, target);
+        try {
+            response.sendRedirect(target);
+        } catch (Exception e) {
+            redirect(CommandConstant.ERROR_PAGE); // problem
+        }
+    }
+
+
 }

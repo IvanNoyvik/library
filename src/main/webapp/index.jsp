@@ -6,7 +6,7 @@
     <title>Index</title>
 </head>
 <body>
-<c:import url="/WEB-INF/jsp/head.jsp" />
+<c:import url="/WEB-INF/jsp/main.jsp" />
 
 </body>
 </html>

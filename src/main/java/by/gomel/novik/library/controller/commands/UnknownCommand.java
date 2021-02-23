@@ -1,7 +1,7 @@
 package by.gomel.novik.library.controller.commands;
 
 import by.gomel.novik.library.controller.FrontCommand;
-import by.gomel.novik.library.controller.constant.CommandConstant;
+import static by.gomel.novik.library.controller.constant.CommandConstant.UNKNOWN;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -10,7 +10,6 @@ public class UnknownCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
 
-        forward(CommandConstant.UNKNOWN);
-
+        response.sendRedirect("/WEB-INF/jsp/unknown.jsp");
     }
 }

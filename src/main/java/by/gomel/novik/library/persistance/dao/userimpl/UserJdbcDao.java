@@ -54,4 +54,26 @@ public class UserJdbcDao extends JdbcDao<User> {
         }
     }
 
+    public User findByLoginSqlQuery(String login) {
+        try (Connection conn = getConnector().getConnection();
+             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().findByLoginSqlQuery())) {
+            getStatementInitializer().initStatement(prSt, login);
+
+            try (ResultSet rs = prSt.executeQuery()) {
+                if (rs.next()) {
+                    return getResultSetMapper().processResultSet(rs);
+                }
+
+                throw new DaoPartException("Invalid login or password");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new DaoPartException("Error process findByLoginAndPasswordSqlQuery entity method: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoPartException("Error receive database connection: " + e.getMessage());
+        }
+    }
+
 }

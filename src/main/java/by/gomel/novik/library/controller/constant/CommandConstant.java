@@ -12,12 +12,13 @@ public interface CommandConstant {
     String UNKNOWN = "unknown";
     String ERROR_PAGE = "error";
 
-
+    String USER = "user";
     String LOGIN = "login";
     String PASSWORD = "password";
     String NAME = "name";
 
 
+    String MAIN = "main";
 
 
 

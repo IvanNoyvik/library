@@ -19,6 +19,9 @@ public class UserSqlQuery implements CrudSqlQuery {
     private static final String FIND_BY_LOGIN_AND_PASSWORD_SQL_QUERY = " SELECT U.ID AS U_ID, U.LOGIN, U.PASSWORD, U.NAME, R.ID AS R_ID, R.ROLE, US.ID AS US_ID, US.STATUS " +
             "FROM USERS U LEFT JOIN ROLES R ON R.ID= U.ROLES_ID " +
             "LEFT JOIN  USERS_STATUSES US ON US.ID = U.USERS_STATUSES_ID WHERE U.LOGIN = ? AND U.PASSWORD = ?";
+    private static final String FIND_BY_LOGIN_SQL_QUERY = " SELECT U.ID AS U_ID, U.LOGIN, U.PASSWORD, U.NAME, R.ID AS R_ID, R.ROLE, US.ID AS US_ID, US.STATUS " +
+            "FROM USERS U LEFT JOIN ROLES R ON R.ID= U.ROLES_ID " +
+            "LEFT JOIN  USERS_STATUSES US ON US.ID = U.USERS_STATUSES_ID WHERE U.LOGIN = ?";
 
     @Override
     public String findByIdSqlQuery() {
@@ -47,6 +50,10 @@ public class UserSqlQuery implements CrudSqlQuery {
 
     public String findByLoginAndPasswordSqlQuery() {
         return FIND_BY_LOGIN_AND_PASSWORD_SQL_QUERY;
+    }
+
+    public String findByLoginSqlQuery() {
+        return FIND_BY_LOGIN_SQL_QUERY;
     }
 
 }
