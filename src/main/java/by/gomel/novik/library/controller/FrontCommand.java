@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.gomel.novik.library.controller.constant.CommandConstant.DELIMITER;
+import static by.gomel.novik.library.controller.constant.CommandConstant.JSP_PATH;
+
 public abstract class FrontCommand {
 
     protected ServletContext context;
@@ -27,21 +30,21 @@ public abstract class FrontCommand {
     public abstract void process() throws ServletException, IOException;
 
     protected void forward(String target) {
-        target = String.format(CommandConstant.JSP_PATH, target);
+        target = DELIMITER + target + JSP_PATH;
         RequestDispatcher dispatcher = context.getRequestDispatcher(target);
         try {
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            redirect(CommandConstant.ERROR_PAGE); // problem
+            redirect(CommandConstant.ERROR); // problem
         }
     }
 
     protected void redirect(String target) {
-        target = String.format(CommandConstant.JSP_PATH, target);
+        target = DELIMITER + target + JSP_PATH;
         try {
             response.sendRedirect(target);
         } catch (Exception e) {
-            redirect(CommandConstant.ERROR_PAGE); // problem
+            redirect(CommandConstant.ERROR); // problem
         }
     }
 

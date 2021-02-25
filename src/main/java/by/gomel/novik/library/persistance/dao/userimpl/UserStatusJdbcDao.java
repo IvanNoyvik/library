@@ -10,6 +10,14 @@ import by.gomel.novik.library.persistance.statement.StatementInit;
 import by.gomel.novik.library.persistance.statement.userimpl.UserStatusStatementInit;
 
 public class UserStatusJdbcDao extends JdbcDao<UserStatus> {
+
+
+
+    private static long OK = 1L;
+    private static long LIMITED = 2L;
+    private static long LOCKED = 3L;
+
+
     @Override
     protected CrudSqlQuery getSqlQuery() {
         return new UserStatusSqlQuery();
@@ -23,5 +31,15 @@ public class UserStatusJdbcDao extends JdbcDao<UserStatus> {
     @Override
     protected StatementInit<UserStatus> getStatementInitializer() {
         return new UserStatusStatementInit();
+    }
+
+    public UserStatus getOkStatus(){
+        return findById(OK);
+    }
+    public UserStatus getLimitedStatus(){
+        return findById(LIMITED);
+    }
+    public UserStatus getLockedStatus(){
+        return findById(LOCKED);
     }
 }

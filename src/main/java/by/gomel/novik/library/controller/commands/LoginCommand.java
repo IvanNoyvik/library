@@ -21,12 +21,14 @@ public class LoginCommand extends FrontCommand {
         String password = request.getParameter(PASSWORD);
 
         User user = userDao.findByLoginAndPasswordSqlQuery(login, password);
+
         if (user != null) {
             request.getSession().setAttribute(USER, user);
-            forward(MAIN);
+            forward(MAIN_JSP);
         }
 
-        response.sendRedirect("/login.jsp?error=true");
+        request.setAttribute(ERROR, LOGIN_MESSAGE);
+        forward(LOGIN_JSP);
 //zxcvbnm,.
 
     }

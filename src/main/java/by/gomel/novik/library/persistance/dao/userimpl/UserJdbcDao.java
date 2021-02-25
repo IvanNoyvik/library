@@ -42,7 +42,7 @@ public class UserJdbcDao extends JdbcDao<User> {
                     return getResultSetMapper().processResultSet(rs);
                 }
 
-                throw new DaoPartException("Invalid login or password");
+                return null;
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -64,7 +64,7 @@ public class UserJdbcDao extends JdbcDao<User> {
                     return getResultSetMapper().processResultSet(rs);
                 }
 
-                throw new DaoPartException("Invalid login or password");
+                return null;
 
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -1,4 +1,11 @@
+/*
+CSS Credit: http://www.templatemo.com/
+*/
 
+/* 
+Book Store Template 
+http://www.templatemo.com/preview/templatemo_086_book_store 
+*/
 body {
 	margin: 0;
 	padding: 0;
@@ -52,7 +59,7 @@ img {
 	width: 100px;
 	padding: 4px 0 5px 0;
 	margin-bottom: 10px; 
-	background: url(/WEB-INF/static/main/images/templatemo_btn_02.jpg) no-repeat;
+	background: url(/static/main/images/templatemo_btn_02.jpg) no-repeat;
 	color: #FFFFFF;
 	font-weight: bold;
 	text-decoration: none;
@@ -65,7 +72,7 @@ img {
 	width: 100px;
 	padding: 4px 0 5px 0;
 	margin-bottom: 10px; 
-	background: url(/WEB-INF/static/main/images/templatemo_btn_01.jpg) no-repeat;
+	background: url(/static/main/images/templatemo_btn_01.jpg) no-repeat;
 	color: #ffffff;
 	font-weight: bold;
 	text-decoration: none;
@@ -75,7 +82,7 @@ img {
 	width: 960px;
 	margin: 0 auto;
 	padding: 0 10px;
-	background: #1c1c1b url(/WEB-INF/static/main/images/templatemo_bg.jpg) repeat-y;
+	background: #1c1c1b url(/static/main/images/templatemo_bg.jpg) repeat-y;
 }
 
 
@@ -85,7 +92,7 @@ img {
 	clear: both;
 	width: 960px;
 	height: 45px;
-	background: url(/WEB-INF/static/main/images/templatemo_menu_bg.jpg) no-repeat;
+	background: url(/static/main/images/templatemo_menu_bg.jpg) no-repeat;
 }
 
 #templatemo_menu ul {
@@ -121,7 +128,7 @@ img {
 	height: 285px;
 	padding: 0;
 	margin: 0;
-	background: url(/WEB-INF/static/main/images/templatemo_header_bg.jpg) no-repeat;
+	background: url(/static/main/images/templatemo_header_bg.jpg) no-repeat;
 }
 
 #templatemo_header a,a:hover {
@@ -229,6 +236,8 @@ img {
 
 
 #templatemo_content_right .templatemo_product_box {
+	float: left;
+	width: 303px;
 	height: 210px;
 	padding: 10px;
 	border: 1px solid #333;
@@ -239,7 +248,7 @@ img {
 	margin: 0 0 20px 0;
 	font-size: 15px;
 	color: #cbc750;
-	background: url(/WEB-INF/static/main/images/templatemo_h1_bg.jpg);
+	background: url(/static/main/images/templatemo_h1_bg.jpg);
 }
 
 #templatemo_content_right h2 {

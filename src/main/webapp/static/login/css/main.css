@@ -273,7 +273,13 @@ iframe {
   text-align: center;
 }
 
-
+.error {
+  color: red; /* Красный цвет символов */
+  font-size: 200%; /* Размер шрифта в процентах */
+  font-family: serif; /* Шрифт с засечками */
+  position: relative; /* Относительное позиционирование */
+  top: 5px; /* Сдвиг сверху */
+}
 
 /*------------------------------------------------------------------
 [ Input ]*/
@@ -528,7 +534,7 @@ input.input100 {
   .login100-form {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 70px;
+    padding-top: 40px;
   }
 }
 
@@ -607,7 +613,7 @@ input.input100 {
 /*==================================================================
 [ Social ]*/
 .login100-form-social-item {
-  width: 36px;
+  /*width: 36px;*/
   height: 36px;
   font-size: 18px;
   color: #fff;

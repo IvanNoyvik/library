@@ -1,8 +1,6 @@
 package by.gomel.novik.library.controller.commands;
 
 import by.gomel.novik.library.controller.FrontCommand;
-import by.gomel.novik.library.model.User;
-import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -23,7 +21,7 @@ public class LogoutCommand extends FrontCommand {
             session.invalidate();
         }
 
-        redirect(MAIN);
+        redirect(MAIN_JSP);
 
     }
 }

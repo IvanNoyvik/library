@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "FrontControllerServlet", urlPatterns = {"/front", "/"})
+@WebServlet(name = "FrontControllerServlet", urlPatterns = {"/front"})
 public class FrontControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,

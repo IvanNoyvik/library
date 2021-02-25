@@ -1,6 +1,10 @@
 package by.gomel.novik.library.controller.commands;
 
 import by.gomel.novik.library.controller.FrontCommand;
+import by.gomel.novik.library.model.User;
+import by.gomel.novik.library.persistance.dao.userimpl.RoleJdbcDao;
+import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
+import by.gomel.novik.library.persistance.dao.userimpl.UserStatusJdbcDao;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -8,6 +12,10 @@ import java.io.IOException;
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class RegistrationCommand extends FrontCommand {
+
+    UserJdbcDao userDao = new UserJdbcDao();
+    RoleJdbcDao roleDao = new RoleJdbcDao();
+    UserStatusJdbcDao statusDao = new UserStatusJdbcDao();
 
 
     @Override
@@ -17,13 +25,24 @@ public class RegistrationCommand extends FrontCommand {
         String password = request.getParameter(PASSWORD);
         String name = request.getParameter(NAME);
 
-//        String login = request.getParameter("login");
-//        String password = request.getParameter("password");
-//
-//        User user = userDao.saveUser(new User(login, password, Role.USER));
+        User user = userDao.findByLoginSqlQuery(login);
+
+        if (user == null){
+            user = userDao.save(new User(login, password, name,
+                    statusDao.getOkStatus(), roleDao.getGuestStatus()));
+            request.setAttribute(MESSAGE, REGISTRATION_MESSAGE);
+            forward(MAIN_JSP);
+        }
+
+        request.setAttribute(ERROR, REGISTRATION_MESSAGE);
+        forward(REGISTRATION_JSP);
+
+
+
+
 //
 //        getServletContext().getRequestDispatcher("/main").forward(request, response);
 
-        forward(MAIN);
+        forward(MAIN_JSP);
     }
 }
