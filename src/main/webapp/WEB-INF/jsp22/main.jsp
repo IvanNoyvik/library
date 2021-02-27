@@ -6,7 +6,7 @@
     <title>Main</title>
 </head>
 <body>
-<c:import url="/WEB-INF/jsp/head.jsp" />
+<c:import url="/WEB-INF/jsp/head3.jsp" />
 MAIN
 </body>
 </html>

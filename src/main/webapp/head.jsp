@@ -41,7 +41,9 @@
                 <c:param name="forward" value="profile"/>
             </c:url>
             <li><a href="<c:out value="${profile}"/>" class="current">${user.login}(${user.name})</a></li>
-
+<%--            <c:if test="${pageContext.}">--%>
+<%--            <li><a href="<c:out value="${profile}"/>" class="current">${user.login}(${user.name})</a></li>--%>
+<%--            </c:if>--%>
         </c:if>
     </ul>
 </div>

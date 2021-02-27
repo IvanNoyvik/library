@@ -10,9 +10,10 @@
     <title>Book Store Template, Free CSS Template, CSS Website Layout</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link href="<c:url value="/WEB-INF/static/main/templatemo_style.css"/>" rel="stylesheet" type="text/css" />
+    <link href="static/main/templatemo_style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+34
 <!--  Free CSS Templates from www.templatemo.com -->
 <div id="templatemo_container">
     <div id="templatemo_menu">
@@ -25,7 +26,7 @@
             <li><a href="logout.html" class="current">Logout</a></li>
 
             <!-- REGISTR -->
-            <li><a href="<c:url value="/WEB-INF/jsp/registration2.jsp"/> " class="current">Registration</a></li>
+            <li><a href="<c:url value="registration2.jsp"/>" class="current">Registration</a></li>
 
             <!-- PROFILE -->
             <li><a href="profile.html" class="current">Profile</a></li>
@@ -84,14 +85,10 @@
                     <li><a href="#">Flash Templates</a></li>
                     <li><a href="#">CSS Templates</a></li>
                     <li><a href="#">Web Design</a></li>
-                    <li><a href="http://www.photovaco.com" target="_parent">Free Photos</a></li>
                 </ul>
             </div>
 
-            <div class="templatemo_content_left_section">
-                <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" width="88" height="31" vspace="8" border="0" /></a>
-                <a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"  src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" vspace="8" border="0" /></a>
-            </div>
+
         </div>
         <!-- CATEGORY FILTER: end -->
 
@@ -102,7 +99,7 @@
 
                 <h1>Photography  <span>(by Best Author)</span></h1>
 
-                <img src="/WEB-INF/static/main/images/templatemo_image_01.jpg" alt="image" />
+                <img src="static/main/images/templatemo_image_01.jpg" alt="image" />
 
                 <div class="product_info">
                     <p>Etiam luctus. Quisque facilisis suscipit elit. Curabitur...</p>
@@ -118,7 +115,7 @@
 
             <!-- BOOK: end -->
 
-            <a href="subpage.html"><img src="/WEB-INF/static/main/images/templatemo_ads.jpg" alt="ads" /></a>
+            <a href="subpage.html"><img src="static/main/images/templatemo_ads.jpg" alt="ads" /></a>
         </div> <!-- end of content right -->
 
         <div class="cleaner_with_height">&nbsp;</div>
@@ -129,14 +126,8 @@
 
         <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br />
         Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
-    <!-- end of footer -->
-    <!--  Free CSS Template www.templatemo.com -->
-</div> <!-- end of container -->
-<!-- templatemo 086 book store -->
-<!--
-Book Store Template
-http://www.templatemo.com/preview/templatemo_086_book_store
--->
+    </div>
+
+</div>
 </body>
 </html>

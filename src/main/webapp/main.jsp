@@ -87,7 +87,7 @@
                     <div class="templatemo_product_box">
 
 
-                        <h1>${book.title} <span>${book.author.author}</span></h1>
+                        <h1>${book.title} <span>(${book.author.author})</span></h1>
 
 
                         <img src="<c:url value="${book.coverLink}" />" alt="image"/>
@@ -100,6 +100,7 @@
                             <c:if test="${book.quantity > 0}">
                                 <h3>${book.quantity} pcs in stock</h3>
                             </c:if>
+
                             <div class="buy_now_button"><a href="subpage.html">Read</a></div>
                             <div class="detail_button"><a href="subpage.html">Detail</a></div>
                         </div>
@@ -107,7 +108,6 @@
                     </div>
 
                     <!-- Insert empty string after book -->
-                    </br>
                 </c:forEach>
 
             </c:if>

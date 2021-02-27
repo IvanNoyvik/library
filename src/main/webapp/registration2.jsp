@@ -10,7 +10,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--===============================================================================================-->
-  <link rel="icon" type="image/png" href="<static/login/images/icons/favicon.ico"/>
+  <link rel="icon" type="image/png" href="static/login/images/icons/favicon.ico"/>
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="static/login/vendor/bootstrap/css/bootstrap.min.css"/>
   <!--===============================================================================================-->
@@ -28,8 +28,8 @@
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="static/login/vendor/daterangepicker/daterangepicker.css"  />
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="static/login/css/util.css"  />
-  <link rel="stylesheet" type="text/css" href="static/login/css/main.css"  />
+  <link rel="stylesheet" type="text/css" href="<c:url value="static/login/css/util.css"/>"  />
+  <link rel="stylesheet" type="text/css" href="<c:url value="static/login/css/main.css"/>"  />
   <!--===============================================================================================-->
 
   <title>Registration</title>
@@ -49,7 +49,7 @@
 
 
 <body style="background-color: #d7cece;">
-<h1>reg2</h1>
+<h1>reg32</h1>
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
