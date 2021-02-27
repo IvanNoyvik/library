@@ -2,8 +2,8 @@ package by.gomel.novik.library.controller.constant;
 
 public interface CommandConstant {
 
-    String JSP_PATH = ".jsp";
-    String DELIMITER = "/";
+    String POSTFIX = ".jsp";
+    String PREFIX = "/";
 
     String COMMAND_PATH = "by.gomel.novik.library.controller.commands.%sCommand";
 
@@ -28,6 +28,9 @@ public interface CommandConstant {
     String PASSWORD = "password";
     String NAME = "name";
     String MESSAGE = "message";
+    String BOOKS = "books";
+    String ORDERS = "orders";
+
 
     //JSP
     String MAIN_JSP = "main";

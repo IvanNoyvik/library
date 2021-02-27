@@ -52,43 +52,39 @@
     <div class="wrap-login100">
       <form class="login100-form validate-form" action="/front" method="post">
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Edit profile
 					</span>
-        <input type="hidden" value="Login" name="command">
+        <input type="hidden" value="EditUser" name="command">
 
 
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" name="login">
+          <input class="input100" type="text" name="name">
           <span class="focus-input100"></span>
-          <span class="label-input100">Login</span>
+          <span class="label-input100">New name</span>
         </div>
 
 
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input class="input100" type="password" name="password">
-          <span class="focus-input100"></span>
-          <span class="label-input100">Password</span>
-        </div>
+<%--        <div class="wrap-input100 validate-input" data-validate="Password is required">--%>
+<%--          <input class="input100" type="text" name="password">--%>
+<%--          <span class="focus-input100"></span>--%>
+<%--          <span class="label-input100">New password</span>--%>
+<%--        </div>--%>
 
 
 
         <div class="container-login100-form-btn">
-        <input class="login100-form-btn" type="submit" value="Login">
+        <input class="login100-form-btn" type="submit" value="Edit">
         </div>
 
-        <div class="text-center p-t-46 p-b-20">
-          <c:if test="${!empty requestScope.error}">
-            <span class="error">Wrong login or password!</span>
-          </c:if>
-        </div>
+
 
         <div class="login100-form-social flex-c-m">
 
-          <c:url value="/front" var="registration">
+          <c:url value="/front" var="profile">
             <c:param name="command" value="Forward"/>
-            <c:param name="forward" value="registration"/>
+            <c:param name="forward" value="profile"/>
           </c:url>
-          <li><a href="<c:out value="${registration}"/>" class="login100-form-social-item flex-c-m bg1 m-r-5">Registration</a></li>
+          <li><a href="<c:out value="${profile}"/>" class="login100-form-social-item flex-c-m bg1 m-r-5">Back to profile</a></li>
 
           <c:url value="/front" var="back">
             <c:param name="command" value="Forward"/>

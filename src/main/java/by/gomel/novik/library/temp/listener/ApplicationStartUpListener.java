@@ -5,6 +5,7 @@ import by.gomel.novik.library.temp.constatn.ApplicationConstant;
 import org.h2.tools.RunScript;
 import org.h2.tools.Server;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -38,7 +39,6 @@ public class ApplicationStartUpListener implements ServletContextListener {
 
             RunScript.execute(connection, Files.newBufferedReader(Paths.get(ddlSql.toURI()), StandardCharsets.UTF_8));
             RunScript.execute(connection, Files.newBufferedReader(Paths.get(dmlSql.toURI()), StandardCharsets.UTF_8));
-
 
         } catch (Exception e) {
             e.printStackTrace();

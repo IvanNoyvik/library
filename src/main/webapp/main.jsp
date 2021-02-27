@@ -18,7 +18,7 @@
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${requestScope.message == 'regostration'}">
+                <c:if test="${requestScope.message eq 'regostration'}">
                     You have successfully registered!
                 </c:if>
             </p>
@@ -79,25 +79,38 @@
 
         <div id="templatemo_content_right">
 
-            <!-- BOOK: start -->
-            <div class="templatemo_product_box">
+            <c:if test="${!empty requestScope.books}">
 
-                <h1>Photography  <span>(by Best Author)</span></h1>
+                <c:forEach items="${books}" var="book">
 
-                <img src="<c:url value="/static/main/images/templatemo_image_01.jpg" />" alt="image" />
+                    <!-- BOOK: start -->
+                    <div class="templatemo_product_box">
 
-                <div class="product_info">
-                    <p>Etiam luctus. Quisque facilisis suscipit elit. Curabitur...</p>
-                    <h3>$55</h3>
-                    <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
-                </div>
 
-            </div>
+                        <h1>${book.title} <span>${book.author.author}</span></h1>
 
-            <!-- Insert empty string after book -->
-            </br>
 
+                        <img src="<c:url value="${book.coverLink}" />" alt="image"/>
+
+                        <div class="product_info">
+                            <p>${book.description}</p>
+                            <c:if test="${book.quantity == 0}">
+                                <h3>Not available</h3>
+                            </c:if>
+                            <c:if test="${book.quantity > 0}">
+                                <h3>${book.quantity} pcs in stock</h3>
+                            </c:if>
+                            <div class="buy_now_button"><a href="subpage.html">Read</a></div>
+                            <div class="detail_button"><a href="subpage.html">Detail</a></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Insert empty string after book -->
+                    </br>
+                </c:forEach>
+
+            </c:if>
             <!-- BOOK: end -->
 
         </div> <!-- end of content right -->

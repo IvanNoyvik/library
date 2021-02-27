@@ -103,7 +103,7 @@
             <c:param name="command" value="Forward"/>
             <c:param name="forward" value="main"/>
           </c:url>
-          <li><a href="<c:out value="${back}"/>" class="login100-form-social-item flex-c-m bg2 m-r-5">Back</a></li>
+          <li><a href="<c:out value="${back}"/>" class="login100-form-social-item flex-c-m bg2 m-r-5">Back to menu</a></li>
         </div>
       </form>
 
