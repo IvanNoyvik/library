@@ -11,6 +11,7 @@ public class OrderSqlQuery implements CrudSqlQuery{
     private static final String FIND_BY_USER_ID_SQL_QUERY = "SELECT ID, DATE_RECEIVING, DAYS, BOOKS_ID, USERS_ID FROM ORDERS WHERE USERS_ID = ?";
     private static final String FIND_ALL_OVERDUE_ORDERS_SQL_QUERY = "SELECT ID, DATE_RECEIVING, DAYS, BOOKS_ID, USERS_ID FROM ORDERS " +
             "WHERE DATEADD('DAY', DAYS, DATE_RECEIVING) > CURRENT_TIMESTAMP()";//
+    private static final String FIND_BY_BOOK_AND_USER_ID_SQL_QUERY = "SELECT ID, DATE_RECEIVING, DAYS, BOOKS_ID, USERS_ID FROM ORDERS WHERE BOOKS_ID = ? AND USERS_ID = ?";
 
 
     @Override
@@ -50,4 +51,9 @@ public class OrderSqlQuery implements CrudSqlQuery{
     public String findAllOverdueOrderSqlQuery() {
         return FIND_ALL_OVERDUE_ORDERS_SQL_QUERY;
     }
+
+    public String getFindByBookAndUserIdSqlQuery() {
+        return FIND_BY_BOOK_AND_USER_ID_SQL_QUERY;
+    }
+
 }

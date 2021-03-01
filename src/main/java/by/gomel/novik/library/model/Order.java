@@ -17,12 +17,24 @@ public class Order extends Entity {
     private Book book;
     private User user;
 
+
+    public Order(LocalDate date, int duration, Book book, User user) {
+        this.date = date;
+        this.duration = duration;
+        this.book = book;
+        this.user = user;
+    }
+
     public Order(long id, LocalDate date, int duration, Book book, User user) {
         super(id);
         this.date = date;
         this.duration = duration;
         this.book = book;
         this.user = user;
+    }
+
+    public LocalDate now(){
+        return LocalDate.now();
     }
 
     public LocalDate getDate() {
@@ -56,4 +68,6 @@ public class Order extends Entity {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

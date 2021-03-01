@@ -1,5 +1,6 @@
 package by.gomel.novik.library.persistance.dao;
 
+import by.gomel.novik.library.model.Book;
 import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
 import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
 import by.gomel.novik.library.model.Order;
@@ -34,8 +35,30 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
     }
 
     @Override
-    protected StatementInit<Order> getStatementInitializer() {
+    protected OrderStatementInit getStatementInitializer() {
         return new OrderStatementInit();
+    }
+
+    @Override
+    public Order save(Order order) {
+        Book book = order.getBook();
+        if (book.getQuantity() < 1){
+            throw new DaoPartException();
+        }
+        book.setQuantity(book.getQuantity() - 1);
+        BOOK_DAO.update(book);
+
+        return super.save(order);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        Order order = findById(id);
+        Book book = order.getBook();
+        book.setQuantity(book.getQuantity() + 1);
+        BOOK_DAO.update(book);
+        super.deleteById(id);
+
     }
 
     @Override
@@ -127,5 +150,26 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
             orders.add(order);
         }
         return orders;
+    }
+
+    public boolean findByBookAndUserId(long bookId, long userId) {
+        try (Connection conn = getConnector().getConnection();
+             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().getFindByBookAndUserIdSqlQuery())) {
+
+            getStatementInitializer().initStatement(prSt, bookId, userId);
+
+
+            try (ResultSet rs = prSt.executeQuery()) {
+
+                return rs.next();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new DaoPartException("Error process findByBookAndUserId entities method: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoPartException("Error receive database connection: " + e.getMessage());
+        }
     }
 }

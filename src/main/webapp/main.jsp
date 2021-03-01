@@ -4,16 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Online library</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="templatemo_container">
 
-    <c:import url="head.jsp" />
+    <c:import url="head.jsp"/>
 
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
@@ -86,23 +86,36 @@
                     <!-- BOOK: start -->
                     <div class="templatemo_product_box">
 
-
                         <h1>${book.title} <span>(${book.author.author})</span></h1>
-
-
                         <img src="<c:url value="${book.coverLink}" />" alt="image"/>
 
                         <div class="product_info">
                             <p>${book.description}</p>
-                            <c:if test="${book.quantity == 0}">
+                            <c:if test="${book.quantity <= 0}">
                                 <h3>Not available</h3>
                             </c:if>
-                            <c:if test="${book.quantity > 0}">
+                            <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
+                                <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                    <label placeolder="quantity days">
+                                        <input name="days" required="required" type="text" placeolder="quantity days"/>
+                                    </label>
+                                    <input name="command" type="hidden" value="AddOrder"/>
+                                    <input name="bookId" type="hidden" value="${book.id}"/>
+                                    <input type="submit" value="Add in my library"/>
+                                        <%--<div class="buy_now_button"><a href="subpage.html">Add in my library</a></div>--%>
+                                </form>
+
                                 <h3>${book.quantity} pcs in stock</h3>
                             </c:if>
 
-                            <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-                            <div class="detail_button"><a href="subpage.html">Detail</a></div>
+                            <c:url value="/front" var="bookInfo">
+                                <c:param name="command" value="Forward"/>
+                                <c:param name="forward" value="book"/>
+                                <c:param name="bookId" value="${book.id}"/>
+                            </c:url>
+                            <div class="detail_button"><a href="<c:out value="${bookInfo}"/>">Detail</a></div>
+
+
                         </div>
 
                     </div>
@@ -116,16 +129,16 @@
         </div> <!-- end of content right -->
 
         <div class="cleaner_with_height">&nbsp;</div>
-    </div>
-    <!-- PAGE CONTENT: end -->
+        <!-- PAGE CONTENT: end -->
 
-    <div id="templatemo_footer">
+        <div id="templatemo_footer">
 
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br />
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
+            <a href="/test">TEST</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
+                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
+            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
+            <!-- Credit: www.templatemo.com -->    </div>
 
-</div> <!-- end of container -->
+    </div> <!-- end of container -->
 
 </body>
 </html>

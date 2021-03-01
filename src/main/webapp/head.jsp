@@ -8,6 +8,7 @@
     <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
 <div id="templatemo_menu">
     <ul>
 
@@ -36,14 +37,14 @@
             <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
 
             <!-- PROFILE -->
-            <c:url value="/front" var="profile">
+            <c:url value="/front" var="profile" >
                 <c:param name="command" value="Forward"/>
                 <c:param name="forward" value="profile"/>
+                <c:param name="userId" value="${sessionScope.user.id}"/>
             </c:url>
-            <li><a href="<c:out value="${profile}"/>" class="current">${user.login}(${user.name})</a></li>
-<%--            <c:if test="${pageContext.}">--%>
-<%--            <li><a href="<c:out value="${profile}"/>" class="current">${user.login}(${user.name})</a></li>--%>
-<%--            </c:if>--%>
+            <li><a href="<c:out value="${profile}"/>" class="current">${sessionScope.user.login}(${sessionScope.user.name})</a></li>
+
+
         </c:if>
     </ul>
 </div>

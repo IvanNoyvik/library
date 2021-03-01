@@ -21,4 +21,9 @@ public class OrderStatementInit extends EntityStatementInit<Order> {
         initStatement(ps, order);
         ps.setLong(5, id);
     }
+
+    public void initStatement(PreparedStatement ps, long bookId, long userId) throws SQLException {
+        ps.setLong(1, bookId);
+        ps.setLong(2, userId);
+    }
 }

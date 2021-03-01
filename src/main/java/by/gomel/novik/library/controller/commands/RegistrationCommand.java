@@ -32,17 +32,12 @@ public class RegistrationCommand extends FrontCommand {
                     statusDao.getOkStatus(), roleDao.getGuestStatus()));
             request.setAttribute(MESSAGE, REGISTRATION_MESSAGE);
             forward(MAIN_JSP);
+
+        } else {
+
+            request.setAttribute(ERROR, REGISTRATION_MESSAGE);
+            forward(REGISTRATION_JSP);
         }
 
-        request.setAttribute(ERROR, REGISTRATION_MESSAGE);
-        forward(REGISTRATION_JSP);
-
-
-
-
-//
-//        getServletContext().getRequestDispatcher("/main").forward(request, response);
-
-        forward(MAIN_JSP);
     }
 }

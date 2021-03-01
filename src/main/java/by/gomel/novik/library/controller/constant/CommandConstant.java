@@ -12,6 +12,7 @@ public interface CommandConstant {
     //MESSAGES and ERRORS
     String REGISTRATION_MESSAGE = "registration";
     String LOGIN_MESSAGE = "login";
+    String ERROR_MESSAGE = "?error=true";
 
 
 
@@ -19,17 +20,23 @@ public interface CommandConstant {
 
     //attributes
     // param
+    String ID = "id";
     String COMMAND = "command";
     String FORWARD = "forward";
     String UNKNOWN = "unknown";
     String ERROR = "error";
     String USER = "user";
+    String USER_ID = "userId";
     String LOGIN = "login";
     String PASSWORD = "password";
     String NAME = "name";
     String MESSAGE = "message";
     String BOOKS = "books";
+    String BOOK = "book";
+    String BOOK_ID = "bookId";
     String ORDERS = "orders";
+    String DAYS = "days";
+
 
 
     //JSP
@@ -38,6 +45,7 @@ public interface CommandConstant {
     String LOGIN_JSP = "login";
     String PROFILE_JSP = "profile";
     String BOOK_JSP = "book";
+    String ERROR_JSP = "error";
 
 
 

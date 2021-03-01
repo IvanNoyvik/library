@@ -25,11 +25,14 @@ public class LoginCommand extends FrontCommand {
         if (user != null) {
             request.getSession().setAttribute(USER, user);
             forward(MAIN_JSP);
-        }
+        } else {
 
         request.setAttribute(ERROR, LOGIN_MESSAGE);
         forward(LOGIN_JSP);
-//zxcvbnm,.
+
+        }
+
+
 
     }
 }

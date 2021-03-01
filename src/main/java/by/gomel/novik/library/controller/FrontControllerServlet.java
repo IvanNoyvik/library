@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static by.gomel.novik.library.controller.constant.CommandConstant.*;
+
 @WebServlet(name = "FrontControllerServlet", urlPatterns = {"/front"})
 public class FrontControllerServlet extends HttpServlet {
     @Override
@@ -27,14 +29,16 @@ public class FrontControllerServlet extends HttpServlet {
         try {
             command.process();
         } catch (Exception e) {
+            throw new RuntimeException("ERROR PROCESS COMMAND", e);
 
+//            command.forward(MAIN_JSP);
         }
     }
 
     private FrontCommand getCommand(HttpServletRequest request) {
         try {
-            Class type = Class.forName(String.format( CommandConstant.COMMAND_PATH,
-                    request.getParameter(CommandConstant.COMMAND)));
+            Class type = Class.forName(String.format( COMMAND_PATH,
+                    request.getParameter(COMMAND)));
             return (FrontCommand) type.asSubclass(FrontCommand.class).newInstance();
         } catch (Exception e) {
             return new UnknownCommand();

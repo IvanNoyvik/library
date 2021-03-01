@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Online library</title>
+    <title>Book</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
@@ -13,24 +13,7 @@
 <body>
 <div id="templatemo_container">
 
-    <div id="templatemo_menu">
-        <ul>
-
-            <c:if test="${!empty sessionScope.user}">
-                <!-- LOGOUT -->
-                <c:url value="/front" var="logout">
-                    <c:param name="command" value="Logout"/>
-                </c:url>
-                <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
-
-                <c:url value="/front" var="main">
-                    <c:param name="command" value="Forward"/>
-                    <c:param name="forward" value="main"/>
-                </c:url>
-                <li><a href="<c:out value="${main}"/>" class="current">Back to menu</a></li>
-            </c:if>
-        </ul>
-    </div>
+    <c:import url="head.jsp"/>
 
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
@@ -50,7 +33,7 @@
                     <li>You login: ${user.login}</li>
                     <li>You name: ${user.name}</li>
                 </ul>
-                <a href="<c:url value="/editUser.jsp" />" style="margin-left: 50px;">Edit profile...</a>
+                <a href="/editUser.jsp" style="margin-left: 50px;">Edit profile...</a>
             </c:if>
 
         </div>
@@ -94,55 +77,48 @@
         </div>
         <!-- CATEGORY FILTER: end -->
 
-        <div id="templatemo_content_right">
 
-            <c:if test="${!empty requestScope.orders}">
+        <c:if test="${!empty requestScope.book}">
 
-                <c:forEach items="${requestScope.orders}" var="order">
+            <div id="templatemo_content_right">
 
-                    <!-- BOOK: start -->
-                    <div class="templatemo_product_box">
+                <h1>${book.title} <span>(${book.author.author})</span></h1>
+                <div class="image_panel"><img src="<c:url value="${book.coverLink}" />" alt="CSS Template" width="100"
+                                              height="150"/></div>
+
+                <div class="product_info">
+                    <p>${book.description}</p>
+                    <c:if test="${book.quantity == 0}">
+                        <h3>Not available</h3>
+                    </c:if>
+                    <c:if test="${book.quantity > 0}">
+                        <h3>${book.quantity} pcs in stock</h3>
+                        <div class="buy_now_button"><a href="subpage.html">Add in my library</a></div>
+                    </c:if>
+                    <ul>
+                        <li>January 2024</li>
+                        <li>Pages: 498</li>
+                        <li>ISBN 10: 0-496-91612-0 | ISBN 13: 9780492518154</li>
+                    </ul>
+
+                    <p>${book.description}</p>
 
 
-                        <h1>${order.book.title} </h1>
+                    <div class="buy_now_button"><a href="subpage.html">Read</a></div>
+                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
+                </div>
 
-                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>
+                <div class="cleaner_with_height">&nbsp;</div>
 
-                        <div class="product_info">
-                            <p>${order.book.description}</p>
+                <a href="index.html"><img src="images/templatemo_ads.jpg" alt="css template ad"/></a>
 
-                            <c:if test="${order.now() >= order.date.plusDays(order.duration)}">
-                                <h3>Book is expired
-                                    return the book to the library</h3>
-                                <%--                                <c:url value="/front" var="return">--%>
-                                <%--                                    <c:param name="command" value="ReturnOrder"/>--%>
-                                <%--                                    <c:param name="id" value="${order.id}"/>--%>
-                                <%--                                </c:url>--%>
-                                <div class="detail_button"><a
-                                        href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
-                                </div>
-                            </c:if>
-                            <c:if test="${order.now() < order.date.plusDays(order.duration)}">
-                            <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-                            <h3> Expected return date: ${order.date.plusDays(order.duration)} </h3>
-                            <h3>${order.date.plusDays(order.duration).toEpochDay() - order.now().toEpochDay()} days
-                                left </h3>
+            </div>
+            <!-- end of content right -->
 
-                            <div class="detail_button"><a
-                                    href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
-                                </c:if>
 
-                            </div>
+        </c:if>
+        <!-- BOOK: end -->
 
-                        </div>
-                    </div>
-                    <!-- Insert empty string after book -->
-                </c:forEach>
-
-            </c:if>
-            <!-- BOOK: end -->
-
-        </div> <!-- end of content right -->
 
         <div class="cleaner_with_height">&nbsp;</div>
     </div>
