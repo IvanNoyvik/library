@@ -12,7 +12,7 @@ public class Book extends Entity {
 
     private String title;
     private String description;
-    private String coverLink;
+    private byte[] image;
     private int quantity;
     private Author author;
     private Genre genre;
@@ -20,11 +20,11 @@ public class Book extends Entity {
     public Book() {
     }
 
-    public Book(long id, String title, String description, String coverLink, int quantity, Author author, Genre genre) {
+    public Book(long id, String title, String description, byte[] image, int quantity, Author author, Genre genre) {
         super(id);
         this.title = title;
         this.description = description;
-        this.coverLink = coverLink;
+        this.image = image;
         this.quantity = quantity;
         this.author = author;
         this.genre = genre;
@@ -46,12 +46,12 @@ public class Book extends Entity {
         this.description = description;
     }
 
-    public String getCoverLink() {
-        return coverLink;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setCoverLink(String coverLink) {
-        this.coverLink = coverLink;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public int getQuantity() {

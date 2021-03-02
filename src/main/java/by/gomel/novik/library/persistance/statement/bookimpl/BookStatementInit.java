@@ -14,7 +14,7 @@ public class BookStatementInit extends EntityStatementInit<Book> {
 
         ps.setString(1, book.getTitle());
         ps.setString(2, book.getDescription());
-        ps.setString(3, book.getCoverLink());
+        ps.setBytes(3, book.getImage());
         ps.setInt(4,book.getQuantity());
         ps.setLong(5, book.getAuthor().getId());
         ps.setLong(6, book.getGenre().getId());

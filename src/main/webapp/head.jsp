@@ -37,12 +37,15 @@
             <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
 
             <!-- PROFILE -->
+            <c:if test="${sessionScope.user.status.status ne 'Locked'}">
+
             <c:url value="/front" var="profile" >
                 <c:param name="command" value="Forward"/>
                 <c:param name="forward" value="profile"/>
                 <c:param name="userId" value="${sessionScope.user.id}"/>
             </c:url>
             <li><a href="<c:out value="${profile}"/>" class="current">${sessionScope.user.login}(${sessionScope.user.name})</a></li>
+            </c:if>
 
 
         </c:if>

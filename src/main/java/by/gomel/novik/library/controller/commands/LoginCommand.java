@@ -23,8 +23,13 @@ public class LoginCommand extends FrontCommand {
         User user = userDao.findByLoginAndPasswordSqlQuery(login, password);
 
         if (user != null) {
+
             request.getSession().setAttribute(USER, user);
-            forward(MAIN_JSP);
+            if (!user.getStatus().getStatus().equalsIgnoreCase(LOCKED)){
+                forward(MAIN_JSP);
+            } else {
+                forward(BLOCK_JSP);
+            }
         } else {
 
         request.setAttribute(ERROR, LOGIN_MESSAGE);
