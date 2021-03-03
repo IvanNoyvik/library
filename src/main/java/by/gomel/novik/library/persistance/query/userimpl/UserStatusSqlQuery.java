@@ -4,10 +4,10 @@ import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 
 public class UserStatusSqlQuery implements CrudSqlQuery {
 
-    private static final String FIND_BY_ID_SQL_QUERY = "SELECT ID, STATUS FROM USERS_STATUSES WHERE ID = ?";
-    private static final String FIND_ALL_SQL_QUERY = "SELECT ID, STATUS FROM USERS_STATUSES";
-    private static final String SAVE_SQL_QUERY = "INSERT INTO USERS_STATUSES (STATUS) VALUES ?";
-    private static final String UPDATE_SQL_QUERY = "UPDATE USERS_STATUSES SET STATUS = ? WHERE ID = ?";
+    private static final String FIND_BY_ID_SQL_QUERY = "SELECT ID, STATUS, DURATION FROM USERS_STATUSES WHERE ID = ?";
+    private static final String FIND_ALL_SQL_QUERY = "SELECT ID, STATUS, DURATION FROM USERS_STATUSES";
+    private static final String SAVE_SQL_QUERY = "INSERT INTO USERS_STATUSES (STATUS, DURATION) VALUES (?, ?)";
+    private static final String UPDATE_SQL_QUERY = "UPDATE USERS_STATUSES SET STATUS = ?, DURATION = ? WHERE ID = ?";
     private static final String DELETE_BY_ID_SQL_QUERY = "DELETE FROM USERS_STATUSES WHERE ID = ?";
 
     @Override

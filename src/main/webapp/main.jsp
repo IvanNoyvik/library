@@ -87,7 +87,10 @@
                     <div class="templatemo_product_box">
 
                         <h1>${book.title} <span>(${book.author.author})</span></h1>
-                        <img src="<c:url value="${book.coverLink}" />" alt="image"/>
+
+
+                            <%--                        IMAGE--%>
+                    <%--                        <img src="<c:url value="${book.coverLink}" />" alt="image"/>--%>
 
                         <div class="product_info">
                             <p>${book.description}</p>

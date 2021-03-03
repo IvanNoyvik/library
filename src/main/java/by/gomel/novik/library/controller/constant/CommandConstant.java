@@ -25,12 +25,17 @@ public interface CommandConstant {
     String FORWARD = "forward";
     String UNKNOWN = "unknown";
     String ERROR = "error";
+
     String USER = "user";
+    String USERS = "users";
     String USER_ID = "userId";
     String LOGIN = "login";
     String PASSWORD = "password";
     String NAME = "name";
+
     String MESSAGE = "message";
+    String MESSAGES = "messages";
+
     String BOOKS = "books";
     String BOOK = "book";
     String BOOK_ID = "bookId";
@@ -38,6 +43,11 @@ public interface CommandConstant {
     String DAYS = "days";
     String CONTEXT = "context";
 
+    String STATUS = "status";
+    String OK = "OK";
+    String LIMITED = "Limited";
+    String LOCKED = "Locked";
+    String DURATION = "duration";
 
 
 
@@ -49,8 +59,8 @@ public interface CommandConstant {
     String BOOK_JSP = "book";
     String BLOCK_JSP = "block";
     String ERROR_JSP = "error";
+    String ADMIN_JSP = "admin";
 
-    String LOCKED = "locked";
 
 
 }

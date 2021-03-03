@@ -1,10 +1,13 @@
 package by.gomel.novik.library.controller;
 
 import by.gomel.novik.library.model.Book;
+import by.gomel.novik.library.model.Message;
 import by.gomel.novik.library.model.Order;
 import by.gomel.novik.library.model.User;
 import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
+import by.gomel.novik.library.persistance.dao.userimpl.MessageJdbcDao;
+import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -102,6 +105,22 @@ public abstract class FrontCommand {
             long bookId = Long.parseLong(request.getParameter("bookId"));
             Book book = bookDao.findById(bookId);
             request.setAttribute(BOOK, book);
+
+        }
+
+        if (target.equalsIgnoreCase(ADMIN_JSP)) {
+
+            UserJdbcDao userDao = new UserJdbcDao();
+            List<User> users = userDao.findAll();
+            request.setAttribute(USERS, users);
+
+            MessageJdbcDao messageDao = new MessageJdbcDao();
+            List<Message> messages = messageDao.findAll();
+            request.setAttribute(MESSAGES, messages);
+
+            OrderJdbcDao orderDao = new OrderJdbcDao();
+            List<Order> orders = orderDao.findAllOverdueOrder();
+            request.setAttribute(ORDERS, orders);
 
         }
     }

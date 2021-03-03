@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Online library</title>
+    <title>Profile</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
@@ -62,18 +62,14 @@
         <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+                <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
+                    <form action="<c:url value="/front"/>" method="post" >
+                        <input type="hidden" name="command" value="Forward"/>
+                        <input type="hidden" name="forward" value="admin"/>
+                        <h1><input type="submit" value="Admin panel"/></h1>
+                    </form>
+                </c:if>
+
             </div>
             <div class="templatemo_content_left_section">
                 <h1>Bestsellers</h1>
@@ -106,7 +102,8 @@
 
                         <h1>${order.book.title} </h1>
 
-                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>
+<%--                        IMAGE--%>
+<%--                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>--%>
 
                         <div class="product_info">
                             <p>${order.book.description}</p>

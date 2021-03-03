@@ -14,8 +14,8 @@ public class UserStatusJdbcDao extends JdbcDao<UserStatus> {
 
 
     private static long OK = 1L;
-    private static long LIMITED = 2L;
-    private static long LOCKED = 3L;
+    private static long LOCKED = 2L;
+//    private static long LIMITED = 3L;
 
 
     @Override
@@ -36,9 +36,9 @@ public class UserStatusJdbcDao extends JdbcDao<UserStatus> {
     public UserStatus getOkStatus(){
         return findById(OK);
     }
-    public UserStatus getLimitedStatus(){
-        return findById(LIMITED);
-    }
+//    public UserStatus getLimitedStatus(){
+//        return findById(LIMITED);
+//    }
     public UserStatus getLockedStatus(){
         return findById(LOCKED);
     }

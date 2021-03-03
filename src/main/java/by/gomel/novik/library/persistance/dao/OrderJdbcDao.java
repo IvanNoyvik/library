@@ -124,7 +124,7 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
     }
 
     @Override
-    public List<Order> findAllOverdueOrderSqlQuery() {
+    public List<Order> findAllOverdueOrder() {
         try (Connection conn = getConnector().getConnection()) {
 
             try (PreparedStatement prSt = conn.prepareStatement(getSqlQuery().findAllOverdueOrderSqlQuery());
