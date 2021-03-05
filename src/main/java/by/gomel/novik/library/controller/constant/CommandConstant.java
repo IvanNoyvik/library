@@ -39,6 +39,9 @@ public interface CommandConstant {
     String BOOKS = "books";
     String BOOK = "book";
     String BOOK_ID = "bookId";
+    String GENRES = "genres";
+    String AUTHORS = "authors";
+
     String ORDERS = "orders";
     String DAYS = "days";
     String CONTEXT = "context";
@@ -60,6 +63,7 @@ public interface CommandConstant {
     String BLOCK_JSP = "block";
     String ERROR_JSP = "error";
     String ADMIN_JSP = "admin";
+    String EDIT_BOOK_JSP = "editBook";
 
 
 

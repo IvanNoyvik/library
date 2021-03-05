@@ -22,7 +22,7 @@ public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Order> orders = orderJdbcDao.findAll();
+        int orders = orderJdbcDao.findNumberOfOverdueOrdersByUserId(1l);
         request.setAttribute("orders", orders);
         getServletContext().getRequestDispatcher("/test.jsp").forward(request, response);
     }

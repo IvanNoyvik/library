@@ -6,6 +6,7 @@ public abstract class JdbcConnector {
 
     private static final Connector CONNECTOR = Connector.getInstance();
 
+
     public Connector getConnector() {
         return CONNECTOR;
     }

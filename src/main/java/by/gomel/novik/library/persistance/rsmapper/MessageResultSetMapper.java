@@ -15,11 +15,11 @@ public class MessageResultSetMapper implements ResultSetMapper<Message> {
 
         Long id = rs.getLong("id");
         LocalDate date = rs.getDate("date_sent").toLocalDate();
-        String context = rs.getString("context");
+        String content = rs.getString("content");
         Long userId = rs.getLong("users_id");
         User user = new User();
         user.setId(userId);
 
-        return new Message(id, date, context, user);
+        return new Message(id, date, content, user);
     }
 }

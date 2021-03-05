@@ -81,16 +81,22 @@
 
             <c:if test="${!empty requestScope.books}">
 
-                <c:forEach items="${books}" var="book">
+                <c:forEach items="${requestScope.books}" var="book">
 
                     <!-- BOOK: start -->
                     <div class="templatemo_product_box">
 
                         <h1>${book.title} <span>(${book.author.author})</span></h1>
 
+                        <c:if test="${!empty book.image}">
+                            <img src="<c:url value="${book.image}" />" alt="cover" width="75"
+                                 height="75"/>
+                        </c:if>
+                        <c:if test="${empty book.image}">
+                            <img src="<c:url value="/static/main/images/no_image.png" />" alt="cover" width="75"
+                                 height="75"/>
+                        </c:if>
 
-                            <%--                        IMAGE--%>
-                    <%--                        <img src="<c:url value="${book.coverLink}" />" alt="image"/>--%>
 
                         <div class="product_info">
                             <p>${book.description}</p>
@@ -99,9 +105,7 @@
                             </c:if>
                             <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
                                 <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <label placeolder="quantity days">
-                                        <input name="days" required="required" type="text" placeolder="quantity days"/>
-                                    </label>
+                                    <input name="days" required type="text" value="quantity days"/>
                                     <input name="command" type="hidden" value="AddOrder"/>
                                     <input name="bookId" type="hidden" value="${book.id}"/>
                                     <input type="submit" value="Add in my library"/>

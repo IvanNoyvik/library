@@ -9,7 +9,6 @@ import by.gomel.novik.library.persistance.query.OrderSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.OrderResultSetMapper;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
 import by.gomel.novik.library.persistance.statement.OrderStatementInit;
-import by.gomel.novik.library.persistance.statement.StatementInit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +41,7 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
     @Override
     public Order save(Order order) {
         Book book = order.getBook();
-        if (book.getQuantity() < 1){
+        if (book.getQuantity() < 1) {
             throw new DaoPartException();
         }
         book.setQuantity(book.getQuantity() - 1);
@@ -139,7 +138,8 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DaoPartException("Error receive database connection: " + e.getMessage());
-        }    }
+        }
+    }
 
     private List<Order> getOrders(ResultSet rs) throws SQLException {
         List<Order> orders = new ArrayList<>();
@@ -172,4 +172,26 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
             throw new DaoPartException("Error receive database connection: " + e.getMessage());
         }
     }
+
+    public int findNumberOfOverdueOrdersByUserId(long userId) {
+        try (Connection conn = getConnector().getConnection();
+             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().getFindOverdueOrdersByUserIdSqlQuery())) {
+
+            getStatementInitializer().initStatement(prSt, userId);
+
+
+            try (ResultSet rs = prSt.executeQuery()) {
+
+                return rs.getRow();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new DaoPartException("Error process findByBookAndUserId entities method: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoPartException("Error receive database connection: " + e.getMessage());
+        }
+    }
 }
+

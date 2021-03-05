@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Head</title>
-    <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
+<%--    <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>--%>
 </head>
 <body>
 

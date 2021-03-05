@@ -1,11 +1,10 @@
 package by.gomel.novik.library.controller;
 
-import by.gomel.novik.library.model.Book;
-import by.gomel.novik.library.model.Message;
-import by.gomel.novik.library.model.Order;
-import by.gomel.novik.library.model.User;
+import by.gomel.novik.library.model.*;
 import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
+import by.gomel.novik.library.persistance.dao.bookimpl.AuthorJdbcDao;
 import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
+import by.gomel.novik.library.persistance.dao.bookimpl.GenreJdbcDao;
 import by.gomel.novik.library.persistance.dao.userimpl.MessageJdbcDao;
 import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
 
@@ -15,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
@@ -108,19 +109,39 @@ public abstract class FrontCommand {
 
         }
 
+        if (target.equalsIgnoreCase(EDIT_BOOK_JSP)) {
+
+            BookJdbcDao bookDao = new BookJdbcDao();
+            long bookId = Long.parseLong(request.getParameter("bookId"));
+            Book book = bookDao.findById(bookId);
+            request.setAttribute(BOOK, book);
+            GenreJdbcDao genreDao = new GenreJdbcDao();
+            List<Genre> genres = genreDao.findAll();
+            request.setAttribute(GENRES, genres);
+            AuthorJdbcDao authorDao = new AuthorJdbcDao();
+            List<Author> authors = authorDao.findAll();
+            request.setAttribute(AUTHORS, authors);
+
+        }
+
         if (target.equalsIgnoreCase(ADMIN_JSP)) {
-
-            UserJdbcDao userDao = new UserJdbcDao();
-            List<User> users = userDao.findAll();
-            request.setAttribute(USERS, users);
-
-            MessageJdbcDao messageDao = new MessageJdbcDao();
-            List<Message> messages = messageDao.findAll();
-            request.setAttribute(MESSAGES, messages);
 
             OrderJdbcDao orderDao = new OrderJdbcDao();
             List<Order> orders = orderDao.findAllOverdueOrder();
             request.setAttribute(ORDERS, orders);
+
+            UserJdbcDao userDao = new UserJdbcDao();
+            List<User> users = userDao.findAll();
+            Map<User, Integer> userWithCountOverdueOrder= new HashMap<>();
+            for (User user: users) {
+                int countOverdueOrder = orderDao.findNumberOfOverdueOrdersByUserId(user.getId());
+                userWithCountOverdueOrder.put(user, countOverdueOrder);
+            }
+            request.setAttribute(USERS, userWithCountOverdueOrder);
+
+            MessageJdbcDao messageDao = new MessageJdbcDao();
+            List<Message> messages = messageDao.findAll();
+            request.setAttribute(MESSAGES, messages);
 
         }
     }

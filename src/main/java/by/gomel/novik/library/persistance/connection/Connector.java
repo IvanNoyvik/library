@@ -18,6 +18,8 @@ public class Connector {
     private HikariConfig config;
     private HikariDataSource ds;
 
+    private ThreadLocal<Connection> connectionHolder;
+
     private Connector() {
 
         try (InputStream resourceAsStream = Connector.class.getResourceAsStream(DATABASE_PROPERTIES_FILE_PATH)) {
@@ -49,8 +51,15 @@ public class Connector {
     }
 
     public Connection getConnection() throws SQLException {
+
+        if(connectionHolder != null && connectionHolder.get() != null) {
+            return connectionHolder.get();
+        }
         return ds.getConnection();
     }
+
+
+
 
 
 }

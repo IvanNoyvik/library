@@ -29,7 +29,7 @@
   <link rel="stylesheet" type="text/css" href="<c:url value="/static/login/css/main.css" />" />
   <!--===============================================================================================-->
 
-  <title>Login</title>
+  <title>Edit user</title>
 
 </head>
 

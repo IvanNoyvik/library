@@ -27,10 +27,13 @@ public class EditUserCommand extends FrontCommand {
 
             request.getSession().setAttribute(USER, user);
             forward(PROFILE_JSP);
+        } else {
+
+            request.setAttribute(ERROR, LOGIN_MESSAGE);
+            forward(MAIN_JSP);
+
         }
 
-        request.setAttribute(ERROR, LOGIN_MESSAGE);
-        forward(MAIN_JSP);
 
     }
 }

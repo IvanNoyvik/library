@@ -30,6 +30,14 @@ img {
 	border: none;
 }
 
+input[type="submit" i] {
+	background: url(/static/main/images/templatemo_btn_01.jpg) no-repeat;
+	display: block;
+}
+textarea {
+	display: block;
+}
+
 
 .cleaner {
 	clear: both;
@@ -128,7 +136,7 @@ img {
 	height: 285px;
 	padding: 0;
 	margin: 0;
-	background: url(/static/main/images/templatemo_header_bg.jpg) no-repeat;
+	background: url(/static/main/images/templatemo_header_bg_blank.jpg) no-repeat;
 }
 
 #templatemo_header a,a:hover {
@@ -276,7 +284,7 @@ img {
 
 #templatemo_content_right .image_panel {
 	float: left;
-	width: 100px;
+	width: 150px;
 	margin-right: 20px;
 }
 
