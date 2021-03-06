@@ -26,12 +26,15 @@ public class AddOrderCommand extends FrontCommand {
 
         long bookId = Long.parseLong(request.getParameter(BOOK_ID));
         User user = (User) request.getSession().getAttribute(USER);
+        Book book = bookDao.findById(bookId);
         long userId =user.getId();
-        if (user.getStatus().getStatus().equalsIgnoreCase("ok") && !orderDao.findByBookAndUserId(bookId,userId)) {
+
+        if (user.getStatus().getStatus().equalsIgnoreCase("OK")
+                && !orderDao.findByBookAndUserId(bookId,userId)
+                && book.getQuantity() > 0) {
 
             int duration = Integer.parseInt(request.getParameter(DAYS));
 
-            Book book = bookDao.findById(bookId);
 
             Order order = new Order(LocalDate.now(), duration, book, user);
 
