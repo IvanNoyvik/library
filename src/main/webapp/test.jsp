@@ -13,23 +13,27 @@
     <title>TEST</title>
 </head>
 <body>
-<c:forEach var="order" items="${requestScope.orders}" >
 
-    <c:if test="${order.now() > order.date.plusDays(order.duration)}">
-        <h3>Book is expired
-            return the book to the library</h3>
-        <div class="detail_button"><a href="subpage.html">Return</a></div>
-    </c:if>
-    <c:if test="${order.now() < order.date.plusDays(order.duration)}">
-        <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-        <h3> Expected return date: ${order.date.plusDays(order.duration)} </h3>
-        <h3>${order.date.plusDays(order.duration).toEpochDay() - order.now().toEpochDay()} days left </h3>
-        <div class="detail_button"><a href="subpage.html">Return</a></div>
-    </c:if>
+<h2>Upload Files</h2>
+
+<form method="post" action="<c:url value="/test"/>"
+      enctype="multipart/form-data">
+
+    Select file to upload:
+    <br />
+    <input type="file" name="file" accept="image/*"  />
+    <br />
+    <br />
+    <br />
+    <label>    Description:
+        <input type="text" name="description" size="100" />
+    </label>
+    <br />
+    <br />
+    <input type="submit" value="Upload" />
+</form>
 
 
-
-</c:forEach>
 <br>
 <br>
 </body>
