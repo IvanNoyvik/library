@@ -1,56 +1,98 @@
 package by.gomel.novik.library.temp;
 
-import by.gomel.novik.library.model.Order;
+import by.gomel.novik.library.model.Book;
+import by.gomel.novik.library.persistance.connection.Connector;
 import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
+import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Collection;
 
 @WebServlet(name = "TestServlet", urlPatterns = "/test")
+@MultipartConfig
 public class TestServlet extends HttpServlet {
 
-    OrderJdbcDao orderJdbcDao = new OrderJdbcDao();
+    BookJdbcDao BookJdbcDao = new BookJdbcDao();
+    private static final Connector CONNECTOR = Connector.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         Connection conn = null;
         try {
-            // Connection to Database
-            // (See more in JDBC Tutorial).
-            conn = ConnectionUtils.getMyConnection();
+            conn = CONNECTOR.getConnection();
             conn.setAutoCommit(false);
 
-            String description = request.getParameter("description");
-
-            // Part list (multi files).
-            for (Part part : request.getParts()) {
-                String fileName = extractFileName(part);
-                if (fileName != null && fileName.length() > 0) {
-                    // File data
-                    InputStream is = part.getInputStream();
+            Long id = Long.parseLong(request.getParameter("id"));
+//            request.getParameter("file");
+//            ServletInputStream inputStream = request.getInputStream();
+            Part part = request.getPart("file");
+//                    InputStream is = part.getInputStream();
                     // Write to file
-                    this.writeToDB(conn, fileName, is, description);
-                }
-            }
+//                        Collection<Part> parts = request.getParts();
+//            for(Part part : request.getParts()){
+//                System.out.println("!!!!!!!"+extractFileName(part));
+//                System.out.println("PN: "+ part.getName());
+//                Collection<String> headers = part.getHeaders("content-disposition");
+//                if (headers == null)
+//                    continue;
+//                for(String header : headers){
+//                    System.out.println("CDH: " + header);
+//                }
+//                InputStream inputStream = part.getInputStream();
+//                this.writeToDB(id, inputStream, conn);
+//
+//            }
+                InputStream inputStream = part.getInputStream();
+                this.writeToDB(id, inputStream, conn);
+
+
             conn.commit();
 
             // Upload successfully!.
-            response.sendRedirect(request.getContextPath() + "/uploadToDBResults");
+            response.sendRedirect("/main.jsp");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Error: " + e.getMessage());
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsps/uploadToDB.jsp");
-            dispatcher.forward(request, response);
+//            request.setAttribute("errorMessage", "Error: " + e.getMessage());
+//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/test.jsp");
+//            dispatcher.forward(request, response);
         } finally {
-            this.closeQuietly(conn);
+            try {
+                conn.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
+
+
+    public void printNames(HttpServletRequest request) throws IOException, ServletException {
+        for(Part part : request.getParts()){
+            System.out.println("PN: "+ part.getName());
+            Collection<String> headers = part.getHeaders("content-disposition");
+            if (headers == null)
+                continue;
+            for(String header : headers){
+                System.out.println("CDH: " + header);
+            }
+        }
+    }
+
 
     private String extractFileName(Part part) {
         // form-data; name="file"; filename="C:\file1.zip"
@@ -72,44 +114,24 @@ public class TestServlet extends HttpServlet {
         return null;
     }
 
-    private Long getMaxAttachmentId(Connection conn) throws SQLException {
-        String sql = "Select max(a.id) from Attachment a";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        ResultSet rs = pstm.executeQuery();
-        if (rs.next()) {
-            long max = rs.getLong(1);
-            return max;
-        }
-        return 0L;
-    }
 
-    private void writeToDB(Connection conn, String fileName, InputStream is, String description) throws SQLException {
 
-        String sql = "Insert into Attachment(Id,File_Name,File_Data,Description) " //
-                + " values (?,?,?,?) ";
-        PreparedStatement pstm = conn.prepareStatement(sql);
+    private void writeToDB(Long id, InputStream is, Connection connection) throws SQLException {
 
-        Long id = this.getMaxAttachmentId(conn) + 1;
-        pstm.setLong(1, id);
-        pstm.setString(2, fileName);
-        pstm.setBlob(3, is);
-        pstm.setString(4, description);
+        String sql = "update books set image = ? where id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setLong(2, id);
+        pstm.setBlob(1, is);
         pstm.executeUpdate();
     }
 
-    private void closeQuietly(Connection conn) {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (Exception e) {
-        }
-    }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int orders = orderJdbcDao.findNumberOfOverdueOrdersByUserId(1l);
-        request.setAttribute("orders", orders);
+        Book book = BookJdbcDao.findById(2);
+        request.setAttribute("book", book);
         getServletContext().getRequestDispatcher("/test.jsp").forward(request, response);
     }
 }
