@@ -39,8 +39,14 @@ public interface CommandConstant {
     String BOOKS = "books";
     String BOOK = "book";
     String BOOK_ID = "bookId";
+    String TITLE = "title";
+    String GENRE = "genre";
     String GENRES = "genres";
+    String AUTHOR = "author";
     String AUTHORS = "authors";
+    String QUANTITY = "quantity";
+    String IMAGE = "image";
+    String DESCRIPTION = "description";
 
     String ORDERS = "orders";
     String DAYS = "days";

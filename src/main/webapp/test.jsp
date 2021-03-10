@@ -18,28 +18,22 @@
 
 <form method="post" action="<c:url value="/test"/>" enctype="multipart/form-data">
 
-    <input type="file" name="file" accept="image/*"  />
-    <input type="hidden" name="id" value="${requestScope.book.id}"  />
+    <input type="file" name="file" accept="image/*"/>
+    <input type="hidden" name="id" value="${requestScope.book.id}"/>
 
-    <input type="submit" value="Upload" />
+    <input type="submit" value="Upload"/>
 </form>
 
-<c:url value="/test2" var="profile" >
-    <c:param name="id" value="${requestScope.book.id}"/>
+<c:url value="/front" var="image">
+    <c:param name="bookId" value="${requestScope.book.id}"/>
+    <c:param name="command" value="GetImage"/>
 </c:url>
 
-<c:if test="${!empty requestScope.book.image}">
-    <div >
-        <img src="${profile}" alt="CSS Template" width="100"
-             height="150"/>
-    </div>
-</c:if>
-<c:if test="${empty requestScope.book.image}">
-    <div >
-        <img src="<c:url value="/static/main/images/no_image.png" />" alt="CSS Template" width="150"
-             height="150"/>
-    </div>
-</c:if>
+<div>
+    <img src="${image}" alt="CSS Template" width="100"
+         height="150"/>
+</div>
+
 
 <br>
 <br>

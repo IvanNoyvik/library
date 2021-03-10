@@ -2,69 +2,45 @@ package by.gomel.novik.library.temp;
 
 import by.gomel.novik.library.model.Book;
 import by.gomel.novik.library.persistance.connection.Connector;
-import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Collection;
 
 @WebServlet(name = "TestServlet", urlPatterns = "/test")
 @MultipartConfig
 public class TestServlet extends HttpServlet {
 
-    BookJdbcDao BookJdbcDao = new BookJdbcDao();
+    BookJdbcDao bookJdbcDao = new BookJdbcDao();
     private static final Connector CONNECTOR = Connector.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException {
 
-        Connection conn = null;
         try {
-            conn = CONNECTOR.getConnection();
-            conn.setAutoCommit(false);
+
 
             Long id = Long.parseLong(request.getParameter("id"));
-//            request.getParameter("file");
-//            ServletInputStream inputStream = request.getInputStream();
+
             Part part = request.getPart("file");
-//                    InputStream is = part.getInputStream();
-                    // Write to file
-//                        Collection<Part> parts = request.getParts();
-//            for(Part part : request.getParts()){
-//                System.out.println("!!!!!!!"+extractFileName(part));
-//                System.out.println("PN: "+ part.getName());
-//                Collection<String> headers = part.getHeaders("content-disposition");
-//                if (headers == null)
-//                    continue;
-//                for(String header : headers){
-//                    System.out.println("CDH: " + header);
-//                }
-//                InputStream inputStream = part.getInputStream();
-//                this.writeToDB(id, inputStream, conn);
-//
-//            }
-                InputStream inputStream = part.getInputStream();
-                this.writeToDB(id, inputStream, conn);
+            try (InputStream inputStream = part.getInputStream()){
+
+                Book book = bookJdbcDao.addImage(id, inputStream);
+
+            }
 
 
-            conn.commit();
-
-            // Upload successfully!.
             response.sendRedirect("/main.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,47 +48,43 @@ public class TestServlet extends HttpServlet {
 //            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/test.jsp");
 //            dispatcher.forward(request, response);
         } finally {
-            try {
-                conn.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+
         }
     }
 
 
-    public void printNames(HttpServletRequest request) throws IOException, ServletException {
-        for(Part part : request.getParts()){
-            System.out.println("PN: "+ part.getName());
-            Collection<String> headers = part.getHeaders("content-disposition");
-            if (headers == null)
-                continue;
-            for(String header : headers){
-                System.out.println("CDH: " + header);
-            }
-        }
-    }
+//    public void printNames(HttpServletRequest request) throws IOException, ServletException {
+//        for(Part part : request.getParts()){
+//            System.out.println("PN: "+ part.getName());
+//            Collection<String> headers = part.getHeaders("content-disposition");
+//            if (headers == null)
+//                continue;
+//            for(String header : headers){
+//                System.out.println("CDH: " + header);
+//            }
+//        }
+//    }
 
 
-    private String extractFileName(Part part) {
-        // form-data; name="file"; filename="C:\file1.zip"
-        // form-data; name="file"; filename="C:\Note\file2.zip"
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                // C:\file1.zip
-                // C:\Note\file2.zip
-                String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
-                clientFileName = clientFileName.replace("\\", "/");
-                int i = clientFileName.lastIndexOf('/');
-                // file1.zip
-                // file2.zip
-                return clientFileName.substring(i + 1);
-            }
-        }
-        return null;
-    }
+//    private String extractFileName(Part part) {
+//        // form-data; name="file"; filename="C:\file1.zip"
+//        // form-data; name="file"; filename="C:\Note\file2.zip"
+//        String contentDisp = part.getHeader("content-disposition");
+//        String[] items = contentDisp.split(";");
+//        for (String s : items) {
+//            if (s.trim().startsWith("filename")) {
+//                // C:\file1.zip
+//                // C:\Note\file2.zip
+//                String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+//                clientFileName = clientFileName.replace("\\", "/");
+//                int i = clientFileName.lastIndexOf('/');
+//                // file1.zip
+//                // file2.zip
+//                return clientFileName.substring(i + 1);
+//            }
+//        }
+//        return null;
+//    }
 
 
 
@@ -130,7 +102,7 @@ public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Book book = BookJdbcDao.findById(2);
+        Book book = bookJdbcDao.findById(2);
         request.setAttribute("book", book);
         getServletContext().getRequestDispatcher("/test.jsp").forward(request, response);
     }

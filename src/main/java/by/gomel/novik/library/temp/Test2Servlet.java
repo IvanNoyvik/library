@@ -34,8 +34,7 @@ public class Test2Servlet extends HttpServlet {
 
         Connection conn = null;
         try {
-            // Get Database Connection.
-            // (See more in JDBC Tutorial)
+
             conn = CONNECTOR.getConnection();
             Long id = null;
             try {
@@ -46,17 +45,9 @@ public class Test2Servlet extends HttpServlet {
             Book book = BookJdbcDao.findById(id);
 //            if (person == null) {
 //                // No record found, redirect to default image.
-//                response.sendRedirect(request.getContextPath() + "/images/noimage.jpg");
-//                return;
+//
 //            }
 
-            // trump.jpg, putin.png
-
-            // image/jpg
-            // image/png
-
-
-            // Write image data to Response.
             response.getOutputStream().write(book.getImage());
 
         } catch (Exception e) {

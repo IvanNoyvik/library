@@ -78,7 +78,9 @@
 
 
         <c:if test="${!empty requestScope.book}">
-            <form action="<c:url value="/front"/>" method="post">
+            <form action="<c:url value="/front"/>" method="post" enctype="multipart/form-data">
+                <input name="command" type="hidden" value="EditBook"/>
+                <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
 
                 <div id="templatemo_content_right">
 
@@ -88,23 +90,25 @@
 
                     <div class="image_panel">
 
-                        <c:if test="${!empty requestScope.book.image}">
-                            <img src="<c:url value="${requestScope.book.image}" />" alt="CSS Template" width="100"
+                        <c:url value="/front" var="image">
+                            <c:param name="bookId" value="${requestScope.book.id}"/>
+                            <c:param name="command" value="GetImage"/>
+                        </c:url>
+                        <div>
+                            <img src="${image}" alt="CSS Template" width="100"
                                  height="150"/>
-                        </c:if>
-                        <c:if test="${empty requestScope.book.image}">
-                            <img src="<c:url value="/static/main/images/no_image.png" />" alt="CSS Template" width="150"
-                                 height="150"/>
-                        </c:if>
+                        </div>
+                        <input type="file" name="image" accept="image/*"/>
                     </div>
+
 
                     <div class="product_info">
 
                         <label> Genre (${requestScope.book.genre.genre}):
-                            <select>
+                            <select name="genre">
                                 <c:forEach items="${requestScope.genres}" var="genre">
                                     <c:if test="${genre eq requestScope.book.genre}">
-                                        <option selected="selected" value="${genre.genre}">${genre.genre}</option>
+                                        <option selected value="${genre.genre}">${genre.genre}</option>
                                     </c:if>
                                     <c:if test="${genre ne requestScope.book.genre}">
                                         <option value="${genre.genre}">${genre.genre}</option>
@@ -115,10 +119,10 @@
                         <br/>
 
                         <label> Author (${requestScope.book.author.author}):
-                            <select>
+                            <select name="author">
                                 <c:forEach items="${requestScope.authors}" var="author">
                                     <c:if test="${author eq requestScope.book.author}">
-                                        <option selected="selected" value="${author.author}">${author.author}</option>
+                                        <option selected value="${author.author}">${author.author}</option>
                                     </c:if>
                                     <c:if test="${author ne requestScope.book.author}">
                                         <option value="${author.author}">${author.author}</option>
@@ -132,7 +136,7 @@
                                value="${requestScope.book.quantity}"/></label>
 
 
-                        <textarea name="context" cols="30" rows="5" >${book.description}</textarea><br/>
+                        <textarea name="description" cols="30" rows="5" >${requestScope.book.description}</textarea><br/>
 
 
                         <div class="buy_now_button"><a href="subpage.html">Read</a></div>

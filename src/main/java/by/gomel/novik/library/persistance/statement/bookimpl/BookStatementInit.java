@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.statement.bookimpl;
 import by.gomel.novik.library.model.Book;
 import by.gomel.novik.library.persistance.statement.EntityStatementInit;
 
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -25,6 +26,13 @@ public class BookStatementInit extends EntityStatementInit<Book> {
 
         initStatement(ps, book);
         ps.setLong(7, id);
+
+    }
+
+    public void initStatement(PreparedStatement ps, InputStream inputStream, long id) throws SQLException {
+
+        ps.setBlob(1, inputStream);
+        ps.setLong(2, id);
 
     }
 }
