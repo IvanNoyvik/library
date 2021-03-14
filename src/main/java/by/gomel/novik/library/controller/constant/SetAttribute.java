@@ -45,6 +45,11 @@ public interface SetAttribute {
             Book book = bookDao.findById(bookId);
             request.setAttribute(BOOK, book);
 
+            OrderJdbcDao orderDao = new OrderJdbcDao();
+            List<Order> orders = orderDao.findByBookId(bookId);
+            request.setAttribute(ORDERS, orders);
+
+
         }
 
         if (target.equalsIgnoreCase(EDIT_BOOK_JSP)) {

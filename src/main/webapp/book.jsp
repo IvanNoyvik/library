@@ -28,7 +28,7 @@
 
         <div id="templatemo_new_books">
             <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
-                <form action="<c:url value="/front"/>" method="post" >
+                <form action="<c:url value="/front"/>" method="post">
                     <input type="hidden" name="command" value="Forward"/>
                     <input type="hidden" name="forward" value="editBook"/>
                     <input type="hidden" name="bookId" value="${requestScope.book.id}"/>
@@ -45,18 +45,26 @@
         <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+                <c:if test="${!empty requestScope.orders && sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
+                    <h1>Users read this book</h1>
+                    <table>
+                        <tr>
+                            <th><h2>User login</h2></th>
+                            <th><h2>Return date</h2></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orders}" var="order">
+                            <tr>
+                                <td>
+                                        ${order.user.login}
+                                </td>
+                                <td>
+                                        ${order.date.plusDays(order.duration)}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+
             </div>
             <div class="templatemo_content_left_section">
                 <h1>Bestsellers</h1>
