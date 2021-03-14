@@ -35,7 +35,7 @@ public class SentMessageCommand extends FrontCommand {
 
         }
 
-        forward(BLOCK_JSP);
+        redirect(BLOCK_JSP);
 
     }
 }

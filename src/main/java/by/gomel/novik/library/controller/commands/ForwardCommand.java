@@ -18,8 +18,6 @@ public class ForwardCommand extends FrontCommand {
 
         String target = request.getParameter(FORWARD);
 
-
-
         forward(target);
     }
 }

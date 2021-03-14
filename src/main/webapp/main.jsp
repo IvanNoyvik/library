@@ -88,14 +88,14 @@
 
                         <h1>${book.title} <span>(${book.author.author})</span></h1>
 
-                        <c:if test="${!empty book.image}">
-                            <img src="<c:url value="${book.image}" />" alt="cover" width="75"
-                                 height="75"/>
-                        </c:if>
-                        <c:if test="${empty book.image}">
-                            <img src="<c:url value="/static/main/images/no_image.png" />" alt="cover" width="75"
-                                 height="75"/>
-                        </c:if>
+                        <c:url value="/front" var="image">
+                            <c:param name="bookId" value="${book.id}"/>
+                            <c:param name="command" value="GetImage"/>
+                        </c:url>
+                        <div>
+                            <img src="${image}" alt="CSS Template" width="100"
+                                 height="100"/>
+                        </div>
 
 
                         <div class="product_info">

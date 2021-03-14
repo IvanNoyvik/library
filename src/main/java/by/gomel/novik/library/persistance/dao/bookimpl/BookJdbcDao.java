@@ -55,7 +55,7 @@ public class BookJdbcDao extends JdbcDao<Book> {
     }
 
 
-    public Book addImage(long id, InputStream inputStream) {
+    public void addImage(long id, InputStream inputStream) {
         try (Connection conn = getConnector().getConnection();
              PreparedStatement prStAddImage = conn.prepareStatement(getSqlQuery().addImageSqlQuery())) {
 
@@ -65,28 +65,9 @@ public class BookJdbcDao extends JdbcDao<Book> {
 
             conn.commit();
 
-            try ( PreparedStatement prStFindById = conn.prepareStatement(getSqlQuery().findByIdSqlQuery())) {
-                getStatementInitializer().initStatement(prStFindById, id);
-
-                try (ResultSet rs = prStFindById.executeQuery()) {
-                    if (rs.next()) {
-                        return getResultSetMapper().processResultSet(rs);
-                    }
-                    throw new DaoPartException("Invalid entity id in addImage method: " + id);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new DaoPartException("Error process getById in addImage method: " + e.getMessage());
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DaoPartException("Error process addImage entity method: " + e.getMessage());
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DaoPartException("Error process addImage entity method: " + e.getMessage());
+            throw new DaoPartException("Error process addImage entity method: " + e.getMessage() , e);
         }
     }
 

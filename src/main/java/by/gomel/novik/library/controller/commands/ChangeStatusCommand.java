@@ -50,7 +50,7 @@ public class ChangeStatusCommand extends FrontCommand {
 
         userDao.update(user);
 
-        forward(ADMIN_JSP);
+        redirectWithTarget(ADMIN_JSP);
 
     }
 }

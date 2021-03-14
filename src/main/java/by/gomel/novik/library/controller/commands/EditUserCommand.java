@@ -26,11 +26,11 @@ public class EditUserCommand extends FrontCommand {
             user = userDao.update(user);
 
             request.getSession().setAttribute(USER, user);
-            forward(PROFILE_JSP);
+            redirectWithTarget(PROFILE_JSP);
         } else {
 
-            request.setAttribute(ERROR, LOGIN_MESSAGE);
-            forward(MAIN_JSP);
+//            request.setAttribute(ERROR, LOGIN_MESSAGE);
+            redirectWithTarget(MAIN_JSP);
 
         }
 

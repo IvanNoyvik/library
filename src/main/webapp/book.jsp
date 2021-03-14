@@ -84,18 +84,14 @@
 
                 <h1>${requestScope.book.title} <span>(${requestScope.book.author.author})</span></h1>
 
-                <c:if test="${!empty requestScope.book.image}">
-                    <div class="image_panel">
-                        <img src="<c:url value="${requestScope.book.image}" />" alt="CSS Template" width="100"
-                                                  height="150"/>
-                    </div>
-                </c:if>
-                <c:if test="${empty requestScope.book.image}">
-                    <div class="image_panel">
-                        <img src="<c:url value="/static/main/images/no_image.png" />" alt="CSS Template" width="150"
-                             height="150"/>
-                    </div>
-                </c:if>
+                <c:url value="/front" var="image">
+                    <c:param name="bookId" value="${requestScope.book.id}"/>
+                    <c:param name="command" value="GetImage"/>
+                </c:url>
+                <div>
+                    <img src="${image}" alt="CSS Template" width="150"
+                         height="150"/>
+                </div>
 
                 <div class="product_info">
                     <p>${requestScope.book.description}</p>
