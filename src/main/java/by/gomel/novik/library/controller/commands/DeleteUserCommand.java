@@ -19,7 +19,7 @@ public class DeleteUserCommand extends FrontCommand {
         long userId = Long.parseLong(request.getParameter(USER_ID));
         userDao.deleteById(userId);
 
-        forward(ADMIN_JSP);
+        redirectWithTarget(ADMIN_JSP);
 
     }
 }

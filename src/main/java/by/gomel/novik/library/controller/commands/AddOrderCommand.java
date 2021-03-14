@@ -40,11 +40,11 @@ public class AddOrderCommand extends FrontCommand {
 
             orderDao.save(order);
 
-            forward(PROFILE_JSP);
+            redirectWithTarget(PROFILE_JSP);
 
         } else {
 
-            forward(MAIN_JSP);
+            redirectWithTarget(MAIN_JSP);
 
         }
 

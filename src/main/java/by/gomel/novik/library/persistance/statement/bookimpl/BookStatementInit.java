@@ -15,17 +15,16 @@ public class BookStatementInit extends EntityStatementInit<Book> {
 
         ps.setString(1, book.getTitle());
         ps.setString(2, book.getDescription());
-        ps.setBytes(3, book.getImage());
-        ps.setInt(4,book.getQuantity());
-        ps.setLong(5, book.getAuthor().getId());
-        ps.setLong(6, book.getGenre().getId());
+        ps.setInt(3,book.getQuantity());
+        ps.setLong(4, book.getAuthor().getId());
+        ps.setLong(5, book.getGenre().getId());
     }
 
     @Override
     public void initStatement(PreparedStatement ps, Book book, long id) throws SQLException {
 
         initStatement(ps, book);
-        ps.setLong(7, id);
+        ps.setLong(6, id);
 
     }
 

@@ -8,6 +8,7 @@ import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.dao.bookimpl.BookJdbcDao;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -28,7 +29,9 @@ public class GetImageCommand extends FrontCommand {
 
         if (image != null) {
 
-            response.getOutputStream().write(image);
+            try (ServletOutputStream outputStream = response.getOutputStream()){
+                outputStream.write(image);
+            }
 
         } else {
 //            response.getOutputStream().write();

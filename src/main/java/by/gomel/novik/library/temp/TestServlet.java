@@ -36,7 +36,7 @@ public class TestServlet extends HttpServlet {
             Part part = request.getPart("file");
             try (InputStream inputStream = part.getInputStream()){
 
-                Book book = bookJdbcDao.addImage(id, inputStream);
+                bookJdbcDao.addImage(id, inputStream);
 
             }
 

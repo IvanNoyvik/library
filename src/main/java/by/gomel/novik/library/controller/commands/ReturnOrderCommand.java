@@ -24,7 +24,7 @@ public class ReturnOrderCommand extends FrontCommand {
         long id = Long.parseLong(request.getParameter(ID));
         orderDao.deleteById(id);
 
-        forward(PROFILE_JSP);
+        redirectWithTarget(PROFILE_JSP);
 
     }
 }

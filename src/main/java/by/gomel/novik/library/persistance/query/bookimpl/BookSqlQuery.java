@@ -11,7 +11,7 @@ public class BookSqlQuery implements CrudSqlQuery {
             "FROM BOOKS B LEFT JOIN AUTHORS A ON A.ID= B.AUTHORS_ID " +
             "LEFT JOIN  GENRES G ON G.ID = B.GENRES_ID";
     private static final String SAVE_SQL_QUERY = "INSERT INTO BOOKS (TITLE, DESCRIPTION, IMAGE, QUANTITY, AUTHORS_ID, GENRES_ID) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL_QUERY = "UPDATE BOOKS SET TITLE = ?, DESCRIPTION = ?, IMAGE = ?, QUANTITY = ?, AUTHORS_ID = ?, GENRES_ID = ? WHERE ID = ?";
+    private static final String UPDATE_SQL_QUERY = "UPDATE BOOKS SET TITLE = ?, DESCRIPTION = ?, QUANTITY = ?, AUTHORS_ID = ?, GENRES_ID = ? WHERE ID = ?";
     private static final String ADD_IMAGE_SQL_QUERY = "UPDATE BOOKS SET IMAGE = ? WHERE ID = ?";
     private static final String DELETE_BY_ID_SQL_QUERY = "DELETE FROM BOOKS WHERE ID = ?";
 

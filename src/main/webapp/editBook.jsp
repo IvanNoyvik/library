@@ -78,17 +78,17 @@
 
 
         <c:if test="${!empty requestScope.book}">
-            <form action="<c:url value="/front"/>" method="post" enctype="multipart/form-data">
-                <input name="command" type="hidden" value="EditBook"/>
-                <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
 
-                <div id="templatemo_content_right">
 
-                    <h1><label>Title: </label>
-                        <input name="title" required type="text" value="${requestScope.book.title}"/>
-                    </h1>
+            <div id="templatemo_content_right">
 
-                    <div class="image_panel">
+                <h1><label>Edit book: </label>
+                    <span>${requestScope.book.title}</span>
+                </h1>
+
+                <div class="image_panel">
+                    <form action="<c:url value="/addImage"/>" method="post" enctype="multipart/form-data">
+                        <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
 
                         <c:url value="/front" var="image">
                             <c:param name="bookId" value="${requestScope.book.id}"/>
@@ -99,8 +99,18 @@
                                  height="150"/>
                         </div>
                         <input type="file" name="image" accept="image/*"/>
-                    </div>
+                        <input type="submit" value="submit"/>
 
+                    </form>
+                </div>
+
+
+                <form action="<c:url value="/front"/>" method="post">
+                    <input name="command" type="hidden" value="EditBook"/>
+                    <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
+
+                    <label>Title: </label>
+                    <input name="title" required type="text" value="${requestScope.book.title}"/>
 
                     <div class="product_info">
 
@@ -108,10 +118,10 @@
                             <select name="genre">
                                 <c:forEach items="${requestScope.genres}" var="genre">
                                     <c:if test="${genre eq requestScope.book.genre}">
-                                        <option selected value="${genre.genre}">${genre.genre}</option>
+                                        <option selected value="${genre.id}">${genre.genre}</option>
                                     </c:if>
                                     <c:if test="${genre ne requestScope.book.genre}">
-                                        <option value="${genre.genre}">${genre.genre}</option>
+                                        <option value="${genre.id}">${genre.genre}</option>
                                     </c:if>
                                 </c:forEach>
                             </select>
@@ -122,21 +132,24 @@
                             <select name="author">
                                 <c:forEach items="${requestScope.authors}" var="author">
                                     <c:if test="${author eq requestScope.book.author}">
-                                        <option selected value="${author.author}">${author.author}</option>
+                                        <option selected value="${author.id}">${author.author}</option>
                                     </c:if>
                                     <c:if test="${author ne requestScope.book.author}">
-                                        <option value="${author.author}">${author.author}</option>
+                                        <option value="${author.id}">${author.author}</option>
                                     </c:if>
                                 </c:forEach>
                             </select>
                         </label>
                         <br/>
                         <label>Quantity:
-                        <input name="quantity" required type="text"
-                               value="${requestScope.book.quantity}"/></label>
+                            <input name="quantity" required type="text"
+                                   value="${requestScope.book.quantity}"/></label>
 
 
-                        <textarea name="description" cols="30" rows="5" >${requestScope.book.description}</textarea><br/>
+                        <textarea name="description" cols="30" rows="5">${requestScope.book.description}</textarea><br/>
+
+                        <input type="reset" value="reset"/>
+                        <input type="submit" value="submit"/>
 
 
                         <div class="buy_now_button"><a href="subpage.html">Read</a></div>
@@ -146,8 +159,8 @@
                     <div class="cleaner_with_height">&nbsp;</div>
 
 
-                </div>
-                <!-- end of content right -->
+            </div>
+            <!-- end of content right -->
 
             </form>
 
