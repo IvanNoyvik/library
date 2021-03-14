@@ -62,6 +62,17 @@ public interface SetAttribute {
 
         }
 
+        if (target.equalsIgnoreCase(ADD_BOOK_JSP)) {
+
+            GenreJdbcDao genreDao = new GenreJdbcDao();
+            List<Genre> genres = genreDao.findAll();
+            request.setAttribute(GENRES, genres);
+            AuthorJdbcDao authorDao = new AuthorJdbcDao();
+            List<Author> authors = authorDao.findAll();
+            request.setAttribute(AUTHORS, authors);
+
+        }
+
         if (target.equalsIgnoreCase(ADMIN_JSP)) {
 
             OrderJdbcDao orderDao = new OrderJdbcDao();

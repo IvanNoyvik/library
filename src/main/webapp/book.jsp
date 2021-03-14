@@ -83,6 +83,7 @@
             <div id="templatemo_content_right">
 
                 <h1>${requestScope.book.title} <span>(${requestScope.book.author.author})</span></h1>
+                <h1>Genre: <span>(${requestScope.book.genre.genre})</span></h1>
 
                 <c:url value="/front" var="image">
                     <c:param name="bookId" value="${requestScope.book.id}"/>
@@ -94,21 +95,23 @@
                 </div>
 
                 <div class="product_info">
+
                     <p>${requestScope.book.description}</p>
                     <c:if test="${requestScope.book.quantity == 0}">
                         <h3>Not available</h3>
                     </c:if>
-                    <c:if test="${requestScope.book.quantity > 0}">
-                        <h3>${requestScope.book.quantity} pcs in stock</h3>
+
+                    <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (requestScope.book.quantity > 0)}">
                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                            <label >Quantity days
-                                <input name="days" required type="text" />
-                            </label>
+                            <input name="days" required type="text" value="quantity days"/>
                             <input name="command" type="hidden" value="AddOrder"/>
                             <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
                             <input type="submit" value="Add in my library"/>
                         </form>
+
+                        <h3>${requestScope.book.quantity} pcs in stock</h3>
                     </c:if>
+
                     <ul>
                         <li>January 2024</li>
                         <li>Pages: 498</li>

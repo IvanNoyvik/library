@@ -63,7 +63,7 @@
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
                 <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
-                    <form action="<c:url value="/front"/>" method="post" >
+                    <form action="<c:url value="/front"/>" method="post">
                         <input type="hidden" name="command" value="Forward"/>
                         <input type="hidden" name="forward" value="admin"/>
                         <h1><input type="submit" value="Admin panel"/></h1>
@@ -102,13 +102,13 @@
 
                         <h1>${order.book.title} </h1>
 
-<%--                        IMAGE--%>
-<%--                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>--%>
+                            <%--                        IMAGE--%>
+                            <%--                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>--%>
 
                         <div class="product_info">
                             <p>${order.book.description}</p>
 
-                            <c:if test="${order.now() >= order.date.plusDays(order.duration)}">
+                            <c:if test="${applicationScope.now.now() >= order.date.plusDays(order.duration)}">
                                 <h3>Book is expired
                                     return the book to the library</h3>
                                 <%--                                <c:url value="/front" var="return">--%>
@@ -119,10 +119,11 @@
                                         href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
                                 </div>
                             </c:if>
-                            <c:if test="${order.now() < order.date.plusDays(order.duration)}">
+                            <c:if test="${applicationScope.now.now() < order.date.plusDays(order.duration)}">
                             <div class="buy_now_button"><a href="subpage.html">Read</a></div>
                             <h3> Expected return date: ${order.date.plusDays(order.duration)} </h3>
-                            <h3>${order.date.plusDays(order.duration).toEpochDay() - order.now().toEpochDay()} days
+                            <h3>${order.date.plusDays(order.duration).toEpochDay() - applicationScope.now.now().toEpochDay()}
+                                days
                                 left </h3>
 
                             <div class="detail_button"><a
@@ -142,15 +143,17 @@
         </div> <!-- end of content right -->
 
         <div class="cleaner_with_height">&nbsp;</div>
+
+        <div id="templatemo_footer">
+
+            <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
+                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
+            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
+            <!-- Credit: www.templatemo.com -->
+        </div>
     </div>
     <!-- PAGE CONTENT: end -->
 
-    <div id="templatemo_footer">
-
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-            href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
 
 </div> <!-- end of container -->
 

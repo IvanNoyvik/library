@@ -29,8 +29,11 @@ public class LoginCommand extends FrontCommand {
             if (user.getStatus().getStatus().equalsIgnoreCase(LIMITED) && user.getStatus().getDuration().isBefore(LocalDate.now())) {
 
                 UserStatusJdbcDao statusDao = new UserStatusJdbcDao();
+                long statusId = user.getStatus().getId();
+
                 user.setStatus(statusDao.getOkStatus());
                 userDao.update(user);
+                statusDao.deleteById(statusId);
 
             }
 

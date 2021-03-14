@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Edit Book</title>
+    <title>Add Book</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="<c:url value="/static/main/templatemo_style.css" />" rel="stylesheet" type="text/css"/>
@@ -27,13 +27,7 @@
 
 
         <div id="templatemo_new_books">
-            <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
-                <%--                <form action="<c:url value="/front"/>" method="post" >--%>
-                <%--                    <input type="hidden" name="command" value="Forward"/>--%>
-                <%--                    <input type="hidden" name="forward" value="editBook"/>--%>
-                <%--                    <h1><input type="submit" value="Edit book"/></h1>--%>
-                <%--                </form>--%>
-            </c:if>
+
 
         </div>
     </div> <!-- end of header -->
@@ -77,80 +71,49 @@
         <!-- CATEGORY FILTER: end -->
 
 
-        <c:if test="${!empty requestScope.book}">
+        <c:if test="${sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
 
 
             <div id="templatemo_content_right">
 
-                <h1><label>Edit book: </label>
-                    <span>${requestScope.book.title}</span>
-                </h1>
-
-                <div class="image_panel">
-                    <form action="<c:url value="/addImage"/>" method="post" enctype="multipart/form-data">
-                        <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
-
-                        <c:url value="/front" var="image">
-                            <c:param name="bookId" value="${requestScope.book.id}"/>
-                            <c:param name="command" value="GetImage"/>
-                        </c:url>
-                        <div>
-                            <img src="${image}" alt="CSS Template" width="100"
-                                 height="150"/>
-                        </div>
-                        <input type="file" name="image" accept="image/*"/>
-                        <input type="submit" value="submit"/>
-
-                    </form>
-                </div>
-
+                <h1>Create new book:                 </h1>
 
                 <form action="<c:url value="/front"/>" method="post">
-                    <input name="command" type="hidden" value="EditBook"/>
-                    <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
+                    <input name="command" type="hidden" value="AddBook"/>
 
                     <label>Title: </label>
-                    <input name="title" required type="text" value="${requestScope.book.title}"/>
+                    <input name="title" required type="text" value="title"/>
 
                     <div class="product_info">
 
-                        <label> Genre (${requestScope.book.genre.genre}):
+                        <label> Genre:
                             <select name="genre">
+                                <option disabled>Select genre</option>
                                 <c:forEach items="${requestScope.genres}" var="genre">
-                                    <c:if test="${genre eq requestScope.book.genre}">
-                                        <option selected value="${genre.id}">${genre.genre}</option>
-                                    </c:if>
-                                    <c:if test="${genre ne requestScope.book.genre}">
                                         <option value="${genre.id}">${genre.genre}</option>
-                                    </c:if>
                                 </c:forEach>
                             </select>
                         </label>
                         <br/>
 
-                        <label> Author (${requestScope.book.author.author}):
+                        <label> Author:
                             <select name="author">
                                 <c:forEach items="${requestScope.authors}" var="author">
-                                    <c:if test="${author eq requestScope.book.author}">
-                                        <option selected value="${author.id}">${author.author}</option>
-                                    </c:if>
-                                    <c:if test="${author ne requestScope.book.author}">
                                         <option value="${author.id}">${author.author}</option>
-                                    </c:if>
                                 </c:forEach>
                             </select>
                         </label>
                         <br/>
                         <label>Quantity:
                             <input name="quantity" required type="text"
-                                   value="${requestScope.book.quantity}"/></label>
+                                   value="quantity"/></label>
+                        <br/>
 
+                        <label>Description:
+                        <textarea name="description" cols="30" rows="5"></textarea><br/>
+                        </label>
 
-                        <textarea name="description" cols="30" rows="5">${requestScope.book.description}</textarea><br/>
-
-                        <input type="reset" value="reset"/>
                         <input type="submit" value="submit"/>
-
 
 
                         <c:url value="/front" var="Cancel">
@@ -158,7 +121,6 @@
                             <c:param name="forward" value="main"/>
                         </c:url>
                         <div class="buy_now_button"><a href="<c:out value="${Cancel}"/>">Cancel</a></div>
-
                         <div class="detail_button"><a href="subpage.html">Detail</a></div>
                     </div>
 

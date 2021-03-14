@@ -64,11 +64,7 @@
                     You have successfully registered!
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
-        </div>
 
-
-        <div id="admin_new_books">
             <ul>
                 <c:if test="${!empty requestScope.error}">
                     <li>Error</li>
@@ -76,6 +72,33 @@
                     <li>Error</li>
                 </c:if>
 
+            </ul>
+        </div>
+
+
+        <div id="admin_new_books">
+            <ul>
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <input name="genre" required type="text" value="Genre"/>
+                        <input name="command" type="hidden" value="AddGenre"/>
+                        <input type="submit" value="Add genre"/>
+                    </form>
+                </li>
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <input name="author" required type="text" value="Author"/>
+                        <input name="command" type="hidden" value="AddAuthor"/>
+                        <input type="submit" value="Add author"/>
+                    </form>
+                </li>
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <input name="forward" type="hidden" value="addBook"/>
+                        <input name="command" type="hidden" value="Forward"/>
+                        <input type="submit" value="Add book"/>
+                    </form>
+                </li>
             </ul>
             <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
@@ -96,7 +119,7 @@
                             <h2>${order.user.login} <span>(${order.user.name})</span></h2>
 
                             <h3> Overdue the book <span>(${order.book.title})</span> by
-                                    ${order.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()} days
+                                    ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()} days
                             </h3>
                             <div class="product_info">
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited')}">
@@ -139,21 +162,21 @@
                 <h1>Messages</h1>
                 <c:if test="${!empty requestScope.messages}">
                     <c:forEach items="${requestScope.messages}" var="mess">
-                <div class="admin_product_box">
-                    <h2>From: ${mess.user.login} <span>(${mess.user.name})</span> ${mess.dateSent}</h2>
-                    <div class="product_info">
-                            ${mess.content}
-                    </div>
-                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                        <input name="command" type="hidden" value="ChangeStatus"/>
-                        <input name="userId" type="hidden" value="${mess.user.id}"/>
-                        <input name="status" type="hidden" value="OK"/>
-                        <input type="submit" value="Unlocked"/>
-                    </form>
+                        <div class="admin_product_box">
+                            <h2>From: ${mess.user.login} <span>(${mess.user.name})</span> ${mess.dateSent}</h2>
+                            <div class="product_info">
+                                    ${mess.content}
+                            </div>
+                            <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                <input name="command" type="hidden" value="ChangeStatus"/>
+                                <input name="userId" type="hidden" value="${mess.user.id}"/>
+                                <input name="status" type="hidden" value="OK"/>
+                                <input type="submit" value="Unlocked"/>
+                            </form>
 
-                </div>
+                        </div>
 
-                </c:forEach>
+                    </c:forEach>
                 </c:if>
 
             </div>
@@ -177,33 +200,45 @@
 
                     </tr>
                     <c:forEach items="${requestScope.users}" var="userMap">
-                            <c:if test="${userMap.key.status.status.equalsIgnoreCase('Locked')}">
-                                <tr>
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Locked')}">
+                            <tr>
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td><h3>${userMap.key.status.status}</h3></td>
                                 <td><h3>${userMap.value}</h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <label >
-                                        <input name="duration" required type="text"/>
-                                    </label>
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="Limited"/>
-                                    <input type="submit" value="Limited"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="OK"/>
-                                    <input type="submit" value="Unlocked"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="DeleteUser"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input type="submit" value="Delete"/>
-                                </form></h3></td>
-                                </tr>
-                            </c:if>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <label>
+                                                <input name="duration" required type="text"/>
+                                            </label>
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Limited"/>
+                                            <input type="submit" value="Limited"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="OK"/>
+                                            <input type="submit" value="Unlocked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
 
                     <c:forEach items="${requestScope.users}" var="userMap">
@@ -212,23 +247,35 @@
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td><h3>${userMap.key.status.status}</h3></td>
                                 <td><h3>${userMap.value}</h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="Locked"/>
-                                    <input type="submit" value="Locked"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="OK"/>
-                                    <input type="submit" value="Unlocked"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="DeleteUser"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input type="submit" value="Delete"/>
-                                </form></h3></td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Locked"/>
+                                            <input type="submit" value="Locked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="OK"/>
+                                            <input type="submit" value="Unlocked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
                             </tr>
                         </c:if>
                     </c:forEach>
@@ -239,26 +286,38 @@
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td><h3>${userMap.key.status.status}</h3></td>
                                 <td><h3>${userMap.value}</h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <label >
-                                        <input name="duration" required type="text" />
-                                    </label>
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="Limited"/>
-                                    <input type="submit" value="Limited"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="ChangeStatus"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input name="status" type="hidden" value="Locked"/>
-                                    <input type="submit" value="Locked"/>
-                                </form></h3></td>
-                                <td><h3><form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="command" type="hidden" value="DeleteUser"/>
-                                    <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                    <input type="submit" value="Delete"/>
-                                </form></h3></td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <label>
+                                                <input name="duration" required type="text"/>
+                                            </label>
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Limited"/>
+                                            <input type="submit" value="Limited"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Locked"/>
+                                            <input type="submit" value="Locked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
                             </tr>
                         </c:if>
                     </c:forEach>

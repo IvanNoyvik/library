@@ -2,6 +2,7 @@ package by.gomel.novik.library.controller;
 
 
 import by.gomel.novik.library.controller.constant.SetAttribute;
+import by.gomel.novik.library.temp.CurrentDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,9 @@ public class RedirectServlet extends HttpServlet implements SetAttribute {
         String target = request.getParameter("target");
         if (target == null){
             target = "main";
+            if (getServletContext().getAttribute("now") == null) {
+                getServletContext().setAttribute("now", new CurrentDate());
+            }
         }
         setAttribute(target, request);
         String path = "/" + target + ".jsp";

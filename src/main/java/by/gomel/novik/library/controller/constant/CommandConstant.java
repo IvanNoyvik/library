@@ -70,7 +70,7 @@ public interface CommandConstant {
     String ERROR_JSP = "error";
     String ADMIN_JSP = "admin";
     String EDIT_BOOK_JSP = "editBook";
-
+    String ADD_BOOK_JSP = "addBook";
 
 
 }
