@@ -30,6 +30,37 @@ img {
 	border: none;
 }
 
+.submit-lock{
+	background: red;
+	border-radius: 10px;
+	color: black;
+}
+
+.submit-unlock{
+	background: green;
+	border-radius: 10px;
+	color: black;
+}
+
+.submit-limit{
+	background: linear-gradient(0, red, green);
+	border-radius: 10px;
+	color: black;
+}
+
+.submit-delete{
+	background: linear-gradient(0, black, red);
+	border-radius: 10px;
+	color: white;
+}
+
+
+.duration {
+	width: 50px;
+	required: required;
+	placeholder: "in days..";
+}
+
 
 .cleaner {
 	clear: both;
@@ -191,6 +222,7 @@ img {
 }
 
 #admin_content #admin_content_right {
+	overflow: auto;
 	float: right;
 	width: 440px;
 }

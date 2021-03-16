@@ -39,6 +39,13 @@ textarea {
 }
 
 
+
+.duration {
+	width: 50px;
+	required: required;
+	placeholder: "in days..";
+}
+
 .cleaner {
 	clear: both;
 	width: 100%;

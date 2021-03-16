@@ -124,13 +124,13 @@
                             <div class="product_info">
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited')}">
                                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                        <label placeolder="duration">
-                                            <input name="duration" required type="text" placeolder="duration"/>
+                                        <label >Duration
+                                            <input name="duration" type="text" class="duration" />
                                         </label>
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
                                         <input name="status" type="hidden" value="Limited"/>
-                                        <input type="submit" value="Limited"/>
+                                        <input class="submit-limit" type="submit" value="Limited"/>
                                     </form>
                                 </c:if>
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('Locked')}">
@@ -138,7 +138,7 @@
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
                                         <input name="status" type="hidden" value="Locked"/>
-                                        <input type="submit" value="Locked"/>
+                                        <input class="submit-lock" type="submit" value="Locked"/>
                                     </form>
                                 </c:if>
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('OK')}">
@@ -146,7 +146,7 @@
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
                                         <input name="status" type="hidden" value="OK"/>
-                                        <input type="submit" value="Unlocked"/>
+                                        <input class="submit-unlock" type="submit" value="Unlocked"/>
                                     </form>
                                 </c:if>
 
@@ -171,7 +171,7 @@
                                 <input name="command" type="hidden" value="ChangeStatus"/>
                                 <input name="userId" type="hidden" value="${mess.user.id}"/>
                                 <input name="status" type="hidden" value="OK"/>
-                                <input type="submit" value="Unlocked"/>
+                                <input class="submit-unlock" type="submit" value="Unlocked"/>
                             </form>
 
                         </div>
@@ -208,13 +208,13 @@
                                 <td>
                                     <h3>
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                            <label>
-                                                <input name="duration" required type="text"/>
+                                            <label >
+                                                <input class="duration" name="duration" type="text"/>
                                             </label>
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="Limited"/>
-                                            <input type="submit" value="Limited"/>
+                                            <input class="submit-limit" type="submit" value="Limited"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -224,7 +224,7 @@
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="OK"/>
-                                            <input type="submit" value="Unlocked"/>
+                                            <input class="submit-unlock" type="submit" value="Unlocked"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -233,7 +233,7 @@
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <input name="command" type="hidden" value="DeleteUser"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                            <input type="submit" value="Delete"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -253,7 +253,7 @@
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="Locked"/>
-                                            <input type="submit" value="Locked"/>
+                                            <input class="submit-lock" type="submit" value="Locked"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -263,7 +263,7 @@
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="OK"/>
-                                            <input type="submit" value="Unlocked"/>
+                                            <input class="submit-unlock" type="submit" value="Unlocked"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -272,7 +272,7 @@
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <input name="command" type="hidden" value="DeleteUser"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                            <input type="submit" value="Delete"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -290,12 +290,12 @@
                                     <h3>
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <label>
-                                                <input name="duration" required type="text"/>
+                                                <input name="duration" class="duration" type="text"/>
                                             </label>
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="Limited"/>
-                                            <input type="submit" value="Limited"/>
+                                            <input class="submit-limit" type="submit" value="Limited"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -305,7 +305,7 @@
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
                                             <input name="status" type="hidden" value="Locked"/>
-                                            <input type="submit" value="Locked"/>
+                                            <input class="submit-lock" type="submit" value="Locked"/>
                                         </form>
                                     </h3>
                                 </td>
@@ -314,7 +314,7 @@
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <input name="command" type="hidden" value="DeleteUser"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
-                                            <input type="submit" value="Delete"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
                                         </form>
                                     </h3>
                                 </td>

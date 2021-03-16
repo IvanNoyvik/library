@@ -91,7 +91,7 @@
             <div id="templatemo_content_right">
 
                 <h1>${requestScope.book.title} <span>(${requestScope.book.author.author})</span></h1>
-                <h1>Genre: <span>(${requestScope.book.genre.genre})</span></h1>
+                Genre: <span>(${requestScope.book.genre.genre})</span>
 
                 <c:url value="/front" var="image">
                     <c:param name="bookId" value="${requestScope.book.id}"/>
@@ -111,7 +111,9 @@
 
                     <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (requestScope.book.quantity > 0)}">
                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                            <input name="days" required type="text" value="quantity days"/>
+                            <label>Duration
+                                <input class="duration" name="days" type="text"/>
+                            </label>
                             <input name="command" type="hidden" value="AddOrder"/>
                             <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
                             <input type="submit" value="Add in my library"/>
@@ -120,17 +122,11 @@
                         <h3>${requestScope.book.quantity} pcs in stock</h3>
                     </c:if>
 
-                    <ul>
-                        <li>January 2024</li>
-                        <li>Pages: 498</li>
-                        <li>ISBN 10: 0-496-91612-0 | ISBN 13: 9780492518154</li>
-                    </ul>
 
                     <p>${requestScope.book.description}</p>
 
+                        <div class="buy_now_button"><a href="subpage.html">Read</a></div>
 
-                    <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
                 </div>
 
                 <div class="cleaner_with_height">&nbsp;</div>

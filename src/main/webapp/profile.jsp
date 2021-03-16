@@ -102,9 +102,14 @@
 
                         <h1>${order.book.title} </h1>
 
-                            <%--                        IMAGE--%>
-                            <%--                        <img src="<c:url value="${order.book.coverLink}" />" alt="image"/>--%>
-
+                        <c:url value="/front" var="image">
+                            <c:param name="bookId" value="${order.book.id}"/>
+                            <c:param name="command" value="GetImage"/>
+                        </c:url>
+                        <div>
+                            <img src="${image}" alt="CSS Template" width="100"
+                                 height="100"/>
+                        </div>
                         <div class="product_info">
                             <p>${order.book.description}</p>
 
@@ -120,18 +125,16 @@
                                 </div>
                             </c:if>
                             <c:if test="${applicationScope.now.now() < order.date.plusDays(order.duration)}">
-                            <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-                            <h3> Expected return date: ${order.date.plusDays(order.duration)} </h3>
-                            <h3>${order.date.plusDays(order.duration).toEpochDay() - applicationScope.now.now().toEpochDay()}
-                                days
-                                left </h3>
+                                <h3> Expected return date: ${order.date.plusDays(order.duration)} </h3>
+                                <h3>${order.date.plusDays(order.duration).toEpochDay() - applicationScope.now.now().toEpochDay()}
+                                    days
+                                    left </h3>
+                                <div class="buy_now_button"><a class="buy_now_button" href="subpage.html">Read</a></div>
 
-                            <div class="detail_button"><a
-                                    href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
-                                </c:if>
-
-                            </div>
-
+                                <div class="detail_button"><a
+                                        href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                     <!-- Insert empty string after book -->

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="templatemo_menu">
+<div id="templatemo_menu" style="display: flex; justify-content: space-between">
     <ul>
 
         <c:if test="${empty sessionScope.user}">
@@ -49,6 +49,13 @@
 
 
         </c:if>
+    </ul>
+    <ul>
+        <c:url value="/front" var="registration">
+            <c:param name="command" value="Forward"/>
+            <c:param name="forward" value="registration"/>
+        </c:url>
+        <li><a href="<c:out value="${registration}"/>" class="current">MAIN</a></li>
     </ul>
 </div>
 

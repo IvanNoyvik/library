@@ -105,7 +105,9 @@
                             </c:if>
                             <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
                                 <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <input name="days" required type="text" value="quantity days"/>
+                                    <label>Duration
+                                        <input class="duration" name="days" type="text"/>
+                                    </label>
                                     <input name="command" type="hidden" value="AddOrder"/>
                                     <input name="bookId" type="hidden" value="${book.id}"/>
                                     <input type="submit" value="Add in my library"/>
