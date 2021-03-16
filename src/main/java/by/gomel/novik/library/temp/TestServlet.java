@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class TestServlet extends HttpServlet {
 
     BookJdbcDao bookJdbcDao = new BookJdbcDao();
-    private static final Connector CONNECTOR = Connector.getInstance();
+//    private static final Connector CONNECTOR = Connector.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
