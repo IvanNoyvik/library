@@ -18,11 +18,10 @@
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${!empty requestScope.message}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
 
 
@@ -36,51 +35,23 @@
             </c:if>
 
         </div>
-    </div> <!-- end of header -->
-
-    <!-- PAGE CONTENT: start -->
+    </div>
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+
             </div>
             <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
 
-        <c:if test="${!empty requestScope.book}">
-
-
-            <div id="templatemo_content_right">
+        <div id="templatemo_content_right">
+            <c:if test="${!empty requestScope.book}">
 
                 <h1><label>Edit book: </label>
                     <span>${requestScope.book.title}</span>
@@ -152,7 +123,6 @@
                         <input type="submit" value="submit"/>
 
 
-
                         <c:url value="/front" var="Cancel">
                             <c:param name="command" value="Forward"/>
                             <c:param name="forward" value="main"/>
@@ -164,28 +134,21 @@
 
                     <div class="cleaner_with_height">&nbsp;</div>
 
+                </form>
 
-            </div>
-            <!-- end of content right -->
-
-            </form>
-
-        </c:if>
-        <!-- BOOK: end -->
+            </c:if>
+        </div>
 
 
         <div class="cleaner_with_height">&nbsp;</div>
     </div>
-    <!-- PAGE CONTENT: end -->
 
     <div id="templatemo_footer">
 
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-            href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
+        <a href="#"><strong>About me</strong></a>
+    </div>
 
-</div> <!-- end of container -->
+</div>
 
 </body>
 </html>

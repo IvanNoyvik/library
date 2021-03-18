@@ -1,5 +1,6 @@
 package by.gomel.novik.library.controller.commands;
 
+import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.controller.FrontCommand;
 import by.gomel.novik.library.model.Author;
 import by.gomel.novik.library.model.Book;
@@ -10,6 +11,7 @@ import by.gomel.novik.library.persistance.dao.bookimpl.GenreJdbcDao;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.text.ParseException;
 
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
@@ -40,9 +42,18 @@ public class AddBookCommand extends FrontCommand {
         book.setGenre(genre);
         book.setAuthor(author);
 
-        book = bookDao.save(book);
+        try {
 
-        redirectWithTarget(MAIN_JSP);
+            book = bookDao.save(book);
+
+            redirectWithResp(MAIN_JSP, ADD_BOOK_OK);
+
+        } catch (DaoPartException e) {
+
+            redirectWithResp(MAIN_JSP, ADD_BOOK_FAIL);
+
+        }
+
 
     }
 }

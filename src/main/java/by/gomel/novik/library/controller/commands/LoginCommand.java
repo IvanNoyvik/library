@@ -39,13 +39,14 @@ public class LoginCommand extends FrontCommand {
 
             request.getSession().setAttribute(USER, user);
             if (!user.getStatus().getStatus().equalsIgnoreCase(LOCKED)) {
-                redirectWithTarget(MAIN_JSP);
+
+                redirectWithResp(MAIN_JSP, LOGIN_OK + user.getName() +"!");
             } else {
-                redirect(BLOCK_JSP);
+                redirectWithResp(BLOCK_JSP, BLOCK);
             }
         } else {
 
-            redirect(LOGIN_JSP);
+            redirectWithResp(LOGIN_JSP, LOGIN_FAIL);
 
         }
 

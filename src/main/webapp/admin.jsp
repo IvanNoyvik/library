@@ -13,66 +13,16 @@
 <body>
 <div id="admin_container">
 
-    <div id="admin_menu">
-        <ul>
 
-            <c:if test="${empty sessionScope.user}">
-                <!-- LOGIN -->
-                <c:url value="/front" var="login">
-                    <c:param name="command" value="Forward"/>
-                    <c:param name="forward" value="login"/>
-                </c:url>
-                <li><a href="<c:out value="${login}"/>" class="current">Login</a></li>
-
-                <!-- REGISTR -->
-                <c:url value="/front" var="registration">
-                    <c:param name="command" value="Forward"/>
-                    <c:param name="forward" value="registration"/>
-                </c:url>
-                <li><a href="<c:out value="${registration}"/>" class="current">Registration</a></li>
-            </c:if>
-
-
-            <c:if test="${!empty sessionScope.user}">
-                <!-- LOGOUT -->
-                <c:url value="/front" var="logout">
-                    <c:param name="command" value="Logout"/>
-                </c:url>
-                <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
-
-                <!-- PROFILE -->
-                <c:if test="${sessionScope.user.status.status ne 'Locked'}">
-
-                    <c:url value="/front" var="profile">
-                        <c:param name="command" value="Forward"/>
-                        <c:param name="forward" value="profile"/>
-                        <c:param name="userId" value="${sessionScope.user.id}"/>
-                    </c:url>
-                    <li><a href="<c:out value="${profile}"/>"
-                           class="current">${sessionScope.user.login}(${sessionScope.user.name})</a></li>
-                </c:if>
-
-
-            </c:if>
-        </ul>
-    </div>
+    <c:import url="head.jsp"/>
 
     <div id="admin_header">
         <div id="admin_special_offers">
             <p>
-                <c:if test="${requestScope.message eq 'regostration'}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-
-            <ul>
-                <c:if test="${!empty requestScope.error}">
-                    <li>Error</li>
-                    <li>Error</li>
-                    <li>Error</li>
-                </c:if>
-
-            </ul>
         </div>
 
 
@@ -100,14 +50,11 @@
                     </form>
                 </li>
             </ul>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
     <div id="admin_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="admin_content_left">
             <div class="admin_content_left_section">
                 <h1>Overdue orders</h1>
@@ -119,13 +66,14 @@
                             <h2>${order.user.login} <span>(${order.user.name})</span></h2>
 
                             <h3> Overdue the book <span>(${order.book.title})</span> by
-                                    ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()} days
+                                    ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()}
+                                days
                             </h3>
                             <div class="product_info">
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited')}">
                                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                        <label >Duration
-                                            <input name="duration" type="text" class="duration" />
+                                        <label>Duration
+                                            <input name="duration" type="text" class="duration"/>
                                         </label>
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
@@ -183,7 +131,6 @@
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
         <div id="admin_content_right">
             <h1>Users</h1>
@@ -208,7 +155,7 @@
                                 <td>
                                     <h3>
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                            <label >
+                                            <label>
                                                 <input class="duration" name="duration" type="text"/>
                                             </label>
                                             <input name="command" type="hidden" value="ChangeStatus"/>
@@ -326,21 +273,17 @@
 
             </c:if>
 
-            <!-- BOOK: end -->
 
-        </div> <!-- end of content right -->
+        </div>
 
         <div class="cleaner_with_height">&nbsp;</div>
-        <!-- PAGE CONTENT: end -->
+    </div>
 
-        <div id="admin_footer">
+    <div id="admin_footer">
 
-            <a href="/test">TEST</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-            <!-- Credit: www.admin.com -->    </div>
-
-    </div> <!-- end of container -->
+        <a href="#"><strong>About me</strong></a>
+    </div>
+</div>
 
 </body>
 </html>

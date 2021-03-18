@@ -8,30 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 @WebServlet(name = "FrontControllerServlet", urlPatterns = {"/front"})
 public class FrontControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) {
+                         HttpServletResponse response) throws IOException {
         doFrontCommand(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)  {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doFrontCommand(request, response);
     }
 
-    private void doFrontCommand(HttpServletRequest request, HttpServletResponse response){
+    private void doFrontCommand(HttpServletRequest request, HttpServletResponse response) throws IOException {
         FrontCommand command = getCommand(request);
         command.init(getServletContext(), request, response);
         try {
             command.process();
         } catch (Exception e) {
-            throw new RuntimeException("ERROR PROCESS COMMAND", e);
 
-//            command.forward(MAIN_JSP);
+               response.sendRedirect("/redirect?target=main&resp=Command process fail");
+
         }
     }
 

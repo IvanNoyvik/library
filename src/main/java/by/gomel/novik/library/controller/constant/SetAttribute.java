@@ -20,6 +20,9 @@ public interface SetAttribute {
 
     default void setAttribute(String target, HttpServletRequest request){
 
+        String resp = request.getParameter("resp");
+        request.setAttribute("resp", resp);
+
         if (target.equalsIgnoreCase(MAIN_JSP)){
 
             BookJdbcDao bookDao = new BookJdbcDao();
@@ -30,9 +33,8 @@ public interface SetAttribute {
         if (target.equalsIgnoreCase(PROFILE_JSP)) {
 
             OrderJdbcDao orderDao = new OrderJdbcDao();
-            User user = (User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute(USER);
             long userId = user.getId();
-//            long userId = Long.parseLong(request.getParameter("userId"));
             List<Order> orders = orderDao.findByUserId(userId);
             request.setAttribute(ORDERS, orders);
 

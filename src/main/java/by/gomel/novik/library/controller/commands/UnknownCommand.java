@@ -11,7 +11,7 @@ public class UnknownCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
 
-        redirectWithTarget(MAIN_JSP);
+        redirectWithResp(MAIN_JSP, UNKNOWN_COMMAND);
 
     }
 }

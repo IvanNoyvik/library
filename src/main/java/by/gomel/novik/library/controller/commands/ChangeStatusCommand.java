@@ -24,6 +24,7 @@ public class ChangeStatusCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
 
+        try {
         long userId = Long.parseLong(request.getParameter(USER_ID));
         String status = request.getParameter(STATUS);
 
@@ -48,9 +49,18 @@ public class ChangeStatusCommand extends FrontCommand {
 
         }
 
-        userDao.update(user);
 
-        redirectWithTarget(ADMIN_JSP);
+
+            userDao.update(user);
+
+            redirectWithResp(ADMIN_JSP, CHANGE_STATUS_OK);
+
+        } catch (Exception e){
+
+            redirectWithResp(ADMIN_JSP, CHANGE_STATUS_FAIL);
+
+        }
+
 
     }
 }

@@ -24,11 +24,12 @@ public class AddGenreCommand extends FrontCommand {
 
             genreDao.save(new Genre(genre));
 
-            redirectWithTarget(ADMIN_JSP);
+            redirectWithResp(ADMIN_JSP, ADD_GENRE_OK);
 
         } else {
 
-            redirect(ADMIN_JSP);
+            redirectWithResp(ADMIN_JSP, ADD_GENRE_FAIL);
+
 
         }
 

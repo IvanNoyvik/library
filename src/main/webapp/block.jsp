@@ -18,7 +18,9 @@
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-            <h1>Your account is blocked</h1>
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
+                </c:if>
             </p>
         </div>
 
@@ -63,15 +65,19 @@
         <div class="cleaner_with_height">&nbsp;</div>
 
 
-    </div>
 
 
     <div class="cleaner_with_height">&nbsp;</div>
+    </div>
+
+    <div id="templatemo_footer">
+
+        <a href="#"><strong>About me</strong></a>
+    </div>
+
 </div>
-<!-- PAGE CONTENT: end -->
 
 
-</div> <!-- end of container -->
 
 </body>
 </html>

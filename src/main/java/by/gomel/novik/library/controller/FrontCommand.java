@@ -28,9 +28,7 @@ public abstract class FrontCommand implements SetAttribute {
 
     public abstract void process() throws ServletException, IOException;
 
-    protected void forward(String target) {
-
-        try {
+    protected void forward(String target) throws ServletException, IOException {
 
             setAttribute(target, request);
 
@@ -39,45 +37,14 @@ public abstract class FrontCommand implements SetAttribute {
 
             dispatcher.forward(request, response);
 
-        } catch (Exception e) {
-
-            errorForward(MAIN_JSP);
-        }
     }
 
-    protected void errorForward(String target) {
 
-        try {
+    protected void redirectWithResp(String target, String resp) throws IOException {
 
-//            setAttribute(target);
-            target = PREFIX + target + POSTFIX + ERROR_MESSAGE;
-
-            RequestDispatcher dispatcher = context.getRequestDispatcher(target);
-            dispatcher.forward(request, response);
-
-        } catch (Exception e) {
-
-            redirect(ERROR_JSP); // problem
-        }
-    }
-
-    protected void redirect(String target) {
-        try {
-//            setAttribute(target);
-            target = PREFIX + target + POSTFIX + ERROR_MESSAGE;
+            target = "/redirect?target=" + target + "&resp=" + resp;
             response.sendRedirect(target);
-        } catch (Exception e) {
-            throw new RuntimeException("ERROR REDIRECT", e);
-        }
-    }
 
-    protected void redirectWithTarget(String target) {
-        try {
-            target = "/redirect?target=" + target;
-            response.sendRedirect(target);
-        } catch (Exception e) {
-            throw new RuntimeException("ERROR redirectWithMarker", e);
-        }
     }
 
 

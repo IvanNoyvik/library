@@ -34,7 +34,7 @@ public class GetImageCommand extends FrontCommand {
             }
 
         } else {
-//            response.getOutputStream().write();
+
             response.sendRedirect(request.getContextPath() + "/static/main/images/no_image.png");
         }
 

@@ -20,25 +20,34 @@ public class AddImageServlet extends HttpServlet {
 
     BookJdbcDao bookJdbcDao = new BookJdbcDao();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        long id = Long.parseLong(request.getParameter(BOOK_ID));
-        Part part = request.getPart(IMAGE);
+        try {
 
-        if (part != null) {
-            try (InputStream inputStream = part.getInputStream()) {
-                bookJdbcDao.addImage(id, inputStream);
-            } /*catch (IOException e) {
-                e.printStackTrace();
-                throw new DaoPartException("Error process addImage entity method: " + e.getMessage() , e);
-            }*/
+            long id = Long.parseLong(request.getParameter(BOOK_ID));
+            Part part = null;
+            part = request.getPart(IMAGE);
+
+            if (part != null) {
+
+                try (InputStream inputStream = part.getInputStream()) {
+                    bookJdbcDao.addImage(id, inputStream);
+                    response.sendRedirect("/redirect?target=main&resp=Add image completed");
+
+                }
+
+            } else {
+                response.sendRedirect("/redirect?target=main&resp=Add image fail");
+
+            }
+
+        } catch (Exception e) {
+            response.sendRedirect("/redirect?target=main&resp=Add image fail");
         }
-
-        response.sendRedirect("/redirect");
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
     }
 }

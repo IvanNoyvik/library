@@ -18,65 +18,36 @@
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${!empty requestScope.message}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
-
 
         <div id="templatemo_new_books">
 
-
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
+
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+
             </div>
             <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
 
-        <c:if test="${sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
+        <div id="templatemo_content_right">
+            <c:if test="${sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
 
-
-            <div id="templatemo_content_right">
-
-                <h1>Create new book:                 </h1>
+                <h1>Create new book: </h1>
 
                 <form action="<c:url value="/front"/>" method="post">
                     <input name="command" type="hidden" value="AddBook"/>
@@ -90,7 +61,7 @@
                             <select name="genre">
                                 <option disabled>Select genre</option>
                                 <c:forEach items="${requestScope.genres}" var="genre">
-                                        <option value="${genre.id}">${genre.genre}</option>
+                                    <option value="${genre.id}">${genre.genre}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -99,7 +70,7 @@
                         <label> Author:
                             <select name="author">
                                 <c:forEach items="${requestScope.authors}" var="author">
-                                        <option value="${author.id}">${author.author}</option>
+                                    <option value="${author.id}">${author.author}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -110,7 +81,7 @@
                         <br/>
 
                         <label>Description:
-                        <textarea name="description" cols="30" rows="5"></textarea><br/>
+                            <textarea name="description" cols="30" rows="5"></textarea><br/>
                         </label>
 
                         <input type="submit" value="submit"/>
@@ -121,33 +92,25 @@
                             <c:param name="forward" value="main"/>
                         </c:url>
                         <div class="buy_now_button"><a href="<c:out value="${Cancel}"/>">Cancel</a></div>
-                        <div class="detail_button"><a href="subpage.html">Detail</a></div>
                     </div>
 
                     <div class="cleaner_with_height">&nbsp;</div>
 
+                </form>
 
-            </div>
-            <!-- end of content right -->
-
-            </form>
-
-        </c:if>
-        <!-- BOOK: end -->
+            </c:if>
+        </div>
 
 
         <div class="cleaner_with_height">&nbsp;</div>
     </div>
-    <!-- PAGE CONTENT: end -->
 
     <div id="templatemo_footer">
 
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-            href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
+        <a href="#"><strong>About me</strong></a>
+    </div>
 
-</div> <!-- end of container -->
+</div>
 
 </body>
 </html>

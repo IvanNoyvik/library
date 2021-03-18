@@ -86,8 +86,8 @@
         </div>
 
         <div class="text-center p-t-46 p-b-20">
-          <c:if test="${!empty requestScope.error}">
-            <span class="error">A user with this login already exists</span>
+          <c:if test="${!empty requestScope.resp}">
+            <span class="error"><c:out value="${requestScope.resp}"/></span>
           </c:if>
         </div>
 

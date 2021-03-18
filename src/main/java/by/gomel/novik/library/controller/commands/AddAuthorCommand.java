@@ -24,11 +24,11 @@ public class AddAuthorCommand extends FrontCommand {
 
             authorDao.save(new Author(author));
 
-            redirectWithTarget(ADMIN_JSP);
+            redirectWithResp(ADMIN_JSP, ADD_AUTHOR_OK);
 
         } else {
 
-            redirect(ADMIN_JSP);
+            redirectWithResp(ADMIN_JSP, ADD_AUTHOR_FAIL);
 
         }
 

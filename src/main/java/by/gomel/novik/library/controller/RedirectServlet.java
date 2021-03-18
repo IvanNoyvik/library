@@ -22,6 +22,7 @@ public class RedirectServlet extends HttpServlet implements SetAttribute {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String target = request.getParameter("target");
+
         if (target == null){
             target = "main";
         }

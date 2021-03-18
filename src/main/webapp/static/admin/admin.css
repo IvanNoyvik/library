@@ -54,6 +54,9 @@ img {
 	color: white;
 }
 
+.resp{
+	color: #bd4147;
+}
 
 .duration {
 	width: 50px;
@@ -118,6 +121,39 @@ img {
 
 
 /* menu */
+
+#templatemo_menu {
+	display: flex;
+	justify-content: space-between;
+	clear: both;
+	width: 960px;
+	height: 45px;
+	background: url(/static/main/images/templatemo_menu_bg.jpg) no-repeat;
+}
+
+#templatemo_menu ul {
+	padding: 13px 0 0 0;
+	margin: 0;
+	list-style: none;
+}
+
+#templatemo_menu ul li{
+	display: inline;
+}
+
+#templatemo_menu ul li a{
+	float: left;
+	padding: 0 20px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	color: #969547;
+}
+
+#templatemo_menu li a:hover, #templatemo_menu li .current{
+	color: #fcf88e;
+}
 
 #admin_menu {
 	clear: both;

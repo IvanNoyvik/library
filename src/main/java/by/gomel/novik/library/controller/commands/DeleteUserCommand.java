@@ -1,5 +1,6 @@
 package by.gomel.novik.library.controller.commands;
 
+import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.controller.FrontCommand;
 import by.gomel.novik.library.persistance.dao.userimpl.UserJdbcDao;
 
@@ -16,10 +17,18 @@ public class DeleteUserCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
 
-        long userId = Long.parseLong(request.getParameter(USER_ID));
-        userDao.deleteById(userId);
+        try {
+            long userId = Long.parseLong(request.getParameter(USER_ID));
+            userDao.deleteById(userId);
 
-        redirectWithTarget(ADMIN_JSP);
+            redirectWithResp(ADMIN_JSP, DELETE_USER_OK);
+
+        } catch (DaoPartException e){
+
+            redirectWithResp(ADMIN_JSP, DELETE_USER_FAIL);
+
+        }
+
 
     }
 }

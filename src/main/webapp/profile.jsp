@@ -13,33 +13,15 @@
 <body>
 <div id="templatemo_container">
 
-    <div id="templatemo_menu">
-        <ul>
-
-            <c:if test="${!empty sessionScope.user}">
-                <!-- LOGOUT -->
-                <c:url value="/front" var="logout">
-                    <c:param name="command" value="Logout"/>
-                </c:url>
-                <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
-
-                <c:url value="/front" var="main">
-                    <c:param name="command" value="Forward"/>
-                    <c:param name="forward" value="main"/>
-                </c:url>
-                <li><a href="<c:out value="${main}"/>" class="current">Back to menu</a></li>
-            </c:if>
-        </ul>
-    </div>
+    <c:import url="head.jsp"/>
 
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${requestScope.message eq 'regostration'}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
 
 
@@ -50,45 +32,30 @@
                     <li>You login: ${user.login}</li>
                     <li>You name: ${user.name}</li>
                 </ul>
-                <a href="<c:url value="/editUser.jsp" />" style="margin-left: 50px;">Edit profile...</a>
+                <a href="<c:url value="/editUser.jsp" />" style="margin-left: 50px;">Edit profile...</a> <%--todo--%>
             </c:if>
 
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
     <div id="templatemo_content">
 
         <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
+
             <div class="templatemo_content_left_section">
                 <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
-                    <form action="<c:url value="/front"/>" method="post">
+                    <form action="<c:url value="/front"/>" method="get">
                         <input type="hidden" name="command" value="Forward"/>
                         <input type="hidden" name="forward" value="admin"/>
                         <h1><input type="submit" value="Admin panel"/></h1>
                     </form>
                 </c:if>
-
-            </div>
-            <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
             </div>
 
+            <div class="templatemo_content_left_section"></div>
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
         <div id="templatemo_content_right">
 
@@ -96,7 +63,6 @@
 
                 <c:forEach items="${requestScope.orders}" var="order">
 
-                    <!-- BOOK: start -->
                     <div class="templatemo_product_box">
 
 
@@ -137,28 +103,25 @@
                             </c:if>
                         </div>
                     </div>
-                    <!-- Insert empty string after book -->
+
                 </c:forEach>
 
             </c:if>
-            <!-- BOOK: end -->
 
-        </div> <!-- end of content right -->
+
+        </div>
 
         <div class="cleaner_with_height">&nbsp;</div>
 
-        <div id="templatemo_footer">
 
-            <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-            <!-- Credit: www.templatemo.com -->
-        </div>
     </div>
-    <!-- PAGE CONTENT: end -->
 
+    <div id="templatemo_footer">
 
-</div> <!-- end of container -->
+        <a href="#"><strong>About me</strong></a>
+    </div>
+
+</div>
 
 </body>
 </html>

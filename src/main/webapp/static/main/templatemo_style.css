@@ -30,15 +30,18 @@ img {
 	border: none;
 }
 
-input[type="submit" i] {
-	background: url(/static/main/images/templatemo_btn_01.jpg) no-repeat;
-	display: block;
-}
+/*input[type="submit" i] {*/
+/*	background: url(/static/main/images/templatemo_btn_01.jpg) no-repeat;*/
+/*	display: block;*/
+/*}*/
+
 textarea {
 	display: block;
 }
 
-
+.resp{
+	color: #bd4147;
+}
 
 .duration {
 	width: 50px;
@@ -104,6 +107,8 @@ textarea {
 /* menu */
 
 #templatemo_menu {
+	display: flex;
+	justify-content: space-between;
 	clear: both;
 	width: 960px;
 	height: 45px;
@@ -133,6 +138,41 @@ textarea {
 #templatemo_menu li a:hover, #templatemo_menu li .current{
 	color: #fcf88e;
 }
+
+
+#admin_menu {
+	display: flex;
+	justify-content: space-between;
+	clear: both;
+	width: 960px;
+	height: 45px;
+	background: url(/static/main/images/templatemo_menu_bg.jpg) no-repeat;
+}
+
+#admin_menu ul {
+	padding: 13px 0 0 0;
+	margin: 0;
+	list-style: none;
+}
+
+#admin_menu ul li{
+	display: inline;
+}
+
+#admin_menu ul li a{
+	float: left;
+	padding: 0 20px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	color: #969547;
+}
+
+#admin_menu li a:hover, #admin_menu li .current{
+	color: #fcf88e;
+}
+
 
 /* end of menu*/
 

@@ -25,17 +25,19 @@ public class SentMessageCommand extends FrontCommand {
 
         String context = request.getParameter(CONTEXT);
         User user = (User) request.getSession().getAttribute(USER);
-
-        if (true) {
+        try {
 
             Message message = new Message(LocalDate.now(), context, user);
-
             messageDao.save(message);
+            redirectWithResp(BLOCK_JSP, SENT_MESSAGE_OK);
+
+        } catch (Exception e){
+
+            redirectWithResp(BLOCK_JSP, SENT_MESSAGE_FAIL);
 
 
         }
 
-        redirect(BLOCK_JSP);
 
     }
 }

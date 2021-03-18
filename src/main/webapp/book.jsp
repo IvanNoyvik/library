@@ -16,15 +16,14 @@
     <c:import url="head.jsp"/>
 
     <div id="templatemo_header">
+
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${!empty requestScope.message}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
-
 
         <div id="templatemo_new_books">
             <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
@@ -37,12 +36,10 @@
             </c:if>
 
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
                 <c:if test="${!empty requestScope.orders && sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
@@ -67,23 +64,11 @@
 
             </div>
             <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
 
         <c:if test="${!empty requestScope.book}">
@@ -104,7 +89,6 @@
 
                 <div class="product_info">
 
-                    <p>${requestScope.book.description}</p>
                     <c:if test="${requestScope.book.quantity == 0}">
                         <h3>Not available</h3>
                     </c:if>
@@ -125,7 +109,8 @@
 
                     <p>${requestScope.book.description}</p>
 
-                        <div class="buy_now_button"><a href="subpage.html">Read</a></div>
+
+<%--                 todo button read       <div class="buy_now_button"><a href="subpage.html">Read</a></div>--%>
 
                 </div>
 
@@ -147,10 +132,8 @@
 
     <div id="templatemo_footer">
 
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-            href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
+        <a href="#"><strong>About me</strong></a>
+    </div>
 
 </div> <!-- end of container -->
 

@@ -1,5 +1,6 @@
 package by.gomel.novik.library.controller.commands;
 
+import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.controller.FrontCommand;
 import by.gomel.novik.library.model.Author;
 import by.gomel.novik.library.model.Book;
@@ -42,9 +43,17 @@ public class EditBookCommand extends FrontCommand {
         book.setGenre(genre);
         book.setAuthor(author);
 
-        book = bookDao.update(book);
 
-        redirectWithTarget(MAIN_JSP);
+        try {
 
+            book = bookDao.update(book);
+
+            redirectWithResp(MAIN_JSP, EDIT_BOOK_OK);
+
+        } catch (DaoPartException e) {
+
+            redirectWithResp(MAIN_JSP, EDIT_BOOK_FAIL);
+
+        }
     }
 }
