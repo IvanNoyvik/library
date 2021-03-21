@@ -18,79 +18,51 @@
     <div id="templatemo_header">
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${requestScope.message eq 'regostration'}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp and requestScope.resp != null}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
+
 
 
         <div id="templatemo_new_books">
-            <ul>
-                <c:if test="${!empty requestScope.error}">
-                    <li>Error</li>
-                    <li>Error</li>
-                    <li>Error</li>
-                </c:if>
 
-            </ul>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+
             </div>
             <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
         <div id="templatemo_content_right">
 
             <c:if test="${!empty requestScope.books}">
 
-                <c:forEach items="${books}" var="book">
+                <c:forEach items="${requestScope.books}" var="book">
 
-                    <!-- BOOK: start -->
                     <div class="templatemo_product_box">
 
                         <h1>${book.title} <span>(${book.author.author})</span></h1>
 
+                        <c:url value="/front" var="image">
+                            <c:param name="bookId" value="${book.id}"/>
+                            <c:param name="command" value="GetImage"/>
+                        </c:url>
+                        <div>
+                            <img src="${image}" alt="CSS Template" width="100"
+                                 height="100"/>
+                        </div>
 
-                            <%--                        IMAGE--%>
-                    <%--                        <img src="<c:url value="${book.coverLink}" />" alt="image"/>--%>
 
                         <div class="product_info">
                             <p>${book.description}</p>
@@ -99,13 +71,13 @@
                             </c:if>
                             <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
                                 <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <label placeolder="quantity days">
-                                        <input name="days" required="required" type="text" placeolder="quantity days"/>
+                                    <label>Duration
+                                        <input class="duration-main" name="days" type="text"
+                                               required="" placeholder="(1-180)in days..." pattern="[1-9]{1}[0-9]+"/>
                                     </label>
                                     <input name="command" type="hidden" value="AddOrder"/>
                                     <input name="bookId" type="hidden" value="${book.id}"/>
                                     <input type="submit" value="Add in my library"/>
-                                        <%--<div class="buy_now_button"><a href="subpage.html">Add in my library</a></div>--%>
                                 </form>
 
                                 <h3>${book.quantity} pcs in stock</h3>
@@ -123,25 +95,20 @@
 
                     </div>
 
-                    <!-- Insert empty string after book -->
                 </c:forEach>
 
             </c:if>
-            <!-- BOOK: end -->
 
-        </div> <!-- end of content right -->
+        </div>
 
-        <div class="cleaner_with_height">&nbsp;</div>
-        <!-- PAGE CONTENT: end -->
+        <div class="cleaner_with_height"></div>
 
-        <div id="templatemo_footer">
+    </div>
 
-            <a href="/test">TEST</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-            <!-- Credit: www.templatemo.com -->    </div>
+    <div id="templatemo_footer">
 
-    </div> <!-- end of container -->
-
+        <a href="#"><strong>About me</strong></a>
+    </div>
+</div>
 </body>
 </html>

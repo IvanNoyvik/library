@@ -18,6 +18,7 @@ public class EditUserCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute(USER);
+
         if (user != null) {
 
             String name = request.getParameter(NAME);
@@ -26,11 +27,15 @@ public class EditUserCommand extends FrontCommand {
             user = userDao.update(user);
 
             request.getSession().setAttribute(USER, user);
-            forward(PROFILE_JSP);
+
+            redirectWithResp(PROFILE_JSP, EDIT_USER_OK);
+
+        } else {
+
+            redirectWithResp(MAIN_JSP, EDIT_USER_FAIL);
+
         }
 
-        request.setAttribute(ERROR, LOGIN_MESSAGE);
-        forward(MAIN_JSP);
 
     }
 }

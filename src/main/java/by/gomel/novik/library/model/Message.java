@@ -1,7 +1,6 @@
 package by.gomel.novik.library.model;
 
 import by.gomel.novik.library.model.entity.Entity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,19 +11,19 @@ import java.time.LocalDate;
 public class Message extends Entity {
 
     private LocalDate dateSent;
-    private String context;
+    private String content;
     private User user;
 
-    public Message(long id, LocalDate dateSent, String context, User user) {
+    public Message(long id, LocalDate dateSent, String content, User user) {
         super(id);
         this.dateSent = dateSent;
-        this.context = context;
+        this.content = content;
         this.user = user;
     }
 
-    public Message(LocalDate dateSent, String context, User user) {
+    public Message(LocalDate dateSent, String content, User user) {
         this.dateSent = dateSent;
-        this.context = context;
+        this.content = content;
         this.user = user;
     }
 
@@ -36,12 +35,12 @@ public class Message extends Entity {
         this.dateSent = dateSent;
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public User getUser() {

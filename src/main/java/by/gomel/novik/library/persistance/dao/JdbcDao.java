@@ -6,10 +6,7 @@ import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
 import by.gomel.novik.library.persistance.statement.StatementInit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +66,15 @@ public abstract class JdbcDao<T extends Entity> extends JdbcConnector implements
     @Override
     public T save(T t) {
         try (Connection conn = getConnector().getConnection();
-             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().saveSqlQuery())) {
+             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().saveSqlQuery(), PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             getStatementInitializer().initStatement(prSt, t);
             prSt.executeUpdate();
+
+            ResultSet rs = prSt.getGeneratedKeys();
+            rs.next();
+            long id = rs.getLong(1);
+            t.setId(id);
 
             return t;
 

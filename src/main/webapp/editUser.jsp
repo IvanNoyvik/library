@@ -29,20 +29,9 @@
   <link rel="stylesheet" type="text/css" href="<c:url value="/static/login/css/main.css" />" />
   <!--===============================================================================================-->
 
-  <title>Login</title>
+  <title>Edit user</title>
 
 </head>
-
-<%--<c:import url="/WEB-INF/jsp/head.jsp" />--%>
-
-<%--<br>--%>
-<%--<form action="/front" method="post">--%>
-<%--  <p> <input name="login" type="text"/> </p>   <br />--%>
-<%--    <p>  <input name="password" type="password"/> </p><br />--%>
-<%--    <p>  <input name="name" type="text"/> </p><br />--%>
-<%--    <input name="command" type="hidden" value="Registration" datafld="Registration" />--%>
-<%--    <p> <input type="submit" value="Registration"/></p>--%>
-<%--</form>--%>
 
 
 <body style="background-color: #d7cece;">

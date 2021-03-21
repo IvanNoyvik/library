@@ -29,14 +29,12 @@ public class RegistrationCommand extends FrontCommand {
 
         if (user == null){
             user = userDao.save(new User(login, password, name,
-                    statusDao.getOkStatus(), roleDao.getGuestStatus()));
-            request.setAttribute(MESSAGE, REGISTRATION_MESSAGE);
-            forward(MAIN_JSP);
+                    statusDao.getOkStatus(), roleDao.getUserStatus()));
+            redirectWithResp(MAIN_JSP, REGISTRATION_OK);
 
         } else {
 
-            request.setAttribute(ERROR, REGISTRATION_MESSAGE);
-            forward(REGISTRATION_JSP);
+            redirectWithResp(REGISTRATION_JSP, REGISTRATION_FAIL);
         }
 
     }

@@ -16,108 +16,111 @@
     <c:import url="head.jsp"/>
 
     <div id="templatemo_header">
+
         <div id="templatemo_special_offers">
             <p>
-                <c:if test="${requestScope.message eq 'regostration'}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
 
-
         <div id="templatemo_new_books">
-            <c:if test="${!empty sessionScope.user}">
-
-                <ul>
-                    <li>You login: ${user.login}</li>
-                    <li>You name: ${user.name}</li>
-                </ul>
-                <a href="/editUser.jsp" style="margin-left: 50px;">Edit profile...</a>
+            <c:if test="${sessionScope.user.role.role eq 'Administrator'}">
+                <form action="<c:url value="/front"/>" method="post">
+                    <input type="hidden" name="command" value="Forward"/>
+                    <input type="hidden" name="forward" value="editBook"/>
+                    <input type="hidden" name="bookId" value="${requestScope.book.id}"/>
+                    <h1><input type="submit" value="Edit book"/></h1>
+                </form>
             </c:if>
 
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
             <div class="templatemo_content_left_section">
-                <h1>Categories</h1>
-                <ul>
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Aliquam tristique dolor</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">Sed pellentesque placerat</a></li>
-                    <li><a href="#">Suspen disse</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                </ul>
+                <c:if test="${!empty requestScope.orders && sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
+                    <h1>Users read this book</h1>
+                    <table>
+                        <tr>
+                            <th><h2>User login</h2></th>
+                            <th><h2>Return date</h2></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orders}" var="order">
+                            <tr>
+                                <td>
+                                        ${order.user.login}
+                                </td>
+                                <td>
+                                        ${order.date.plusDays(order.duration)}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+
             </div>
             <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
 
         <c:if test="${!empty requestScope.book}">
 
             <div id="templatemo_content_right">
 
-                <h1>${book.title} <span>(${book.author.author})</span></h1>
-                <div class="image_panel"><img src="<c:url value="${book.coverLink}" />" alt="CSS Template" width="100"
-                                              height="150"/></div>
+                <h1>${requestScope.book.title} <span>(${requestScope.book.author.author})</span></h1>
+                Genre: <span>(${requestScope.book.genre.genre})</span>
+
+                <c:url value="/front" var="image">
+                    <c:param name="bookId" value="${requestScope.book.id}"/>
+                    <c:param name="command" value="GetImage"/>
+                </c:url>
+                <div>
+                    <img src="${image}" alt="CSS Template" width="150"
+                         height="150"/>
+                </div>
 
                 <div class="product_info">
-                    <p>${book.description}</p>
-                    <c:if test="${book.quantity == 0}">
+
+                    <c:if test="${requestScope.book.quantity == 0}">
                         <h3>Not available</h3>
                     </c:if>
-                    <c:if test="${book.quantity > 0}">
-                        <h3>${book.quantity} pcs in stock</h3>
-                        <div class="buy_now_button"><a href="subpage.html">Add in my library</a></div>
+
+                    <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (requestScope.book.quantity > 0)}">
+                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                            <label>Duration
+                                <input class="duration-main" name="days" type="text"
+                                       required="" placeholder="(1-180)in days..." pattern="[1-9]{1}[0-9]+"/>
+                            </label>
+                            <input name="command" type="hidden" value="AddOrder"/>
+                            <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
+                            <input type="submit" value="Add in my library"/>
+                        </form>
+
+                        <h3>${requestScope.book.quantity} pcs in stock</h3>
                     </c:if>
-                    <ul>
-                        <li>January 2024</li>
-                        <li>Pages: 498</li>
-                        <li>ISBN 10: 0-496-91612-0 | ISBN 13: 9780492518154</li>
-                    </ul>
-
-                    <p>${book.description}</p>
 
 
-                    <div class="buy_now_button"><a href="subpage.html">Read</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
+                    <p>${requestScope.book.description}</p>
+
+
+                        <%--                 todo button read       <div class="buy_now_button"><a href="subpage.html">Read</a></div>--%>
+
                 </div>
 
                 <div class="cleaner_with_height">&nbsp;</div>
 
-                <a href="index.html"><img src="images/templatemo_ads.jpg" alt="css template ad"/></a>
-
             </div>
-            <!-- end of content right -->
 
 
         </c:if>
-        <!-- BOOK: end -->
 
 
         <div class="cleaner_with_height">&nbsp;</div>
@@ -126,12 +129,9 @@
 
     <div id="templatemo_footer">
 
-        <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-            href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-        Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-        <!-- Credit: www.templatemo.com -->    </div>
+        <a href="#"><strong>About me</strong></a>
+    </div>
 
-</div> <!-- end of container -->
-
+</div>
 </body>
 </html>

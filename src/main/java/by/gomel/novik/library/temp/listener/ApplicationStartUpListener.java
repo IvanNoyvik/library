@@ -1,6 +1,7 @@
 package by.gomel.novik.library.temp.listener;
 
 import by.gomel.novik.library.persistance.connection.Connector;
+import by.gomel.novik.library.temp.CurrentDate;
 import by.gomel.novik.library.temp.constatn.ApplicationConstant;
 import org.h2.tools.RunScript;
 import org.h2.tools.Server;
@@ -45,6 +46,8 @@ public class ApplicationStartUpListener implements ServletContextListener {
             System.err.println("Error initialization in-memory database: " + e.getMessage());
             throw new RuntimeException("Error initialization in-memory database: " + e.getMessage());
         }
+
+        sce.getServletContext().setAttribute("now", new CurrentDate());
 
     }
 

@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html<%-- PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"--%>>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,79 +11,99 @@
     <link href="<c:url value="/static/admin/admin.css" />" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="templatemo_container">
+<div id="admin_container">
+
 
     <c:import url="head.jsp"/>
 
-    <div id="templatemo_header">
-        <div id="templatemo_special_offers">
+    <div id="admin_header">
+        <div id="admin_special_offers">
             <p>
-                <c:if test="${requestScope.message eq 'regostration'}">
-                    You have successfully registered!
+                <c:if test="${!empty requestScope.resp}">
+                    <span class="resp"><c:out value="${requestScope.resp}"/></span>
                 </c:if>
             </p>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
 
 
-        <div id="templatemo_new_books">
+        <div id="admin_new_books">
             <ul>
-                <c:if test="${!empty requestScope.error}">
-                    <li>Error</li>
-                    <li>Error</li>
-                    <li>Error</li>
-                </c:if>
-
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <label>Enter genre<br/>
+                            <input name="genre" type="text" class="genre-inp"
+                                   required="" placeholder="Enter genre..." />
+                        </label><br/>
+                        <input name="command" type="hidden" value="AddGenre"/>
+                        <input type="submit" value="Add genre"/>
+                    </form>
+                </li>
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <label>Enter author<br/>
+                            <input name="author" type="text" class="author-inp"
+                                   required="" placeholder="Enter author..." />
+                        </label><br/>
+                        <input name="command" type="hidden" value="AddAuthor"/>
+                        <input type="submit" value="Add author"/>
+                    </form>
+                </li>
+                <li>
+                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                        <input name="forward" type="hidden" value="addBook"/>
+                        <input name="command" type="hidden" value="Forward"/>
+                        <input type="submit" value="Add book"/>
+                    </form>
+                </li>
             </ul>
-            <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
         </div>
-    </div> <!-- end of header -->
+    </div>
 
-    <!-- PAGE CONTENT: start -->
-    <div id="templatemo_content">
+    <div id="admin_content">
 
-        <!-- CATEGORY FILTER: start -->
-        <div id="templatemo_content_left">
-            <div class="templatemo_content_left_section">
+        <div id="admin_content_left">
+            <div class="admin_content_left_section">
                 <h1>Overdue orders</h1>
                 <c:if test="${!empty requestScope.orders && sessionScope.user.role.role.equalsIgnoreCase('Administrator')}">
                     <c:forEach items="${requestScope.orders}" var="order">
 
-                        <div class="templatemo_product_box">
+                        <div class="admin_product_box">
 
-                            <h2>${order.user.login} <span>(${order.user.name})</span></h2>
+                             <span style="font-size:13px; font-style: italic" >-- ${order.user.login} (${order.user.name})</span>
 
-                            <h3> Overdue the book <span>(${order.book.title})</span> by
-                                    ${order.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()} days
-                            </h3>
+                             Overdue the book <span style="font-style: italic">(${order.book.title})</span> by
+                                    ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()}
+                                days
+
                             <div class="product_info">
-                                <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited')}">
+                                <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited') and order.user.id ne sessionScope.user.id}">
                                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                        <label placeolder="duration">
-                                            <input name="duration" required type="text" placeolder="duration"/>
+                                        <label>Duration
+                                            <input name="duration" type="text" class="duration"
+                                                   required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
                                         </label>
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
                                         <input name="status" type="hidden" value="Limited"/>
-                                        <input type="submit" value="Limited"/>
+                                        <input class="submit-limit" type="submit" value="Limited"/>
                                     </form>
                                 </c:if>
-                                <c:if test="${!order.user.status.status.equalsIgnoreCase('Locked')}">
+                                <c:if test="${!order.user.status.status.equalsIgnoreCase('Locked') and order.user.id ne sessionScope.user.id}">
                                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
                                         <input name="status" type="hidden" value="Locked"/>
-                                        <input type="submit" value="Locked"/>
+                                        <input class="submit-lock" type="submit" value="Locked"/>
                                     </form>
                                 </c:if>
-                                <c:if test="${!order.user.status.status.equalsIgnoreCase('OK')}">
-                                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                        <input name="command" type="hidden" value="ChangeStatus"/>
-                                        <input name="userId" type="hidden" value="${order.user.id}"/>
-                                        <input name="status" type="hidden" value="OK"/>
-                                        <input type="submit" value="Unlocked"/>
-                                    </form>
-                                </c:if>
+<%--                                <c:if test="${!order.user.status.status.equalsIgnoreCase('OK')}">--%>
+<%--                                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">--%>
+<%--                                        <input name="command" type="hidden" value="ChangeStatus"/>--%>
+<%--                                        <input name="userId" type="hidden" value="${order.user.id}"/>--%>
+<%--                                        <input name="status" type="hidden" value="OK"/>--%>
+<%--                                        <input class="submit-unlock" type="submit" value="Unlocked"/>--%>
+<%--                                    </form>--%>
+<%--                                </c:if>--%>
 
                             </div>
 
@@ -93,73 +113,185 @@
 
                 </c:if>
             </div>
-            <div class="templatemo_content_left_section">
-                <h1>Bestsellers</h1>
-                <ul>
-                    <li><a href="#">Vestibulum ullamcorper</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Praesent mattis varius</a></li>
-                    <li><a href="#">Maece nas metus</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-                    <li><a href="#">Flash Templates</a></li>
-                    <li><a href="#">CSS Templates</a></li>
-                    <li><a href="#">Web Design</a></li>
-                </ul>
+            <div class="admin_content_left_section">
+                <h1>Messages</h1>
+                <c:if test="${!empty requestScope.messages}">
+                    <c:forEach items="${requestScope.messages}" var="mess">
+                        <div class="admin_product_box">
+                            <span style="font-size:14px; font-style: italic" >-- From: ${mess.user.login} (${mess.user.name}) ${mess.dateSent}</span>
+                            <div class="product_info">
+                                    ${mess.content}
+                            </div>
+                            <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                <input name="command" type="hidden" value="ChangeStatus"/>
+                                <input name="userId" type="hidden" value="${mess.user.id}"/>
+                                <input name="status" type="hidden" value="OK"/>
+                                <input class="submit-unlock" type="submit" value="Unlocked"/>
+                            </form>
+
+                        </div>
+
+                    </c:forEach>
+                </c:if>
+
             </div>
 
 
         </div>
-        <!-- CATEGORY FILTER: end -->
 
-        <div id="templatemo_content_right">
+        <div id="admin_content_right">
             <h1>Users</h1>
 
             <c:if test="${!empty requestScope.users}">
                 <table>
                     <tr>
-                        <th>OK User</th>
-                        <th>Limited User</th>
-                        <th>Locked User</th>
+                        <th><h2>Login</h2></th>
+                        <th class="table-width"><h2>User Status</h2></th>
+                        <th class="table-width"><h2>Count Overdue Order</h2></th>
+                        <th class="table-width" STYLE="text-align: right"><h2> Change</h2></th>
+                        <th class="table-width" STYLE="text-align: left"><h2> Status </h2></th>
+                        <th class="table-width"><h2>Delete User</h2></th>
+
                     </tr>
-                    <c:forEach items="${requestScope.users}" var="user">
-                        <tr>
-                            <td>
-                                <c:if test="${user.status.status.equalsIgnoreCase('OK')}">
-
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${user.status.status.equalsIgnoreCase('Limited')}">
-
-                                </c:if>
-                            </td>
-                            <td>
-                                <c:if test="${user.status.status.equalsIgnoreCase('Locked')}">
-
-                                </c:if>
-                            </td>
-                        </tr>
+                    <c:forEach items="${requestScope.users}" var="userMap">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Locked') and userMap.key.id ne sessionScope.user.id}">
+                            <tr>
+                                <td><h3>${userMap.key.login}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.value}</h3></td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <label>
+                                                <input class="duration" name="duration" type="text"
+                                                       required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
+                                            </label>
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Limited"/>
+                                            <input class="submit-limit" type="submit" value="Limited"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="OK"/>
+                                            <input class="submit-unlock" type="submit" value="Unlocked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
+
+                    <c:forEach items="${requestScope.users}" var="userMap">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Limited') and userMap.key.id ne sessionScope.user.id}">
+                            <tr>
+                                <td><h3>${userMap.key.login}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.value}</h3></td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Locked"/>
+                                            <input class="submit-lock" type="submit" value="Locked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="OK"/>
+                                            <input class="submit-unlock" type="submit" value="Unlocked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${requestScope.users}" var="userMap">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('OK') and userMap.key.id ne sessionScope.user.id}">
+                            <tr>
+                                <td><h3>${userMap.key.login}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
+                                <td class="table-text-center"><h3>${userMap.value}</h3></td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <label>
+                                                <input name="duration" class="duration" type="text"
+                                                       required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
+                                            </label>
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Limited"/>
+                                            <input class="submit-limit" type="submit" value="Limited"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="ChangeStatus"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input name="status" type="hidden" value="Locked"/>
+                                            <input class="submit-lock" type="submit" value="Locked"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                                <td class="table-text-center">
+                                    <h3>
+                                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                            <input name="command" type="hidden" value="DeleteUser"/>
+                                            <input name="userId" type="hidden" value="${userMap.key.id}"/>
+                                            <input class="submit-delete" type="submit" value="Delete"/>
+                                        </form>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+
                 </table>
 
             </c:if>
 
-            <!-- BOOK: end -->
 
-        </div> <!-- end of content right -->
+        </div>
 
         <div class="cleaner_with_height">&nbsp;</div>
-        <!-- PAGE CONTENT: end -->
+    </div>
 
-        <div id="templatemo_footer">
+    <div id="admin_footer">
 
-            <a href="/test">TEST</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a
-                href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br/>
-            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
-            <!-- Credit: www.templatemo.com -->    </div>
-
-    </div> <!-- end of container -->
+        <a href="#"><strong>About me</strong></a>
+    </div>
+</div>
 
 </body>
 </html>

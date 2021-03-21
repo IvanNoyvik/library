@@ -17,7 +17,6 @@ public class BookResultSetMapper implements ResultSetMapper<Book> {
         Long id = rs.getLong("b_id");
         String title = rs.getString("title");
         String description = rs.getString("description");
-        byte[] image = rs.getBytes("image");
         int quantity = rs.getInt("quantity");
         Author author = new Author();
         author.setId(rs.getLong("a_id"));
@@ -27,7 +26,7 @@ public class BookResultSetMapper implements ResultSetMapper<Book> {
         genre.setGenre(rs.getString("genre"));
 
 
-        Book book = new Book(id, title, description, image, quantity, author, genre);
+        Book book = new Book(id, title, description, quantity, author, genre);
 
         return book;
 

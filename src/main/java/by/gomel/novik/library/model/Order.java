@@ -33,10 +33,6 @@ public class Order extends Entity {
         this.user = user;
     }
 
-    public LocalDate now(){
-        return LocalDate.now();
-    }
-
     public LocalDate getDate() {
         return date;
     }

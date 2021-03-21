@@ -32,6 +32,11 @@ public class UserJdbcDao extends JdbcDao<User> {
         return new UserStatementInit();
     }
 
+    @Override
+    public User update(User user) {
+        return super.update(user);
+    }
+
     public User findByLoginAndPasswordSqlQuery(String login, String password) {
         try (Connection conn = getConnector().getConnection();
              PreparedStatement prSt = conn.prepareStatement(getSqlQuery().findByLoginAndPasswordSqlQuery())) {

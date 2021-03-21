@@ -21,7 +21,7 @@ public class LogoutCommand extends FrontCommand {
             session.invalidate();
         }
 
-        redirect(MAIN_JSP);
+        redirectWithResp(MAIN_JSP, "");
 
     }
 }

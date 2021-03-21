@@ -20,6 +20,15 @@ public class Book extends Entity {
     public Book() {
     }
 
+    public Book(long id, String title, String description, int quantity, Author author, Genre genre) {
+        super(id);
+        this.title = title;
+        this.description = description;
+        this.quantity = quantity;
+        this.author = author;
+        this.genre = genre;
+    }
+
     public Book(long id, String title, String description, byte[] image, int quantity, Author author, Genre genre) {
         super(id);
         this.title = title;

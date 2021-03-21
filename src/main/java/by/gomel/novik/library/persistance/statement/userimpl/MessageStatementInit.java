@@ -1,7 +1,6 @@
 package by.gomel.novik.library.persistance.statement.userimpl;
 
 import by.gomel.novik.library.model.Message;
-import by.gomel.novik.library.model.Order;
 import by.gomel.novik.library.persistance.statement.EntityStatementInit;
 
 import java.sql.Date;
@@ -13,7 +12,7 @@ public class MessageStatementInit extends EntityStatementInit<Message> {
     @Override
     public void initStatement(PreparedStatement ps, Message message) throws SQLException {
         ps.setDate(1, Date.valueOf(message.getDateSent()));
-        ps.setString(2, message.getContext());
+        ps.setString(2, message.getContent());
         ps.setLong(3,message.getUser().getId());
     }
 

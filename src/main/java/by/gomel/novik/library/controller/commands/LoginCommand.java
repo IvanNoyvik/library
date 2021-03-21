@@ -29,24 +29,26 @@ public class LoginCommand extends FrontCommand {
             if (user.getStatus().getStatus().equalsIgnoreCase(LIMITED) && user.getStatus().getDuration().isBefore(LocalDate.now())) {
 
                 UserStatusJdbcDao statusDao = new UserStatusJdbcDao();
+                long statusId = user.getStatus().getId();
+
                 user.setStatus(statusDao.getOkStatus());
                 userDao.update(user);
+                statusDao.deleteById(statusId);
 
             }
 
             request.getSession().setAttribute(USER, user);
-            if (!user.getStatus().getStatus().equalsIgnoreCase(LOCKED)){
-                forward(MAIN_JSP);
+            if (!user.getStatus().getStatus().equalsIgnoreCase(LOCKED)) {
+
+                redirectWithResp(MAIN_JSP, LOGIN_OK + user.getName() +"!");
             } else {
-                forward(BLOCK_JSP);
+                redirectWithResp(BLOCK_JSP, BLOCK);
             }
         } else {
 
-        request.setAttribute(ERROR, LOGIN_MESSAGE);
-        forward(LOGIN_JSP);
+            redirectWithResp(LOGIN_JSP, LOGIN_FAIL);
 
         }
-
 
 
     }

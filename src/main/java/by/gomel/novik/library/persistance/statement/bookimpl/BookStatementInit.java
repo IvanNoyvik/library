@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.statement.bookimpl;
 import by.gomel.novik.library.model.Book;
 import by.gomel.novik.library.persistance.statement.EntityStatementInit;
 
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -14,17 +15,30 @@ public class BookStatementInit extends EntityStatementInit<Book> {
 
         ps.setString(1, book.getTitle());
         ps.setString(2, book.getDescription());
-        ps.setBytes(3, book.getImage());
-        ps.setInt(4,book.getQuantity());
-        ps.setLong(5, book.getAuthor().getId());
-        ps.setLong(6, book.getGenre().getId());
+        ps.setInt(3,book.getQuantity());
+        ps.setLong(4, book.getAuthor().getId());
+        ps.setLong(5, book.getGenre().getId());
     }
 
     @Override
     public void initStatement(PreparedStatement ps, Book book, long id) throws SQLException {
 
         initStatement(ps, book);
-        ps.setLong(7, id);
+        ps.setLong(6, id);
+
+    }
+
+    public void initStatement(PreparedStatement ps, InputStream inputStream, long id) throws SQLException {
+
+        ps.setBlob(1, inputStream);
+        ps.setLong(2, id);
+
+    }
+
+    public void initStatement(PreparedStatement ps, String title, String author) throws SQLException {
+
+        ps.setString(1, title);
+        ps.setString(2, author);
 
     }
 }
