@@ -182,7 +182,10 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
 
             try (ResultSet rs = prSt.executeQuery()) {
 
-                return rs.getRow();
+                rs.last();
+                int row = rs.getRow();
+
+                return row;
 
             } catch (SQLException e) {
                 e.printStackTrace();

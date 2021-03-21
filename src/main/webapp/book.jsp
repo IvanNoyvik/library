@@ -110,20 +110,16 @@
                     <p>${requestScope.book.description}</p>
 
 
-<%--                 todo button read       <div class="buy_now_button"><a href="subpage.html">Read</a></div>--%>
+                        <%--                 todo button read       <div class="buy_now_button"><a href="subpage.html">Read</a></div>--%>
 
                 </div>
 
                 <div class="cleaner_with_height">&nbsp;</div>
 
-                <a href="index.html"><img src="images/templatemo_ads.jpg" alt="css template ad"/></a>
-
             </div>
-            <!-- end of content right -->
 
 
         </c:if>
-        <!-- BOOK: end -->
 
 
         <div class="cleaner_with_height">&nbsp;</div>
@@ -135,7 +131,6 @@
         <a href="#"><strong>About me</strong></a>
     </div>
 
-</div> <!-- end of container -->
-
+</div>
 </body>
 </html>

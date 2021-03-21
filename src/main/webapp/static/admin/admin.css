@@ -29,6 +29,9 @@ img {
 	padding: 0px;
 	border: none;
 }
+form {
+	/*margin: auto;*/
+}
 
 .submit-lock{
 	background: red;
@@ -58,10 +61,30 @@ img {
 	color: #bd4147;
 }
 
+.table-text-center{
+	text-align: center;
+}
+
+.table-width{
+	width: 57px;
+}
+
 .duration {
 	width: 50px;
 	required: required;
 	placeholder: "in days..";
+	pattern:"[0-9]+";
+}
+
+.genre-inp {
+	width: 100px;
+	required: required;
+	placeholder: "Genre..";
+}
+.author-inp {
+	width: 100px;
+	required: required;
+	placeholder: "Author..";
 }
 
 
@@ -223,7 +246,7 @@ img {
 
 #admin_header #admin_new_books {
 	float: left;
-	margin-top: 90px;	
+	margin-top: 45px;
 	margin-left: 55px;
 	width: 180px;
 }
@@ -312,7 +335,7 @@ img {
 
 #admin_content_right h1 {
 	padding: 10px;
-	margin: 0 0 20px 0;
+	margin: 0 0 4px 0;
 	font-size: 15px;
 	color: #cbc750;
 	background: url(/static/main/images/templatemo_h1_bg.jpg);
@@ -327,7 +350,7 @@ img {
 
 #admin_content_right h3 {
 	padding: 0;
-	margin: 0 0 20px 0;
+	margin: 0 0 0px 0;
 	font-size: 18px;
 	color: #85391f;
 }
@@ -363,6 +386,7 @@ img {
 }
 
 .admin_product_box .product_info {
+	display: flex;
 	/*float: left;*/
 	/*width: 180px;*/
 }
