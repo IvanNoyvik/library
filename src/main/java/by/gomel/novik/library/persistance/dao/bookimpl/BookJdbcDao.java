@@ -71,5 +71,23 @@ public class BookJdbcDao extends JdbcDao<Book> {
         }
     }
 
+    public boolean findByTitleAndAuthor(String title, String author) {
+        try (Connection conn = getConnector().getConnection();
+             PreparedStatement prSt = conn.prepareStatement(getSqlQuery().findByTitleAndAuthorSqlQuery())) {
+            getStatementInitializer().initStatement(prSt, title, author);
+
+            try (ResultSet rs = prSt.executeQuery()) {
+                return rs.next();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new DaoPartException("Error process findByTitleAndAuthor entity method: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoPartException("Error receive database connection: " + e.getMessage());
+        }
+    }
+
 
 }

@@ -72,7 +72,8 @@
                             <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
                                 <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                     <label>Duration
-                                        <input class="duration" name="days" type="text"/>
+                                        <input class="duration-main" name="days" type="text"
+                                               required="" placeholder="(1-180)in days..." pattern="[1-9]{1}[0-9]+"/>
                                     </label>
                                     <input name="command" type="hidden" value="AddOrder"/>
                                     <input name="bookId" type="hidden" value="${book.id}"/>

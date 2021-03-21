@@ -76,8 +76,8 @@
                         </label>
                         <br/>
                         <label>Quantity:
-                            <input name="quantity" required type="text"
-                                   value="quantity"/></label>
+                            <input name="quantity" type="text" value="quantity"
+                                   required="" placeholder=">0" pattern="[1-9]{1}[0-9]+"/></label>
                         <br/>
 
                         <label>Description:

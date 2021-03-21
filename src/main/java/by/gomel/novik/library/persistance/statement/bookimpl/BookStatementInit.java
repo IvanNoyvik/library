@@ -34,4 +34,11 @@ public class BookStatementInit extends EntityStatementInit<Book> {
         ps.setLong(2, id);
 
     }
+
+    public void initStatement(PreparedStatement ps, String title, String author) throws SQLException {
+
+        ps.setString(1, title);
+        ps.setString(2, author);
+
+    }
 }

@@ -45,8 +45,9 @@ textarea {
 
 .duration {
 	width: 50px;
-	required: required;
-	placeholder: "in days..";
+}
+.duration-main {
+	width: 95px;
 }
 
 .cleaner {

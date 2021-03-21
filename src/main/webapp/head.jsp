@@ -43,7 +43,7 @@
                     <c:param name="command" value="Forward"/>
                     <c:param name="forward" value="profile"/>
                 </c:url>
-                <li><a href="<c:out value="${profile}"/>" class="current">${sessionScope.user.login}</a></li>
+                <li><a href="<c:out value="${profile}"/>" class="current">Profile</a></li>
 
             </c:if>
         </ul>

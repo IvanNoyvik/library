@@ -113,8 +113,8 @@
                         </label>
                         <br/>
                         <label>Quantity:
-                            <input name="quantity" required type="text"
-                                   value="${requestScope.book.quantity}"/></label>
+                            <input name="quantity" type="text" value="${requestScope.book.quantity}"
+                                   required="" placeholder=">=0" pattern="[0-9]+"/></label>
 
 
                         <textarea name="description" cols="30" rows="5">${requestScope.book.description}</textarea><br/>
@@ -129,7 +129,6 @@
                         </c:url>
                         <div class="buy_now_button"><a href="<c:out value="${Cancel}"/>">Cancel</a></div>
 
-                        <div class="detail_button"><a href="subpage.html">Detail</a></div>
                     </div>
 
                     <div class="cleaner_with_height">&nbsp;</div>

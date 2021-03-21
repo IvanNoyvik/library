@@ -49,8 +49,7 @@ public interface CommandConstant {
     String ID = "id";
     String COMMAND = "command";
     String FORWARD = "forward";
-    String UNKNOWN = "unknown";
-    String ERROR = "error";
+
 
     String USER = "user";
     String USERS = "users";

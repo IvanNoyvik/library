@@ -35,25 +35,33 @@ public class AddBookCommand extends FrontCommand {
         long authorId = Long.parseLong(request.getParameter(AUTHOR));
         Author author = authorDao.findById(authorId);
 
-        Book book = new Book();
-        book.setTitle(title);
-        book.setDescription(description);
-        book.setQuantity(quantity);
-        book.setGenre(genre);
-        book.setAuthor(author);
+        if (!bookDao.findByTitleAndAuthor(title, author.getAuthor())) {
 
-        try {
 
-            book = bookDao.save(book);
+            Book book = new Book();
+            book.setTitle(title);
+            book.setDescription(description);
+            book.setQuantity(quantity);
+            book.setGenre(genre);
+            book.setAuthor(author);
 
-            redirectWithResp(MAIN_JSP, ADD_BOOK_OK);
+            try {
 
-        } catch (DaoPartException e) {
+                book = bookDao.save(book);
+
+                redirectWithResp(MAIN_JSP, ADD_BOOK_OK);
+
+            } catch (DaoPartException e) {
+
+                redirectWithResp(MAIN_JSP, ADD_BOOK_FAIL);
+
+            }
+
+        } else {
 
             redirectWithResp(MAIN_JSP, ADD_BOOK_FAIL);
 
         }
-
 
     }
 }

@@ -7,6 +7,9 @@ public class BookSqlQuery implements CrudSqlQuery {
     private static final String FIND_BY_ID_SQL_QUERY = " SELECT B.ID AS B_ID, B.TITLE, B.DESCRIPTION, B.QUANTITY, A.ID AS A_ID, A.AUTHOR, G.ID AS G_ID, G.GENRE " +
             "FROM BOOKS B LEFT JOIN AUTHORS A ON A.ID= B.AUTHORS_ID " +
             "LEFT JOIN  GENRES G ON G.ID = B.GENRES_ID WHERE B.ID = ?";
+    private static final String FIND_BY_TITLE_AND_AUTHOR_SQL_QUERY = " SELECT B.ID FROM BOOKS B LEFT " +
+            "JOIN AUTHORS A ON A.ID= B.AUTHORS_ID " +
+            " WHERE B.TITLE = ? AND A.AUTHOR = ?";
     private static final String FIND_ALL_SQL_QUERY = " SELECT B.ID AS B_ID, B.TITLE, B.DESCRIPTION, B.QUANTITY, A.ID AS A_ID, A.AUTHOR, G.ID AS G_ID, G.GENRE " +
             "FROM BOOKS B LEFT JOIN AUTHORS A ON A.ID= B.AUTHORS_ID " +
             "LEFT JOIN  GENRES G ON G.ID = B.GENRES_ID";
@@ -47,6 +50,10 @@ public class BookSqlQuery implements CrudSqlQuery {
 
     public String addImageSqlQuery() {
         return ADD_IMAGE_SQL_QUERY;
+    }
+
+    public String findByTitleAndAuthorSqlQuery() {
+        return FIND_BY_TITLE_AND_AUTHOR_SQL_QUERY;
     }
 
 
