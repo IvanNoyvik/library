@@ -32,7 +32,7 @@ public class FrontControllerServlet extends HttpServlet {
             command.process();
         } catch (Exception e) {
 
-               response.sendRedirect("/redirect?target=main&resp=Command process fail");
+               response.sendRedirect(ERROR_PROCESS);
 
         }
     }

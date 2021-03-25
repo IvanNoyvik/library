@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddGenreCommand extends FrontCommand {
 
-    GenreJdbcDao genreDao = new GenreJdbcDao();
+    private static final GenreJdbcDao GENRE_DAO = new GenreJdbcDao();
 
 
     @Override
@@ -20,9 +20,9 @@ public class AddGenreCommand extends FrontCommand {
 
         String genre = request.getParameter(GENRE);
 
-        if (genre != null && genreDao.findByGenre(genre) == null) {
+        if (genre != null && GENRE_DAO.findByGenre(genre) == null) {
 
-            genreDao.save(new Genre(genre));
+            GENRE_DAO.save(new Genre(genre));
 
             redirectWithResp(ADMIN_JSP, ADD_GENRE_OK);
 

@@ -51,6 +51,22 @@ public interface SetAttribute {
             List<Order> orders = orderDao.findByBookId(bookId);
             request.setAttribute(ORDERS, orders);
 
+            User user = (User) request.getSession().getAttribute(USER);
+
+            if (user != null){
+                boolean haveBook = orderDao.findByBookAndUserId(bookId, user.getId());
+                request.setAttribute(HAVE_BOOK, haveBook);
+            }
+
+
+        }
+
+        if (target.equalsIgnoreCase(BOOK_CONTENT_JSP)) {
+
+            BookJdbcDao bookDao = new BookJdbcDao();
+            long bookId = Long.parseLong(request.getParameter("bookId"));
+            Book book = bookDao.findById(bookId);
+            request.setAttribute(BOOK, book);
 
         }
 

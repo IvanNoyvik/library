@@ -8,6 +8,7 @@ import java.io.IOException;
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class UnknownCommand extends FrontCommand {
+
     @Override
     public void process() throws ServletException, IOException {
 

@@ -76,7 +76,7 @@
             <div id="templatemo_content_right">
 
                 <h1>${requestScope.book.title} <span>(${requestScope.book.author.author})</span></h1>
-                Genre: <span>(${requestScope.book.genre.genre})</span>
+                <h2>Genre: <span>(${requestScope.book.genre.genre})</span></h2>
 
                 <c:url value="/front" var="image">
                     <c:param name="bookId" value="${requestScope.book.id}"/>
@@ -92,26 +92,39 @@
                     <c:if test="${requestScope.book.quantity == 0}">
                         <h3>Not available</h3>
                     </c:if>
-
-                    <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (requestScope.book.quantity > 0)}">
-                        <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                            <label>Duration
-                                <input class="duration-main" name="days" type="text"
-                                       required="" placeholder="(1-180)in days..." pattern="[1-9]{1}[0-9]+"/>
-                            </label>
-                            <input name="command" type="hidden" value="AddOrder"/>
-                            <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
-                            <input type="submit" value="Add in my library"/>
-                        </form>
+                    <c:if test="${(requestScope.book.quantity > 0)}">
 
                         <h3>${requestScope.book.quantity} pcs in stock</h3>
-                    </c:if>
 
+                        <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK')}">
+                            <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                <label>Duration
+                                    <input class="duration-main" name="days" type="text"
+                                           required="" placeholder="(1-180)in days..."
+                                           pattern="^0*[1-9]\d*$"/>
+                                </label>
+                                <input name="command" type="hidden" value="AddOrder"/>
+                                <input name="bookId" type="hidden" value="${requestScope.book.id}"/>
+                                <input type="submit" value="Add in my library"/>
+                            </form>
+
+                        </c:if>
+                    </c:if>
 
                     <p>${requestScope.book.description}</p>
 
+                    <c:if test="${requestScope.haveBook}">
 
-                        <%--                 todo button read       <div class="buy_now_button"><a href="subpage.html">Read</a></div>--%>
+                        <c:url value="/front" var="bookContent">
+                            <c:param name="command" value="Forward"/>
+                            <c:param name="forward" value="bookContent"/>
+                            <c:param name="bookId" value="${requestScope.book.id}"/>
+                        </c:url>
+                        <div class="buy_now_button"><a class="buy_now_button"
+                                                       href="<c:out value="${bookContent}"/>">Read</a>
+                        </div>
+
+                    </c:if>
 
                 </div>
 
@@ -125,11 +138,10 @@
 
         <div class="cleaner_with_height">&nbsp;</div>
     </div>
-    <!-- PAGE CONTENT: end -->
 
     <div id="templatemo_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 
 </div>
