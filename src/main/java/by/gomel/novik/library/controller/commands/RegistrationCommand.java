@@ -13,9 +13,9 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class RegistrationCommand extends FrontCommand {
 
-    UserJdbcDao userDao = new UserJdbcDao();
-    RoleJdbcDao roleDao = new RoleJdbcDao();
-    UserStatusJdbcDao statusDao = new UserStatusJdbcDao();
+    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
+    private static final RoleJdbcDao ROLE_DAO = new RoleJdbcDao();
+    private static final UserStatusJdbcDao STATUS_DAO = new UserStatusJdbcDao();
 
 
     @Override
@@ -25,11 +25,11 @@ public class RegistrationCommand extends FrontCommand {
         String password = request.getParameter(PASSWORD);
         String name = request.getParameter(NAME);
 
-        User user = userDao.findByLoginSqlQuery(login);
+        User user = USER_DAO.findByLoginSqlQuery(login);
 
-        if (user == null){
-            user = userDao.save(new User(login, password, name,
-                    statusDao.getOkStatus(), roleDao.getUserStatus()));
+        if (user == null && !login.isEmpty() && !password.isEmpty()) {
+            user = USER_DAO.save(new User(login, password, name,
+                    STATUS_DAO.getOkStatus(), ROLE_DAO.getUserStatus()));
             redirectWithResp(MAIN_JSP, REGISTRATION_OK);
 
         } else {

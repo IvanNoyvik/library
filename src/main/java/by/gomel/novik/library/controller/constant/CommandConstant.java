@@ -9,39 +9,35 @@ public interface CommandConstant {
 
     //command
 
-    //todo
     //resp message
     String LOGIN_OK = "Hello ";
-    String LOGIN_FAIL = "wrong log or pass";
-    String REGISTRATION_FAIL = "registration fail";
+    String LOGIN_FAIL = "Wrong log or pass";
+    String REGISTRATION_FAIL = "Failed to registration";
     String REGISTRATION_OK = "You have successfully registered!";
-    String ADD_ORDER_FAIL = "ADD_ORDER_FAIL";
-    String ADD_ORDER_OK = "ADD_ORDER_OK";
-    String RETURN_ORDER_FAIL = "RETURN_ORDER_FAIL";
-    String RETURN_ORDER_OK = "RETURN_ORDER_OK";
-    String SENT_MESSAGE_OK = "SENT_MESSAGE_OK";
-    String SENT_MESSAGE_FAIL = "SENT_MESSAGE_FAIL";
-    String ADD_BOOK_FAIL = "ADD_BOOK_FAIL";
-    String ADD_BOOK_OK = "ADD_BOOK_OK";
-    String ADD_AUTHOR_FAIL = "ADD_AUTHOR_FAIL";
-    String ADD_AUTHOR_OK = "ADD_AUTHOR_OK";
-    String ADD_GENRE_FAIL = "ADD_GENRE_FAIL";
-    String ADD_GENRE_OK = "ADD_GENRE_OK";
-    String CHANGE_STATUS_FAIL = "CHANGE_STATUS_FAIL";
-    String CHANGE_STATUS_OK = "CHANGE_STATUS_OK";
-    String DELETE_USER_FAIL = "DELETE_USER_FAIL";
-    String DELETE_USER_OK = "DELETE_USER_OK";
-    String EDIT_USER_OK = "EDIT_USER_OK";
-    String EDIT_USER_FAIL = "EDIT_USER_FAIL";
-    String EDIT_BOOK_OK = "EDIT_BOOK_OK";
-    String EDIT_BOOK_FAIL = "EDIT_BOOK_FAIL";
+    String ADD_ORDER_FAIL = "Book adding error";
+    String ADD_ORDER_OK = "The book has been placed in your library";
+    String RETURN_ORDER_FAIL = "Book return fail";
+    String RETURN_ORDER_OK = "The book is returned to the library";
+    String SENT_MESSAGE_OK = "Message sent";
+    String SENT_MESSAGE_FAIL = "Sending message error";
+    String ADD_BOOK_FAIL = "Failed to add book";
+    String ADD_BOOK_OK = "Book added";
+    String ADD_AUTHOR_FAIL = "Failed to add author";
+    String ADD_AUTHOR_OK = "Author added";
+    String ADD_GENRE_FAIL = "Failed to add genre";
+    String ADD_GENRE_OK = "Genre added";
+    String CHANGE_STATUS_FAIL = "Status change error";
+    String CHANGE_STATUS_OK = "Status changed";
+    String DELETE_USER_FAIL = "Delete user error";
+    String DELETE_USER_OK = "User deleted";
+    String EDIT_USER_OK = "Information updated";
+    String EDIT_USER_FAIL = "Failed to change data";
+    String EDIT_BOOK_OK = "Book changed";
+    String EDIT_BOOK_FAIL = "Failed to change data";
     String BLOCK = "Your account is blocked";
     String UNKNOWN_COMMAND = "UNKNOWN_COMMAND";
-
-
-    String ERROR_MESSAGE = "?error=true";
-
-
+    String ERROR_PROCESS = "/redirect?target=main&resp=Incorrect or unsupported operations";
+    String PARSE_NUMBER_EXCEPTION = "You entered invalid data";
 
 
     //attributes
@@ -58,12 +54,12 @@ public interface CommandConstant {
     String PASSWORD = "password";
     String NAME = "name";
 
-    String MESSAGE = "message";
     String MESSAGES = "messages";
 
     String BOOKS = "books";
     String BOOK = "book";
     String BOOK_ID = "bookId";
+    String HAVE_BOOK = "haveBook";
     String TITLE = "title";
     String GENRE = "genre";
     String GENRES = "genres";
@@ -71,6 +67,7 @@ public interface CommandConstant {
     String AUTHORS = "authors";
     String QUANTITY = "quantity";
     String IMAGE = "image";
+    String NO_IMAGE = "/static/main/images/no_image.png";
     String DESCRIPTION = "description";
 
     String ORDERS = "orders";
@@ -92,10 +89,10 @@ public interface CommandConstant {
     String PROFILE_JSP = "profile";
     String BOOK_JSP = "book";
     String BLOCK_JSP = "block";
-    String ERROR_JSP = "error";
     String ADMIN_JSP = "admin";
     String EDIT_BOOK_JSP = "editBook";
     String ADD_BOOK_JSP = "addBook";
+    String BOOK_CONTENT_JSP = "bookContent";
 
 
 }

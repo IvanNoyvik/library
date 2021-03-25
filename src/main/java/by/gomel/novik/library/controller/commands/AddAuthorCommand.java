@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddAuthorCommand extends FrontCommand {
 
-    AuthorJdbcDao authorDao = new AuthorJdbcDao();
+    private static final AuthorJdbcDao AUTHOR_DAO = new AuthorJdbcDao();
 
 
     @Override
@@ -20,9 +20,9 @@ public class AddAuthorCommand extends FrontCommand {
 
         String author = request.getParameter(AUTHOR);
 
-        if (author != null && authorDao.findByAuthor(author) == null) {
+        if (author != null && AUTHOR_DAO.findByAuthor(author) == null) {
 
-            authorDao.save(new Author(author));
+            AUTHOR_DAO.save(new Author(author));
 
             redirectWithResp(ADMIN_JSP, ADD_AUTHOR_OK);
 

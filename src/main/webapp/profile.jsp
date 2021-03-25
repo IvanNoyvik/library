@@ -32,7 +32,7 @@
                     <li>You login: ${user.login}</li>
                     <li>You name: ${user.name}</li>
                 </ul>
-                <a href="<c:url value="/editUser.jsp" />" style="margin-left: 50px;">Edit profile...</a> <%--todo--%>
+                <a href="<c:url value="/editUser.jsp" />" style="margin-left: 50px;">Edit profile...</a>
             </c:if>
 
         </div>
@@ -40,7 +40,6 @@
 
     <div id="templatemo_content">
 
-        <!-- CATEGORY FILTER: start -->
         <div id="templatemo_content_left">
 
             <div class="templatemo_content_left_section">
@@ -82,10 +81,7 @@
                             <c:if test="${applicationScope.now.now() >= order.date.plusDays(order.duration)}">
                                 <h3>Book is expired
                                     return the book to the library</h3>
-                                <%--                                <c:url value="/front" var="return">--%>
-                                <%--                                    <c:param name="command" value="ReturnOrder"/>--%>
-                                <%--                                    <c:param name="id" value="${order.id}"/>--%>
-                                <%--                                </c:url>--%>
+
                                 <div class="detail_button"><a
                                         href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
                                 </div>
@@ -95,10 +91,19 @@
                                 <h3>${order.date.plusDays(order.duration).toEpochDay() - applicationScope.now.now().toEpochDay()}
                                     days
                                     left </h3>
-                                <div class="buy_now_button"><a class="buy_now_button" href="subpage.html">Read</a></div>
+
+                                <c:url value="/front" var="bookContent">
+                                    <c:param name="command" value="Forward"/>
+                                    <c:param name="forward" value="bookContent"/>
+                                    <c:param name="bookId" value="${order.book.id}"/>
+                                </c:url>
+                                <div class="buy_now_button"><a class="buy_now_button"
+                                                               href="<c:out value="${bookContent}"/>">Read</a>
+                                </div>
 
                                 <div class="detail_button"><a
-                                        href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return</a>
+                                        href="<c:url value="/front?command=ReturnOrder&id=${order.id}"/>">Return
+                                    book</a>
                                 </div>
                             </c:if>
                         </div>
@@ -118,7 +123,7 @@
 
     <div id="templatemo_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 
 </div>

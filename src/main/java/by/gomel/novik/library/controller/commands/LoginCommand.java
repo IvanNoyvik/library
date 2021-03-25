@@ -13,7 +13,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class LoginCommand extends FrontCommand {
 
-    UserJdbcDao userDao = new UserJdbcDao();
+    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
 
 
     @Override
@@ -22,7 +22,7 @@ public class LoginCommand extends FrontCommand {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
 
-        User user = userDao.findByLoginAndPasswordSqlQuery(login, password);
+        User user = USER_DAO.findByLoginAndPasswordSqlQuery(login, password);
 
         if (user != null) {
 
@@ -32,7 +32,7 @@ public class LoginCommand extends FrontCommand {
                 long statusId = user.getStatus().getId();
 
                 user.setStatus(statusDao.getOkStatus());
-                userDao.update(user);
+                USER_DAO.update(user);
                 statusDao.deleteById(statusId);
 
             }
@@ -40,7 +40,7 @@ public class LoginCommand extends FrontCommand {
             request.getSession().setAttribute(USER, user);
             if (!user.getStatus().getStatus().equalsIgnoreCase(LOCKED)) {
 
-                redirectWithResp(MAIN_JSP, LOGIN_OK + user.getName() +"!");
+                redirectWithResp(MAIN_JSP, LOGIN_OK + user.getName() + "!");
             } else {
                 redirectWithResp(BLOCK_JSP, BLOCK);
             }

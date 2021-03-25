@@ -152,6 +152,7 @@ public class OrderJdbcDao extends AbstractOrderJdbcDao {
         return orders;
     }
 
+    @Override
     public boolean findByBookAndUserId(long bookId, long userId) {
         try (Connection conn = getConnector().getConnection();
              PreparedStatement prSt = conn.prepareStatement(getSqlQuery().getFindByBookAndUserIdSqlQuery())) {

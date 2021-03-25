@@ -32,7 +32,7 @@
                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                         <label>Enter genre<br/>
                             <input name="genre" type="text" class="genre-inp"
-                                   required="" placeholder="Enter genre..." />
+                                   required="" placeholder="Enter genre..."/>
                         </label><br/>
                         <input name="command" type="hidden" value="AddGenre"/>
                         <input type="submit" value="Add genre"/>
@@ -42,7 +42,7 @@
                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                         <label>Enter author<br/>
                             <input name="author" type="text" class="author-inp"
-                                   required="" placeholder="Enter author..." />
+                                   required="" placeholder="Enter author..."/>
                         </label><br/>
                         <input name="command" type="hidden" value="AddAuthor"/>
                         <input type="submit" value="Add author"/>
@@ -69,18 +69,18 @@
 
                         <div class="admin_product_box">
 
-                             <span style="font-size:13px; font-style: italic" >-- ${order.user.login} (${order.user.name})</span>
+                            <span style="font-size:13px; font-style: italic">-- ${order.user.login} (${order.user.name})</span>
 
-                             Overdue the book <span style="font-style: italic">(${order.book.title})</span> by
-                                    ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()}
-                                days
+                            Overdue the book <span style="font-style: italic">(${order.book.title})</span> by
+                                ${applicationScope.now.now().toEpochDay() - order.date.plusDays(order.duration).toEpochDay()}
+                            days
 
                             <div class="product_info">
                                 <c:if test="${!order.user.status.status.equalsIgnoreCase('Limited') and order.user.id ne sessionScope.user.id}">
                                     <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                         <label>Duration
                                             <input name="duration" type="text" class="duration"
-                                                   required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
+                                                   required="" placeholder="in days..." pattern="^0*[1-9]\d*$"/>
                                         </label>
                                         <input name="command" type="hidden" value="ChangeStatus"/>
                                         <input name="userId" type="hidden" value="${order.user.id}"/>
@@ -96,14 +96,14 @@
                                         <input class="submit-lock" type="submit" value="Locked"/>
                                     </form>
                                 </c:if>
-<%--                                <c:if test="${!order.user.status.status.equalsIgnoreCase('OK')}">--%>
-<%--                                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">--%>
-<%--                                        <input name="command" type="hidden" value="ChangeStatus"/>--%>
-<%--                                        <input name="userId" type="hidden" value="${order.user.id}"/>--%>
-<%--                                        <input name="status" type="hidden" value="OK"/>--%>
-<%--                                        <input class="submit-unlock" type="submit" value="Unlocked"/>--%>
-<%--                                    </form>--%>
-<%--                                </c:if>--%>
+                                    <%--                                <c:if test="${!order.user.status.status.equalsIgnoreCase('OK')}">--%>
+                                    <%--                                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">--%>
+                                    <%--                                        <input name="command" type="hidden" value="ChangeStatus"/>--%>
+                                    <%--                                        <input name="userId" type="hidden" value="${order.user.id}"/>--%>
+                                    <%--                                        <input name="status" type="hidden" value="OK"/>--%>
+                                    <%--                                        <input class="submit-unlock" type="submit" value="Unlocked"/>--%>
+                                    <%--                                    </form>--%>
+                                    <%--                                </c:if>--%>
 
                             </div>
 
@@ -118,7 +118,7 @@
                 <c:if test="${!empty requestScope.messages}">
                     <c:forEach items="${requestScope.messages}" var="mess">
                         <div class="admin_product_box">
-                            <span style="font-size:14px; font-style: italic" >-- From: ${mess.user.login} (${mess.user.name}) ${mess.dateSent}</span>
+                            <span style="font-size:14px; font-style: italic">-- From: ${mess.user.login} (${mess.user.name}) ${mess.dateSent}</span>
                             <div class="product_info">
                                     ${mess.content}
                             </div>
@@ -154,7 +154,8 @@
 
                     </tr>
                     <c:forEach items="${requestScope.users}" var="userMap">
-                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Locked') and userMap.key.id ne sessionScope.user.id}">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Locked')
+                        and userMap.key.id ne sessionScope.user.id}">
                             <tr>
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
@@ -164,7 +165,7 @@
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <label>
                                                 <input class="duration" name="duration" type="text"
-                                                       required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
+                                                       required="" placeholder="in days..." pattern="^0*[1-9]\d*$"/>
                                             </label>
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
@@ -197,7 +198,8 @@
                     </c:forEach>
 
                     <c:forEach items="${requestScope.users}" var="userMap">
-                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Limited') and userMap.key.id ne sessionScope.user.id}">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('Limited')
+                        and userMap.key.id ne sessionScope.user.id}">
                             <tr>
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
@@ -235,7 +237,8 @@
                         </c:if>
                     </c:forEach>
                     <c:forEach items="${requestScope.users}" var="userMap">
-                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('OK') and userMap.key.id ne sessionScope.user.id}">
+                        <c:if test="${userMap.key.status.status.equalsIgnoreCase('OK')
+                        and userMap.key.id ne sessionScope.user.id}">
                             <tr>
                                 <td><h3>${userMap.key.login}</h3></td>
                                 <td class="table-text-center"><h3>${userMap.key.status.status}</h3></td>
@@ -245,7 +248,7 @@
                                         <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
                                             <label>
                                                 <input name="duration" class="duration" type="text"
-                                                       required="" placeholder="in days..." pattern="[1-9]{1}[0-9]+"/>
+                                                       required="" placeholder="in days..." pattern="^0*[1-9]\d*$"/>
                                             </label>
                                             <input name="command" type="hidden" value="ChangeStatus"/>
                                             <input name="userId" type="hidden" value="${userMap.key.id}"/>
@@ -289,7 +292,7 @@
 
     <div id="admin_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 </div>
 

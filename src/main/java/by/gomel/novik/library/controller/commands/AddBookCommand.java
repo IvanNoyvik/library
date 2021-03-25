@@ -11,15 +11,14 @@ import by.gomel.novik.library.persistance.dao.bookimpl.GenreJdbcDao;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.text.ParseException;
 
 import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddBookCommand extends FrontCommand {
 
-    BookJdbcDao bookDao = new BookJdbcDao();
-    GenreJdbcDao genreDao = new GenreJdbcDao();
-    AuthorJdbcDao authorDao = new AuthorJdbcDao();
+    private static final BookJdbcDao BOOK_DAO = new BookJdbcDao();
+    private static final GenreJdbcDao GENRE_DAO = new GenreJdbcDao();
+    private static final AuthorJdbcDao AUTHOR_DAO = new AuthorJdbcDao();
 
 
     @Override
@@ -27,15 +26,24 @@ public class AddBookCommand extends FrontCommand {
 
         String title = request.getParameter(TITLE);
         String description = request.getParameter(DESCRIPTION);
-        int quantity = Integer.parseInt(request.getParameter(QUANTITY));
+        int quantity;
+
+        try {
+            quantity = Integer.parseInt(request.getParameter(QUANTITY));
+
+        } catch (NumberFormatException e) {
+
+            redirectWithResp(MAIN_JSP, PARSE_NUMBER_EXCEPTION);
+            return;
+        }
 
         long genreId = Long.parseLong(request.getParameter(GENRE));
-        Genre genre = genreDao.findById(genreId);
+        Genre genre = GENRE_DAO.findById(genreId);
 
         long authorId = Long.parseLong(request.getParameter(AUTHOR));
-        Author author = authorDao.findById(authorId);
+        Author author = AUTHOR_DAO.findById(authorId);
 
-        if (!bookDao.findByTitleAndAuthor(title, author.getAuthor())) {
+        if (!BOOK_DAO.findByTitleAndAuthor(title, author.getAuthor())) {
 
 
             Book book = new Book();
@@ -47,7 +55,7 @@ public class AddBookCommand extends FrontCommand {
 
             try {
 
-                book = bookDao.save(book);
+                book = BOOK_DAO.save(book);
 
                 redirectWithResp(MAIN_JSP, ADD_BOOK_OK);
 

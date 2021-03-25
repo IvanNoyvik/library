@@ -53,7 +53,7 @@
                     <input name="command" type="hidden" value="AddBook"/>
 
                     <label>Title:
-                    <input name="title" required type="text" value="title"/>
+                        <input name="title" required type="text" value="title"/>
                     </label>
                     <div class="product_info">
 
@@ -77,14 +77,14 @@
                         <br/>
                         <label>Quantity:
                             <input name="quantity" type="text" value="quantity"
-                                   required="" placeholder=">0" pattern="[1-9]{1}[0-9]+"/></label>
+                                   required="" placeholder=">0" pattern="^0*[1-9]\d*$"/></label>
                         <br/>
 
                         <label>Description:
                             <textarea name="description" cols="30" rows="5"></textarea><br/>
                         </label>
 
-                        <input type="submit" value="submit"/>
+                        <input type="submit" value="Add book"/>
 
 
                         <c:url value="/front" var="Cancel">
@@ -107,7 +107,7 @@
 
     <div id="templatemo_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 
 </div>

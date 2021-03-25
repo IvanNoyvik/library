@@ -25,7 +25,6 @@
         </div>
 
 
-
         <div id="templatemo_new_books">
 
         </div>
@@ -69,18 +68,22 @@
                             <c:if test="${book.quantity <= 0}">
                                 <h3>Not available</h3>
                             </c:if>
-                            <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK') and (book.quantity > 0)}">
-                                <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
-                                    <label>Duration
-                                        <input class="duration-main" name="days" type="text"
-                                               required="" placeholder="(1-180)in days..." pattern="[1-9]{1}[0-9]+"/>
-                                    </label>
-                                    <input name="command" type="hidden" value="AddOrder"/>
-                                    <input name="bookId" type="hidden" value="${book.id}"/>
-                                    <input type="submit" value="Add in my library"/>
-                                </form>
-
+                            <c:if test="${(book.quantity > 0)}">
                                 <h3>${book.quantity} pcs in stock</h3>
+                                <c:if test="${!empty sessionScope.user and (sessionScope.user.status.status eq 'OK')}">
+                                    <form accept-charset="UTF-8" action="<c:url value="/front"/>" method="post">
+                                        <label>Duration
+                                            <input class="duration-main" name="days" type="text"
+                                                   required="" placeholder="(1-180)in days..."
+                                                   pattern="^0*[1-9]\d*$"/>
+                                        </label>
+                                        <input name="command" type="hidden" value="AddOrder"/>
+                                        <input name="bookId" type="hidden" value="${book.id}"/>
+                                        <input type="submit" value="Add in my library"/>
+                                    </form>
+
+
+                                </c:if>
                             </c:if>
 
                             <c:url value="/front" var="bookInfo">
@@ -107,7 +110,7 @@
 
     <div id="templatemo_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 </div>
 </body>

@@ -12,7 +12,17 @@
     <c:if test="${sessionScope.user.status.status ne 'Locked'}">
 
         <ul>
+            <!-- MAIN -->
+            <c:url value="/front" var="main">
+                <c:param name="command" value="Forward"/>
+                <c:param name="forward" value="main"/>
+            </c:url>
+            <li><a href="<c:out value="${main}"/>" class="current">Main</a></li>
 
+        </ul>
+
+
+        <ul>
             <c:if test="${empty sessionScope.user}">
                 <!-- LOGIN -->
                 <c:url value="/front" var="login">
@@ -32,12 +42,6 @@
 
             <c:if test="${!empty sessionScope.user}">
 
-                <!-- LOGOUT -->
-                <c:url value="/front" var="logout">
-                    <c:param name="command" value="Logout"/>
-                </c:url>
-                <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
-
                 <!-- PROFILE -->
                 <c:url value="/front" var="profile">
                     <c:param name="command" value="Forward"/>
@@ -45,17 +49,14 @@
                 </c:url>
                 <li><a href="<c:out value="${profile}"/>" class="current">Profile</a></li>
 
+                <!-- LOGOUT -->
+                <c:url value="/front" var="logout">
+                    <c:param name="command" value="Logout"/>
+                </c:url>
+                <li><a href="<c:out value="${logout}"/>" class="current">Logout</a></li>
+
+
             </c:if>
-        </ul>
-
-
-        <ul>
-            <!-- MAIN -->
-            <c:url value="/front" var="main">
-                <c:param name="command" value="Forward"/>
-                <c:param name="forward" value="main"/>
-            </c:url>
-            <li><a href="<c:out value="${main}"/>" class="current">Main</a></li>
         </ul>
     </c:if>
 </div>

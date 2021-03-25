@@ -11,7 +11,6 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 public class LogoutCommand extends FrontCommand {
 
 
-
     @Override
     public void process() throws ServletException, IOException {
 

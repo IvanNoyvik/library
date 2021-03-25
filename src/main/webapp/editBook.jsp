@@ -70,7 +70,7 @@
                                  height="150"/>
                         </div>
                         <input type="file" name="image" accept="image/*"/>
-                        <input type="submit" value="submit"/>
+                        <input type="submit" value="Add/change Image"/>
 
                     </form>
                 </div>
@@ -120,7 +120,7 @@
                         <textarea name="description" cols="30" rows="5">${requestScope.book.description}</textarea><br/>
 
                         <input type="reset" value="reset"/>
-                        <input type="submit" value="submit"/>
+                        <input type="submit" value="Edit book"/>
 
 
                         <c:url value="/front" var="Cancel">
@@ -144,7 +144,7 @@
 
     <div id="templatemo_footer">
 
-        <a href="#"><strong>About me</strong></a>
+        <a href="https://www.linkedin.com/in/ivan-novik/"><strong>About me</strong></a>
     </div>
 
 </div>

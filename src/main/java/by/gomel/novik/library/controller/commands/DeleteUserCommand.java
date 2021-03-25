@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class DeleteUserCommand extends FrontCommand {
 
-    UserJdbcDao userDao = new UserJdbcDao();
+    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
 
 
     @Override
@@ -19,11 +19,11 @@ public class DeleteUserCommand extends FrontCommand {
 
         try {
             long userId = Long.parseLong(request.getParameter(USER_ID));
-            userDao.deleteById(userId);
+            USER_DAO.deleteById(userId);
 
             redirectWithResp(ADMIN_JSP, DELETE_USER_OK);
 
-        } catch (DaoPartException e){
+        } catch (DaoPartException e) {
 
             redirectWithResp(ADMIN_JSP, DELETE_USER_FAIL);
 

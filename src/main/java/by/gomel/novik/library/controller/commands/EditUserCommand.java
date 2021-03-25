@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class EditUserCommand extends FrontCommand {
 
-    UserJdbcDao userDao = new UserJdbcDao();
+    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
 
 
     @Override
@@ -24,7 +24,7 @@ public class EditUserCommand extends FrontCommand {
             String name = request.getParameter(NAME);
 
             user.setName(name);
-            user = userDao.update(user);
+            user = USER_DAO.update(user);
 
             request.getSession().setAttribute(USER, user);
 
