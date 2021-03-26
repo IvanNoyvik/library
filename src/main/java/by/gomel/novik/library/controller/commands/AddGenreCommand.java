@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddGenreCommand extends FrontCommand {
 
-    private static final GenreJdbcDao GENRE_DAO = new GenreJdbcDao();
+    private static final GenreJdbcDao GENRE_DAO = GenreJdbcDao.getInstance();
 
 
     @Override

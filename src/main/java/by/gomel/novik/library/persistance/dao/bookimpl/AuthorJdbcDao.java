@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.dao.bookimpl;
 import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.Author;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.bookimpl.AuthorSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
 import by.gomel.novik.library.persistance.rsmapper.bookimpl.AuthorResultSetMapper;
@@ -15,6 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AuthorJdbcDao extends JdbcDao<Author> {
+
+    private static final AuthorJdbcDao instance = new AuthorJdbcDao();
+
+    private AuthorJdbcDao(){}
+
+    public static AuthorJdbcDao getInstance(){
+        return instance;
+    }
     @Override
     protected AuthorSqlQuery getSqlQuery() {
         return new AuthorSqlQuery();

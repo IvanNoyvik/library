@@ -15,8 +15,8 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddOrderCommand extends FrontCommand {
 
-    private static final OrderJdbcDao ORDER_DAO = new OrderJdbcDao();
-    private static final BookJdbcDao BOOK_DAO = new BookJdbcDao();
+    private static final OrderJdbcDao ORDER_DAO = OrderJdbcDao.getInstance();
+    private static final BookJdbcDao BOOK_DAO = BookJdbcDao.getInstance();
 
 
     @Override

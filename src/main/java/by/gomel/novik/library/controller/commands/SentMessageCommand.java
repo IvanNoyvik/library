@@ -13,7 +13,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class SentMessageCommand extends FrontCommand {
 
-    private static final MessageJdbcDao MESSAGE_DAO = new MessageJdbcDao();
+    private static final MessageJdbcDao MESSAGE_DAO = MessageJdbcDao.getInstance();
 
 
     @Override

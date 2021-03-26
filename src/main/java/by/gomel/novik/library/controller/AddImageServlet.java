@@ -18,7 +18,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 @MultipartConfig
 public class AddImageServlet extends HttpServlet {
 
-    BookJdbcDao bookJdbcDao = new BookJdbcDao();
+    BookJdbcDao bookJdbcDao = BookJdbcDao.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

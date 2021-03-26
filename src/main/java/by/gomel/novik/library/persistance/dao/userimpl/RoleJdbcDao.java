@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.dao.userimpl;
 import by.gomel.novik.library.model.UserStatus;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.Role;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.query.userimpl.RoleSqlQuery;
 import by.gomel.novik.library.persistance.query.userimpl.UserStatusSqlQuery;
@@ -14,6 +15,14 @@ import by.gomel.novik.library.persistance.statement.userimpl.RoleStatementInit;
 import by.gomel.novik.library.persistance.statement.userimpl.UserStatusStatementInit;
 
 public class RoleJdbcDao extends JdbcDao<Role> {
+
+    private static final RoleJdbcDao instance = new RoleJdbcDao();
+
+    private RoleJdbcDao(){}
+
+    public static RoleJdbcDao getInstance(){
+        return instance;
+    }
 
     private static long ADMIN = 1L;
     private static long USER = 2L;

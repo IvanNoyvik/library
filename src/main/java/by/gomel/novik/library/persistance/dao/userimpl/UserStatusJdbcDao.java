@@ -2,6 +2,7 @@ package by.gomel.novik.library.persistance.dao.userimpl;
 
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.UserStatus;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.query.userimpl.UserStatusSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
@@ -11,11 +12,18 @@ import by.gomel.novik.library.persistance.statement.userimpl.UserStatusStatement
 
 public class UserStatusJdbcDao extends JdbcDao<UserStatus> {
 
+    private static final UserStatusJdbcDao instance = new UserStatusJdbcDao();
+
+    private UserStatusJdbcDao(){}
+
+    public static UserStatusJdbcDao getInstance(){
+        return instance;
+    }
+
 
 
     private static long OK = 1L;
     private static long LOCKED = 2L;
-//    private static long LIMITED = 3L;
 
 
     @Override

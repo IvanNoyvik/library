@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.dao.bookimpl;
 import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.Genre;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.bookimpl.GenreSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
 import by.gomel.novik.library.persistance.rsmapper.bookimpl.GenreResultSetMapper;
@@ -15,6 +16,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GenreJdbcDao extends JdbcDao<Genre> {
+
+    private static final GenreJdbcDao instance = new GenreJdbcDao();
+
+    private GenreJdbcDao(){}
+
+    public static GenreJdbcDao getInstance(){
+        return instance;
+    }
+
     @Override
     protected GenreSqlQuery getSqlQuery() {
         return new GenreSqlQuery();

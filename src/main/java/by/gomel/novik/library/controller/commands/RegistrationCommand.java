@@ -13,9 +13,9 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class RegistrationCommand extends FrontCommand {
 
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
-    private static final RoleJdbcDao ROLE_DAO = new RoleJdbcDao();
-    private static final UserStatusJdbcDao STATUS_DAO = new UserStatusJdbcDao();
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
+    private static final RoleJdbcDao ROLE_DAO = RoleJdbcDao.getInstance();
+    private static final UserStatusJdbcDao STATUS_DAO = UserStatusJdbcDao.getInstance();
 
 
     @Override

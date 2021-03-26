@@ -19,9 +19,16 @@ import java.util.List;
 
 public class OrderJdbcDao extends AbstractOrderJdbcDao {
 
-    private static final BookJdbcDao BOOK_DAO = new BookJdbcDao();
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
+    private static final OrderJdbcDao instance = new OrderJdbcDao();
 
+    private static final BookJdbcDao BOOK_DAO = BookJdbcDao.getInstance();
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
+
+    private OrderJdbcDao(){}
+
+    public static OrderJdbcDao getInstance(){
+        return instance;
+    }
 
     @Override
     protected OrderSqlQuery getSqlQuery() {

@@ -16,9 +16,9 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddBookCommand extends FrontCommand {
 
-    private static final BookJdbcDao BOOK_DAO = new BookJdbcDao();
-    private static final GenreJdbcDao GENRE_DAO = new GenreJdbcDao();
-    private static final AuthorJdbcDao AUTHOR_DAO = new AuthorJdbcDao();
+    private static final BookJdbcDao BOOK_DAO = BookJdbcDao.getInstance();
+    private static final GenreJdbcDao GENRE_DAO = GenreJdbcDao.getInstance();
+    private static final AuthorJdbcDao AUTHOR_DAO = AuthorJdbcDao.getInstance();
 
 
     @Override

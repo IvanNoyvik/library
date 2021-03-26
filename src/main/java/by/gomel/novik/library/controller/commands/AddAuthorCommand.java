@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class AddAuthorCommand extends FrontCommand {
 
-    private static final AuthorJdbcDao AUTHOR_DAO = new AuthorJdbcDao();
+    private static final AuthorJdbcDao AUTHOR_DAO = AuthorJdbcDao.getInstance();
 
 
     @Override

@@ -13,7 +13,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class LoginCommand extends FrontCommand {
 
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
 
 
     @Override
@@ -28,7 +28,7 @@ public class LoginCommand extends FrontCommand {
 
             if (user.getStatus().getStatus().equalsIgnoreCase(LIMITED) && user.getStatus().getDuration().isBefore(LocalDate.now())) {
 
-                UserStatusJdbcDao statusDao = new UserStatusJdbcDao();
+                UserStatusJdbcDao statusDao = UserStatusJdbcDao.getInstance();
                 long statusId = user.getStatus().getId();
 
                 user.setStatus(statusDao.getOkStatus());

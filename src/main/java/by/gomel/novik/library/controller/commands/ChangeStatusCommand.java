@@ -16,9 +16,9 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class ChangeStatusCommand extends FrontCommand {
 
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
-    private static final UserStatusJdbcDao STATUS_DAO = new UserStatusJdbcDao();
-    private static final OrderJdbcDao ORDER_DAO = new OrderJdbcDao();
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
+    private static final UserStatusJdbcDao STATUS_DAO = UserStatusJdbcDao.getInstance();
+    private static final OrderJdbcDao ORDER_DAO = OrderJdbcDao.getInstance();
 
 
     @Override

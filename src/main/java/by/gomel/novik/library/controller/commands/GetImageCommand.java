@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class GetImageCommand extends FrontCommand {
 
-    private static final BookJdbcDao BOOK_DAO = new BookJdbcDao();
+    private static final BookJdbcDao BOOK_DAO = BookJdbcDao.getInstance();
 
 
     @Override

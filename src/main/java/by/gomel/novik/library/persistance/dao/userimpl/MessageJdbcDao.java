@@ -2,6 +2,7 @@ package by.gomel.novik.library.persistance.dao.userimpl;
 
 import by.gomel.novik.library.model.Message;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.query.userimpl.MessageSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.MessageResultSetMapper;
@@ -13,7 +14,15 @@ import java.util.List;
 
 public class MessageJdbcDao extends JdbcDao<Message> {
 
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
+    private static final MessageJdbcDao instance = new MessageJdbcDao();
+
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
+
+    private MessageJdbcDao(){}
+
+    public static MessageJdbcDao getInstance(){
+        return instance;
+    }
 
     @Override
     protected CrudSqlQuery getSqlQuery() {

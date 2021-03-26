@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.dao.userimpl;
 import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.User;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.query.userimpl.UserSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
@@ -16,6 +17,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserJdbcDao extends JdbcDao<User> {
+
+    private static final UserJdbcDao instance = new UserJdbcDao();
+
+    private UserJdbcDao(){}
+
+    public static UserJdbcDao getInstance(){
+        return instance;
+    }
 
     @Override
     protected UserSqlQuery getSqlQuery() {

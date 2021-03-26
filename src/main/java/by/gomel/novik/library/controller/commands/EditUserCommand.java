@@ -11,7 +11,7 @@ import static by.gomel.novik.library.controller.constant.CommandConstant.*;
 
 public class EditUserCommand extends FrontCommand {
 
-    private static final UserJdbcDao USER_DAO = new UserJdbcDao();
+    private static final UserJdbcDao USER_DAO = UserJdbcDao.getInstance();
 
 
     @Override

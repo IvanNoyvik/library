@@ -25,14 +25,14 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(MAIN_JSP)){
 
-            BookJdbcDao bookDao = new BookJdbcDao();
+            BookJdbcDao bookDao = BookJdbcDao.getInstance();
             List<Book> books = bookDao.findAll();
             request.setAttribute(BOOKS, books);
         }
 
         if (target.equalsIgnoreCase(PROFILE_JSP)) {
 
-            OrderJdbcDao orderDao = new OrderJdbcDao();
+            OrderJdbcDao orderDao = OrderJdbcDao.getInstance();
             User user = (User) request.getSession().getAttribute(USER);
             long userId = user.getId();
             List<Order> orders = orderDao.findByUserId(userId);
@@ -42,12 +42,12 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(BOOK_JSP)) {
 
-            BookJdbcDao bookDao = new BookJdbcDao();
+            BookJdbcDao bookDao = BookJdbcDao.getInstance();
             long bookId = Long.parseLong(request.getParameter("bookId"));
             Book book = bookDao.findById(bookId);
             request.setAttribute(BOOK, book);
 
-            OrderJdbcDao orderDao = new OrderJdbcDao();
+            OrderJdbcDao orderDao = OrderJdbcDao.getInstance();
             List<Order> orders = orderDao.findByBookId(bookId);
             request.setAttribute(ORDERS, orders);
 
@@ -63,7 +63,7 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(BOOK_CONTENT_JSP)) {
 
-            BookJdbcDao bookDao = new BookJdbcDao();
+            BookJdbcDao bookDao = BookJdbcDao.getInstance();
             long bookId = Long.parseLong(request.getParameter("bookId"));
             Book book = bookDao.findById(bookId);
             request.setAttribute(BOOK, book);
@@ -72,14 +72,14 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(EDIT_BOOK_JSP)) {
 
-            BookJdbcDao bookDao = new BookJdbcDao();
+            BookJdbcDao bookDao = BookJdbcDao.getInstance();
             long bookId = Long.parseLong(request.getParameter("bookId"));
             Book book = bookDao.findById(bookId);
             request.setAttribute(BOOK, book);
-            GenreJdbcDao genreDao = new GenreJdbcDao();
+            GenreJdbcDao genreDao = GenreJdbcDao.getInstance();
             List<Genre> genres = genreDao.findAll();
             request.setAttribute(GENRES, genres);
-            AuthorJdbcDao authorDao = new AuthorJdbcDao();
+            AuthorJdbcDao authorDao = AuthorJdbcDao.getInstance();
             List<Author> authors = authorDao.findAll();
             request.setAttribute(AUTHORS, authors);
 
@@ -87,10 +87,10 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(ADD_BOOK_JSP)) {
 
-            GenreJdbcDao genreDao = new GenreJdbcDao();
+            GenreJdbcDao genreDao = GenreJdbcDao.getInstance();
             List<Genre> genres = genreDao.findAll();
             request.setAttribute(GENRES, genres);
-            AuthorJdbcDao authorDao = new AuthorJdbcDao();
+            AuthorJdbcDao authorDao = AuthorJdbcDao.getInstance();
             List<Author> authors = authorDao.findAll();
             request.setAttribute(AUTHORS, authors);
 
@@ -98,11 +98,11 @@ public interface SetAttribute {
 
         if (target.equalsIgnoreCase(ADMIN_JSP)) {
 
-            OrderJdbcDao orderDao = new OrderJdbcDao();
+            OrderJdbcDao orderDao = OrderJdbcDao.getInstance();
             List<Order> orders = orderDao.findAllOverdueOrder();
             request.setAttribute(ORDERS, orders);
 
-            UserJdbcDao userDao = new UserJdbcDao();
+            UserJdbcDao userDao = UserJdbcDao.getInstance();
             List<User> users = userDao.findAll();
             Map<User, Integer> userWithCountOverdueOrder= new HashMap<>();
             for (User user: users) {
@@ -111,7 +111,7 @@ public interface SetAttribute {
             }
             request.setAttribute(USERS, userWithCountOverdueOrder);
 
-            MessageJdbcDao messageDao = new MessageJdbcDao();
+            MessageJdbcDao messageDao = MessageJdbcDao.getInstance();
             List<Message> messages = messageDao.findAll();
             request.setAttribute(MESSAGES, messages);
 

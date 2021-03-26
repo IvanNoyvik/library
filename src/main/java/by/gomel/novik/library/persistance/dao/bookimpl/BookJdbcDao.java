@@ -3,6 +3,7 @@ package by.gomel.novik.library.persistance.dao.bookimpl;
 import by.gomel.library.exception.DaoPartException;
 import by.gomel.novik.library.persistance.dao.JdbcDao;
 import by.gomel.novik.library.model.Book;
+import by.gomel.novik.library.persistance.dao.OrderJdbcDao;
 import by.gomel.novik.library.persistance.query.CrudSqlQuery;
 import by.gomel.novik.library.persistance.query.bookimpl.BookSqlQuery;
 import by.gomel.novik.library.persistance.rsmapper.ResultSetMapper;
@@ -17,6 +18,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BookJdbcDao extends JdbcDao<Book> {
+
+    private static final BookJdbcDao instance = new BookJdbcDao();
+
+    private BookJdbcDao(){}
+
+    public static BookJdbcDao getInstance(){
+        return instance;
+    }
 
     @Override
     protected BookSqlQuery getSqlQuery() {
